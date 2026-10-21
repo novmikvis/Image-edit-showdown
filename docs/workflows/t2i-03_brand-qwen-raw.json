@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1184,
+      "height": 896,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "A flat, straight-on presentation board for a fictional cloud software company, photographed as a clean digital mockup sheet on a pure white background with no perspective distortion and no drop shadow around the sheet itself. The sheet is divided by thin light grey hairlines into six rectangular panels arranged in a two-row grid, each panel labelled in the upper left with tiny grey uppercase text.\n\nThe upper left panel is labelled \"PRIMARY LOGO\" and contains a wordmark reading \"NIMBRA\" in a modern geometric sans-serif, preceded by a mark of two overlapping rounded clouds, the rear cloud pale periwinkle and the front cloud saturated indigo blue. Directly below it, a panel labelled \"ALTERNATE LOGO\" repeats the same lockup at a smaller size. Below that, a small square panel labelled \"APP ICON\" shows the cloud mark alone, white on a rounded-corner navy tile.\n\nThe second column contains two stacked panels. The upper one, labelled \"REVERSED LOGO\", shows the white \"NIMBRA\" lockup on a solid navy card. The lower one, labelled \"BUSINESS CARD\", shows a white card bearing the small cloud mark, the name \"ALEX MORGAN\" in bold dark type, the line \"HEAD OF PLATFORM\" beneath it, and three tiny lines of grey contact text below that.\n\nThe large panel occupying the entire right half of the top row is labelled \"HOMEPAGE MOCKUP\" and shows a browser window with a thin navigation bar carrying five small menu words and a blue pill-shaped button reading \"GET STARTED\". Its headline reads \"WORK BETTER.\" on the first line and \"FROM ANYWHERE.\" on the second, the final two words rendered in indigo while the rest is near-black. Two short lines of small grey body text sit beneath, followed by a solid indigo button reading \"TRY FREE\" and an outlined button reading \"BOOK A DEMO\". To the right of the text floats a pale dashboard card showing a small rising line chart and a large legible figure reading \"98.6%\".\n\nIn the bottom row, a panel labelled \"COLOUR PALETTE\" shows exactly five swatch rectangles in a row, from left to right: near-black navy, saturated indigo, soft periwinkle, pale lavender, and off-white, each with two tiny lines of grey text beneath giving a name and a hex code. The adjacent panel labelled \"TYPOGRAPHY\" shows a very large letterform pair \"Aa\" above the typeface name \"INTER\" and four progressively smaller lines of specimen text. A narrow panel labelled \"ICONOGRAPHY\" holds a grid of ten thin-line outline icons in two rows of five: cloud, shield, user, clock, message, folder, document, sliders, bell, and grid. The final panel, labelled \"PACKAGING\", shows a matte navy cube-shaped box in soft three-quarter perspective with the white cloud mark and \"NIMBRA\" wordmark on its front face and two small lines of white text near its lower edge. A single line of small dark centred text sits directly beneath the entire sheet reading \"BRAND GUIDELINES 2024\". All type is crisp and legible, the layout is airy and precisely aligned, and the only colours present are navy, indigo, periwinkle, lavender, white and neutral grey.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

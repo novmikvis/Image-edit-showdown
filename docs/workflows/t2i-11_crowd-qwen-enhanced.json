@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1376,
+      "height": 768,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a wide ink-and-watercolour fantasy landscape of a city atop five enormous rock spires, rising from low cloud beneath an indigo, sepia, pale ochre and thin sea-green sky. The scene lies on cold-pressed paper whose visible tooth shows through translucent washes, with bleeding pigment edges, granulating colour and confident dark ink linework. Across the top, a graded pale ochre sky grows nearly white at the horizon, leaving a quiet band above the rooftops. Near the right edge, the faint circle of a low sun glows through the wash, partly softened by the paper’s grain. In the upper-left distance, the first spire rises from the cloud sea with compact tiled roofs, a narrow tower, laundry lines and small round windows. Just to its right, a second spire stands farther back, its warm sepia and pale ochre buildings appearing smaller and lighter with distance. Two higher suspension bridges wind across the left side, their fine ink cables dipping in gentle catenary curves between the spires. About ten small dark silhouettes are scattered singly along those two bridges, moving along the spans. In the centre middle-ground, the widest bridge carries a dense group of roughly fifteen figures travelling in both directions. The bridge’s sagging curve passes in front of the distant rock faces, while a lower span crosses behind it at a different height. A fourth long winding bridge links the remaining spires, its cables and narrow deck layered clearly against the open air. At the centre-right, the largest spire rises above the cloud, topped with clustered tiled roofs, narrow towers, laundry lines and small round windows. Six dark silhouettes lean over the railings on its rooftop terraces, their features and clothing unreadable at this scale. Farther back, tiny ink specks stand on the fifth spire, small enough to read as marks rather than bodies. Altogether, more than forty human figures populate the city, with the silhouettes growing progressively smaller and paler into the distance. Three thin-necked birds glide through the empty air between the spires, their dark strokes distinct against the pale sky. Across the lower foreground, a low wall frames a cluster of five figures seen from behind, seated and looking out over the cloud sea. Beneath them, broad wet-in-wet indigo washes form the cloud layers, with soft blooms and hard-edged tide marks where pigment has dried. The rock faces break through the clouds in dark sepia and indigo strokes, their steep sides descending out of sight below the mist. The lighting is soft and diffuse, with the low sun near the right edge lending a pale warm glow to the sky and faint highlights to roof tiles and bridge cables. Shadows remain subdued within the ink contours, while the translucent washes allow the paper to glow through. Brush edges, backruns and dry-brush scumbling remain visible across the roofs, rock and clouds. The overall composition feels expansive and layered, balancing the busy bridge crossings against open sky and cloud, with a translucent indigo, sepia, pale ochre and thin sea-green palette, an ink-and-watercolour style and a quiet, lofty mood.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1248,
+      "height": 832,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A straight-on, photorealistic dusk view of a small international bookshop window, its warm interior and three book-lined wooden shelves visible behind five individually taped, crisply legible signs. A green-shaded brass lamp glows on the middle shelf; a tortoiseshell cat sleeps on four large books below. Streetlight and cyclist reflections overlay the upper-right glass, while wet pavement catches the window’s warm glow.\",\"objects\":[{\"description\":\"A white card sign taped flat to the inside of the glass, centered at the top of the window. Its bold black sans-serif capitals are crisp and correctly spelled.\",\"location\":\"top centre of the glass\",\"relationship\":\"The largest of five separate signs; directly above the cream Russian sign.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Rectangular white card with black lettering\",\"texture\":\"Matte paper\",\"appearance_details\":\"Flat to the glass, with clean edges and sharply readable type.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, parallel to the glass\"},{\"description\":\"A smaller cream card sign taped flat to the inside of the glass, with dark red Cyrillic capitals.\",\"location\":\"upper centre, directly beneath the white sign\",\"relationship\":\"Directly below the largest sign and separate from the other four signs.\",\"relative_size\":\"small\",\"shape_and_color\":\"Rectangular cream card with dark red lettering\",\"texture\":\"Matte paper\",\"appearance_details\":\"Crisply legible, correctly spelled, and aligned parallel to the glass.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, parallel to the glass\"},{\"description\":\"A pale blue card sign taped flat to the inside of the glass. Heavy black brushed Japanese characters sit above a smaller Latin word.\",\"location\":\"left of centre on the glass\",\"relationship\":\"Separate from the other signs; positioned left of the centreline and below the top-centre sign.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Rectangular pale blue card with black lettering\",\"texture\":\"Matte paper\",\"appearance_details\":\"The brushed characters and the smaller word beneath them are crisp, distinct, and correctly rendered.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, parallel to the glass\"},{\"description\":\"A mustard yellow card sign taped flat to the inside of the glass, with black Chinese characters and a thin black border.\",\"location\":\"right of centre on the glass\",\"relationship\":\"Separate from the other signs; positioned to the right of the centreline.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Rectangular mustard yellow card with black lettering and border\",\"texture\":\"Matte paper\",\"appearance_details\":\"The thin border is clearly visible; characters are crisp, correctly spelled, and distinct from other scripts.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, parallel to the glass\"},{\"description\":\"A small handwritten white paper sign taped flat to the inside of the glass, with two lines written in blue ink.\",\"location\":\"lower left corner of the window\",\"relationship\":\"Separate from the other four signs; the second line sits directly beneath the first.\",\"relative_size\":\"small\",\"shape_and_color\":\"Small white rectangular card with blue handwriting\",\"texture\":\"Matte paper\",\"appearance_details\":\"Both handwritten lines are individually sharp and legible.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, parallel to the glass\"},{\"description\":\"Three wooden bookshop shelves lined with books seen mostly spine-on. The spines are muted reds, greens, and creams; any titles are too small to resolve.\",\"location\":\"inside the shop, spanning the background behind the window signs\",\"relationship\":\"The shelves sit behind the glass and signs; the cat and stack of four books are on the bottom shelf, and the lamp is on the middle shelf.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Three horizontal brown wooden shelves with rows of muted red, green, and cream book spines\",\"texture\":\"Wood grain and varied book-cover finishes\",\"appearance_details\":\"Warm interior light falls across the shelves; book titles remain indistinct and unreadable.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal, parallel to one another\"},{\"description\":\"A brass desk lamp with a green glass shade, resting on the middle shelf and casting warm light upward.\",\"location\":\"middle shelf, near the centre of the window\",\"relationship\":\"Among the books on the middle shelf; its glow warms the surrounding interior.\",\"relative_size\":\"small\",\"shape_and_color\":\"Brass lamp with a curved arm and green glass shade\",\"texture\":\"Polished brass and smooth, translucent glass\",\"appearance_details\":\"The shade glows softly and the brass catches warm highlights.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, with the shade directed downward and its light cast upward\"},{\"description\":\"A tortoiseshell cat asleep in a curled position on a stack of four large books.\",\"location\":\"bottom shelf, near the centre of the window\",\"relationship\":\"The cat rests atop the four-book stack on the bottom shelf, behind the glass.\",\"relative_size\":\"small\",\"shape_and_color\":\"Compact curled form with mottled black, brown, and amber fur\",\"texture\":\"Soft fur\",\"appearance_details\":\"Relaxed sleeping posture, with paws tucked close and body curled tightly.\",\"number_of_objects\":1,\"pose\":\"Curled up with paws tucked in\",\"expression\":\"Sleeping, peaceful\",\"clothing\":null,\"action\":\"Sleeping\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Curled on its side\"},{\"description\":\"A neat stack of four large books supporting the sleeping cat on the bottom shelf.\",\"location\":\"bottom shelf, beneath the cat\",\"relationship\":\"The cat sleeps directly on top of the four-book stack.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Four broad rectangular books with muted, varied covers\",\"texture\":\"Worn paper and cloth covers\",\"appearance_details\":\"The stacked volumes are large and stable; no titles are legible.\",\"number_of_objects\":4,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Stacked horizontally\"},{\"description\":\"A partial reflection of a streetlight on the window glass, with a dim, indistinct glow.\",\"location\":\"upper right of the glass\",\"relationship\":\"Appears as a reflection layered over the shop interior, not as an object inside the shop.\",\"relative_size\":\"small\",\"shape_and_color\":\"Soft pale amber light with an indistinct streetlight form\",\"texture\":\"Diffuse reflected glow on glass\",\"appearance_details\":\"Faint and partially overlaid on the interior scene.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright reflection on the glass\"},{\"description\":\"A dim silhouette of a passing cyclist, visible only as a partial reflection in the glass.\",\"location\":\"upper-right area of the glass\",\"relationship\":\"A reflected street scene overlay, clearly outside the shop and separate from the interior objects.\",\"relative_size\":\"small\",\"shape_and_color\":\"Dark, low-contrast human silhouette with indistinct bicycle outline\",\"texture\":\"Soft, shadowy reflection\",\"appearance_details\":\"Features and clothing are not discernible; the silhouette is partially overlaid on the shop interior.\",\"number_of_objects\":1,\"pose\":\"Leaning forward while riding\",\"expression\":\"Not discernible\",\"clothing\":\"Indistinct dark clothing\",\"action\":\"Passing by on a bicycle\",\"gender\":\"Indeterminate\",\"skin_tone_and_texture\":\"Not discernible in the dim reflection\",\"orientation\":\"In profile, moving across the reflected street scene\"},{\"description\":\"Wet pavement in front of the shop, catching a small amount of warm light from the window.\",\"location\":\"bottom foreground, outside the window\",\"relationship\":\"In front of the glass; its faint reflections echo the shop’s warm interior glow.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Dark grey pavement with scattered warm amber reflections\",\"texture\":\"Wet, glossy surface\",\"appearance_details\":\"Subtle reflected light glimmers across the damp ground.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Flat ground plane\"}],\"background_setting\":\"A small international bookshop at dusk. The window glass fills most of the frame, with the warm, softly glowing interior visible behind five signs taped to the inside. Three wooden shelves hold books with muted red, green, and cream spines. Outside, wet pavement reflects a little of the window light. In the upper-right glass, faint streetlight and cyclist reflections overlay the shop interior.\",\"lighting\":{\"conditions\":\"Dusk ambient light outside, balanced with warm interior light from the shop and the green-shaded brass lamp.\",\"direction\":\"Warm lamp light rises from the middle shelf; the shop interior glows through the glass, with cool dusk light on the exterior and pavement.\",\"shadows\":\"Soft interior shadows; faint, diffuse shadows and reflections on the wet pavement and glass.\"},\"aesthetics\":{\"composition\":\"Straight-on view with the glass filling most of the frame; the five signs are distributed across the window, with the largest at top centre. Shelves and cat remain visible behind them.\",\"color_scheme\":\"Warm amber interior light against cool dusk tones, with muted book colors and distinct white, cream, pale blue, and mustard signs.\",\"mood_atmosphere\":\"Quiet, inviting, intimate, and gently atmospheric.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Moderate depth of field, keeping all five signs and the shop interior clearly readable while preserving subtle reflections.\",\"focus\":\"Crisp focus across the signs and window; interior books and reflections remain discernible.\",\"camera_angle\":\"Straight-on, eye-level view of the shop window.\",\"lens_focal_length\":\"50mm standard lens\"},\"style_medium\":\"photograph\",\"text_render\":[{\"text\":\"WORLD LITERATURE\",\"location\":\"top centre of the glass\",\"size\":\"large\",\"color\":\"black\",\"font\":\"bold sans-serif capitals\",\"appearance_details\":\"On the largest white card; crisp and correctly spelled.\"},{\"text\":\"КНИГИ И КОФЕ\",\"location\":\"upper centre, directly beneath WORLD LITERATURE\",\"size\":\"medium\",\"color\":\"dark red\",\"font\":\"bold Cyrillic capitals\",\"appearance_details\":\"On a smaller cream sign; crisp and correctly spelled.\"},{\"text\":\"本屋\",\"location\":\"left of centre on the glass\",\"size\":\"large\",\"color\":\"black\",\"font\":\"heavy brushed Japanese characters\",\"appearance_details\":\"On a pale blue card; characters are crisp and correctly rendered.\"},{\"text\":\"HONYA\",\"location\":\"left of centre, directly beneath 本屋\",\"size\":\"small\",\"color\":\"black\",\"font\":\"plain Latin capitals\",\"appearance_details\":\"Printed beneath the Japanese characters on the same pale blue sign.\"},{\"text\":\"新書到\",\"location\":\"right of centre on the glass\",\"size\":\"large\",\"color\":\"black\",\"font\":\"Chinese characters\",\"appearance_details\":\"On a mustard yellow card with a thin black border; crisp and correctly spelled.\"},{\"text\":\"OUVERT\",\"location\":\"lower left corner of the window\",\"size\":\"small\",\"color\":\"blue\",\"font\":\"handwritten\",\"appearance_details\":\"First line on the small white sign.\"},{\"text\":\"10h - 19h\",\"location\":\"lower left corner of the window, directly beneath OUVERT\",\"size\":\"small\",\"color\":\"blue\",\"font\":\"handwritten\",\"appearance_details\":\"Second line on the small white sign.\"}],\"context\":\"A realistic photograph of a neighborhood international bookshop window at dusk, suitable for a literary editorial or storefront atmosphere image.\",\"artistic_style\":\"realistic\"}"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A flat printed infographic page photographed straight on and filling the frame. The warm off-white page uses a strict left-aligned grid and a restrained palette of deep ink blue, muted brick red, sage green, and warm grey. Across the top, the deep ink blue headline reads \\\"HOW THE TOWN GETS TO WORK\\\"; directly beneath it, one smaller warm grey line reads \\\"SURVEY OF 1,200 RESIDENTS, SPRING 2024\\\". Below the headline, a vertical bar chart occupies the left half and a donut chart with a three-item legend occupies the right half. A horizontal timeline runs along the bottom, with a small credit in the bottom right reading \\\"SOURCE: TOWN TRANSPORT OFFICE\\\". All numerals and labels are crisp, correctly formed, and unduplicated; chart geometry is clean and mathematically plausible, and every element aligns precisely to the grid.\",\"subjects\":[{\"description\":\"Headline text reading \\\"HOW THE TOWN GETS TO WORK\\\" in deep ink blue.\",\"position\":\"Across the top of the page, aligned to the left grid.\",\"action\":\"Printed as one crisp headline.\"},{\"description\":\"A single smaller warm grey line reading \\\"SURVEY OF 1,200 RESIDENTS, SPRING 2024\\\".\",\"position\":\"Directly beneath the headline, left-aligned.\",\"action\":\"Printed as the survey subtitle.\"},{\"description\":\"A vertical bar chart with exactly five bars of clearly different heights, a thin horizontal baseline, and a labelled vertical axis. The axis has four evenly spaced marks labelled \\\"0\\\", \\\"10\\\", \\\"20\\\" and \\\"30\\\", with a small \\\"%\\\" at the top. The bars from left to right are labelled in small warm grey capitals \\\"WALK\\\", \\\"BUS\\\", \\\"CAR\\\", \\\"BICYCLE\\\" and \\\"TRAIN\\\". Their values, printed directly above each bar, read \\\"18\\\", \\\"22\\\", \\\"31\\\", \\\"17\\\" and \\\"12\\\" in that order. The third bar is tallest and muted brick red; bar heights correspond to the printed values.\",\"position\":\"Below the headline on the left half of the page.\",\"action\":\"Displays the five labelled commute-mode values on a clean, evenly aligned chart.\"},{\"description\":\"A clean donut chart formed by a hollow ring divided into exactly three unequal segments, colored deep ink blue, sage green and muted brick red. The deep ink blue segment is largest and occupies roughly half the ring. The hollow centre contains the large figure \\\"62%\\\" and, beneath it, the small warm grey line \\\"COMMUTE ALONE\\\".\",\"position\":\"Below the headline on the right half of the page, left of the legend.\",\"action\":\"Displays the three-part commute distribution with its central percentage and label.\"},{\"description\":\"A three-item legend, each item consisting of one small colored square followed by a short label. From top to bottom: a deep ink blue square with \\\"ALONE\\\", a sage green square with \\\"SHARED\\\", and a muted brick red square with \\\"OTHER\\\".\",\"position\":\"Immediately to the right of the donut chart, stacked vertically.\",\"action\":\"Labels the corresponding donut segments.\"},{\"description\":\"A horizontal timeline consisting of one thin sage green line and exactly four evenly spaced dots. Beneath the dots, the years from left to right read \\\"2010\\\", \\\"2015\\\", \\\"2020\\\" and \\\"2024\\\". Above the dots, the small figures from left to right read \\\"41\\\", \\\"48\\\", \\\"55\\\" and \\\"62\\\".\",\"position\":\"Along the bottom of the page, aligned to the grid.\",\"action\":\"Presents four dated figures in chronological order.\"},{\"description\":\"A small warm grey credit line reading \\\"SOURCE: TOWN TRANSPORT OFFICE\\\".\",\"position\":\"In the bottom right corner of the page.\",\"action\":\"Printed as the source credit.\"}],\"style\":\"Flat printed infographic with crisp typography, clean vector-like chart geometry, precise grid alignment, and clear data labels.\",\"color_palette\":[\"warm off-white\",\"deep ink blue\",\"muted brick red\",\"sage green\",\"warm grey\"],\"lighting\":\"Even, neutral illumination across the printed page, with no glare or strong shadows.\",\"mood\":\"Clear, restrained, and informational.\",\"background\":\"The warm off-white infographic page fills the frame edge to edge.\",\"composition\":\"Landscape page with the headline and subtitle across the top; the five-bar chart below on the left; the three-segment donut and vertically stacked legend below on the right; and the timeline spanning the bottom, with the source credit in the bottom-right corner.\",\"camera\":{\"angle\":\"Straight-on, perpendicular to the page.\",\"lens\":\"Normal perspective with no visible distortion.\",\"depth_of_field\":\"Uniform sharp focus across the entire page, keeping every label and numeral legible.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1184,
+      "height": 896
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1184,
+      "height": 896
+    }
+  }
+}

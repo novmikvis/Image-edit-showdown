@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A contemporary flat illustration of a small laundrette at night, composed as a square, straight-on like a stage set. Exactly three colours are used everywhere: deep slate navy, dusty coral pink, and pale warm sand. Every surface, shape, line, and piece of text uses only these colours; depth and shading come from flat blocks of these colours.\",\"subjects\":[{\"description\":\"Exactly six front-loading washing machines in pale warm sand, each with a circular dusty coral pink door.\",\"position\":\"Arranged in one even row across the middle of the frame against the back wall.\",\"action\":\"Standing side by side.\"},{\"description\":\"A horizontal pale warm sand sign with the exact words \\\"WASH & FOLD\\\" in slate navy capitals.\",\"position\":\"Above the row of washing machines.\",\"action\":\"Displaying the laundrette sign text.\"},{\"description\":\"A tall folding table in dusty coral pink holding exactly three neatly stacked piles of laundry in pale warm sand.\",\"position\":\"Left side of the laundrette, beside the washing machines.\",\"action\":\"Holding the laundry piles.\"},{\"description\":\"One vending machine in pale warm sand with a dusty coral pink panel and a small deep slate navy coin slot.\",\"position\":\"Right side of the laundrette, beside the washing machines.\",\"action\":\"Standing against the back wall.\"},{\"description\":\"One figure wearing a dusty coral pink coat, seated in three-quarter view.\",\"position\":\"Foreground, on a pale warm sand bench, facing right.\",\"action\":\"Reading a folded pale warm sand newspaper marked with slate navy lines in place of text.\"},{\"description\":\"A pale warm sand bench.\",\"position\":\"Foreground beneath the seated figure.\",\"action\":\"Supporting the figure.\"},{\"description\":\"A slate navy tiled floor with a simple pale warm sand grid.\",\"position\":\"Across the lower foreground, receding toward the washing machines.\",\"action\":\"Forming the laundrette floor.\"},{\"description\":\"A dusty coral pink crescent moon against a deep slate navy sky.\",\"position\":\"Visible through a window in the upper-left corner.\",\"action\":\"Hanging in the night sky.\"}],\"style\":\"Clean contemporary flat vector illustration with crisp edges, a graphic poster-like appearance, no gradients, and no texture. Use exactly the three specified colours, with no other hues or neutral colours.\",\"color_palette\":[\"deep slate navy\",\"dusty coral pink\",\"pale warm sand\"],\"lighting\":\"Night setting, expressed only with flat blocks of the three specified colours; no gradients or additional shades.\",\"mood\":\"Calm, graphic, poster-like.\",\"background\":\"A deep slate navy back wall behind the machines, with a window in the upper-left corner revealing a deep slate navy night sky and dusty coral pink crescent moon.\",\"composition\":\"Square composition, straight-on stage-set view. The sign sits above six evenly aligned washing machines across the middle. The folding table and three laundry piles are on the left; the single vending machine is on the right. The seated figure and bench occupy the foreground, with the tiled floor grid receding toward the machines. Maintain exactly three colours across the entire image.\",\"camera\":{\"angle\":\"Straight-on, stage-set view.\",\"lens\":\"Flat graphic perspective without lens effects.\",\"depth_of_field\":\"Uniform sharpness throughout, with crisp vector edges.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1024,
+      "height": 1024
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}

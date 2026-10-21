@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A contemporary illustration of a sunlit apartment corner in the late morning, drawn with soft flat shapes, gentle grain and a warm muted palette, composed in landscape.\n\nExactly four elements carry the composition and each occupies its own clearly separated region of the frame, with no two overlapping.\n\nA tall window fills the right third of the image from top edge to floor, its frame painted chalky white, divided into six panes by thin muntins, with pale sunlight pouring through it and casting a hard-edged parallelogram of light across the floor toward the lower left corner.\n\nA woman stands in the left third, in three-quarter view facing right toward the window, her weight on her back foot. She wears a loose oatmeal linen shirt with the sleeves pushed to the elbow and wide dark olive trousers, her dark hair tied in a low bun, one hand wrapped around a small ceramic cup held at chest height. Her head and shoulders reach into the upper half of the frame; her feet are visible on the floor.\n\nA large monstera plant occupies the centre of the frame between the woman and the window, standing in a ribbed terracotta pot on the floor. It has exactly seven broad split leaves, three of them turned toward the window and catching the light on their upper surfaces, the rest in soft shade.\n\nA cat lies in the lower right, directly inside the bright parallelogram of sunlight on the floorboards, stretched out on its side with its front legs extended and its eyes closed. It is a short-haired ginger tabby with faint darker stripes along its flank and a white chin.\n\nNothing else of substance appears: the back wall is a plain warm off-white, the floor is pale honey-toned boards running diagonally toward the window, and the negative space between the four elements stays deliberately empty so each one reads separately and in its stated place.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1184,
+      "height": 896
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1184,
+      "height": 896
+    }
+  }
+}

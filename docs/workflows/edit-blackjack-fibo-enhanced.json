@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1248,
+      "height": 832,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_09_blackjack_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A hand holds an Ace of Spades and a King of Hearts above a green casino table, with blurred chips and casino colors in the background.\",\"objects\":[{\"description\":\"A close-up human hand with a warm light-to-medium skin tone grips two playing cards, the thumb crossing their lower-left area.\",\"location\":\"Left and center foreground\",\"relationship\":\"Holds the two overlapping playing cards above the table.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Curved hand shape in warm skin tones\",\"texture\":\"Natural skin with fine creases and soft highlights\",\"appearance_details\":\"The thumb and fingertips are prominent; the thumbnail is short and pale.\",\"number_of_objects\":1,\"pose\":\"Fingers curl around the cards while the thumb presses across their fronts.\",\"expression\":null,\"clothing\":null,\"action\":\"Holding the cards\",\"gender\":null,\"skin_tone_and_texture\":\"Warm light-to-medium skin tone with natural creases\",\"orientation\":\"Angled from the left edge toward the center\"},{\"description\":\"Two white playing cards are fanned in the hand: an Ace of Spades behind a King of Hearts in front. The king card has a traditional illustrated face and red heart suit markings.\",\"location\":\"Center foreground\",\"relationship\":\"The King of Hearts overlaps the Ace of Spades; both are held by the hand.\",\"relative_size\":\"Medium within frame\",\"shape_and_color\":\"Rectangular white cards with black and red printed markings\",\"texture\":\"Smooth, slightly reflective card stock\",\"appearance_details\":\"The Ace of Spades has a black ace index and spade symbol. The King of Hearts has a red king index and heart symbol, with a multicolored mirrored court illustration.\",\"number_of_objects\":2,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Fanned diagonally, with the King of Hearts angled down toward the right\"},{\"description\":\"A cluster of casino chips sits blurred across the lower foreground, with a few colored chips visible beyond the cards.\",\"location\":\"Bottom foreground and midground\",\"relationship\":\"The chips rest on the green felt around the hand holding the cards.\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Round stacks and discs in red, white, blue, and green\",\"texture\":\"Smooth, slightly glossy surfaces\",\"appearance_details\":\"The nearest chips are heavily out of focus.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Mostly horizontal on the table\"}],\"background_setting\":\"A casino table covered in green felt fills the scene. Softly blurred casino activity and patches of bright color occupy the upper background.\",\"lighting\":{\"conditions\":\"Bright indoor casino lighting\",\"direction\":\"Soft light from the upper left and front\",\"shadows\":\"Soft shadows fall beneath the hand and cards on the felt.\"},\"aesthetics\":{\"composition\":\"Tight close-up with the hand and fanned cards centered, chips framing the lower edge, and a shallow-focus background\",\"color_scheme\":\"Rich green felt with warm skin tones, white cards, black spade markings, and red heart markings\",\"mood_atmosphere\":\"Focused, lively casino-table atmosphere\"},\"photographic_characteristics\":{\"depth_of_field\":\"Shallow, with the hand and cards prominent against a blurred background\",\"focus\":\"Sharp focus on the hand and playing cards\",\"camera_angle\":\"Low, close table-level angle\",\"lens_focal_length\":\"Standard lens\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A realistic close-up photograph of a blackjack hand at a casino table.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Change the King of Spades to a King of Hearts and keep the Ace of Spades unchanged.\"}"
+    }
+  }
+}

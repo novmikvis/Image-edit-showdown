@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1184,
+      "height": 896,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A warm, quiet apartment corner in late-morning sunlight, rendered as a softly textured contemporary illustration. A woman stands at left with a ceramic cup, a seven-leaf monstera fills the center, a tall six-pane window occupies the right third, and a ginger tabby rests in a bright patch on the floor.\",\"objects\":[{\"description\":\"A tall apartment window spanning the right third of the composition from the top edge to the floor. Its chalky white frame is divided by thin muntins into six panes. Pale sunlight passes through the glass; the window remains visually distinct from the cat and plant.\",\"location\":\"Right third, extending from the top edge to the floor\",\"relationship\":\"Behind the plant and cat in the room; its light forms a hard-edged parallelogram across the floor toward the lower left. The window frame does not overlap the other subjects.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Tall rectangular frame in chalky white, divided into six rectangular panes\",\"texture\":\"Matte, softly painted surface with subtle grain\",\"appearance_details\":\"Pale sunlight shows through the panes; thin muntins divide the glass into exactly six panes.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, with its frame parallel to the image edges\"},{\"description\":\"A woman in three-quarter view, standing with her weight on her back foot. Her head and shoulders reach into the upper half of the frame, and both feet are visible on the floor. She holds a small ceramic cup at chest height with one hand.\",\"location\":\"Left third, standing on the floor\",\"relationship\":\"Faces toward the window across open negative space; clearly separated from the central plant and the other elements.\",\"relative_size\":\"Medium-to-large\",\"shape_and_color\":\"Human figure in soft, natural forms; oatmeal, dark olive, and deep brown tones\",\"texture\":\"Soft flat-color illustration with gentle grain; linen appears softly woven\",\"appearance_details\":\"Dark hair tied in a low bun. Loose oatmeal linen shirt with sleeves pushed to the elbows, wide dark olive trousers, and a small ceramic cup.\",\"number_of_objects\":1,\"pose\":\"Standing in three-quarter view, facing right toward the window, with weight on her back foot; head and shoulders in the upper half of the frame and feet visible.\",\"expression\":\"Calm, relaxed expression\",\"clothing\":\"Loose oatmeal linen shirt with sleeves pushed to the elbows and wide dark olive trousers\",\"action\":\"Holding a small ceramic cup at chest height with one hand\",\"gender\":\"Woman\",\"skin_tone_and_texture\":\"Natural skin tone rendered with soft, understated flat shading\",\"orientation\":\"Three-quarter view facing right toward the window\"},{\"description\":\"One large monstera with exactly seven broad split leaves, growing from a ribbed terracotta pot. Three leaves turn toward the window and catch light on their upper surfaces; the other four remain in soft shade.\",\"location\":\"Center of the frame, standing on the floor between the woman and the window\",\"relationship\":\"Separated from the woman on the left and the window on the right by visible negative space; its leaves do not overlap either subject.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Seven broad, split dark green leaves above a tapered terracotta pot\",\"texture\":\"Leaves are smooth and softly shaded; pot is matte, ribbed terracotta\",\"appearance_details\":\"Exactly seven leaves: three angled toward the window with pale highlights on their upper surfaces, and four in soft shade. The pot rests directly on the floor.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright; leaves fan outward, with three turned toward the window\"},{\"description\":\"A short-haired ginger tabby cat lying on its side with its front legs extended and eyes closed. Faint darker stripes trace its flank, and its chin is white.\",\"location\":\"Lower right, directly inside the bright parallelogram of sunlight on the floorboards\",\"relationship\":\"Rests in the sunlight cast by the window, visually separate from the window frame, woman, and potted plant.\",\"relative_size\":\"Medium within frame\",\"shape_and_color\":\"Low, elongated ginger-orange cat with faint darker stripes and a small white chin\",\"texture\":\"Short, smooth fur with soft illustrated grain\",\"appearance_details\":\"Faint darker stripes along the flank; white chin; eyes closed.\",\"number_of_objects\":1,\"pose\":\"Stretched out on its side with front legs extended\",\"expression\":\"Eyes closed, peacefully resting\",\"clothing\":null,\"action\":\"Lying still in the sunlight\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal, stretched across the floor\"}],\"background_setting\":\"A simple apartment corner in late morning. The back wall is plain warm off-white, and pale honey-toned floorboards run diagonally toward the window. A hard-edged parallelogram of sunlight reaches across the floor toward the lower left corner. The composition preserves deliberate empty space between the four main elements; no other substantial objects or decoration appear.\",\"lighting\":{\"conditions\":\"Pale late-morning sunlight pouring through the window\",\"direction\":\"From the right through the window, traveling diagonally across the floor toward the lower left\",\"shadows\":\"A hard-edged parallelogram of light with crisp boundaries on the floor; the shaded monstera leaves and room remain softly muted\"},\"aesthetics\":{\"composition\":\"Landscape composition with four clearly separated elements: the woman in the left third, the monstera at center, the window in the right third, and the cat in the lower right. Open negative space keeps their silhouettes distinct.\",\"color_scheme\":\"Warm muted palette of chalky white, warm off-white, honey-toned wood, terracotta, oatmeal, dark olive, and ginger orange\",\"mood_atmosphere\":\"Quiet, sunlit, relaxed, and intimate\"},\"photographic_characteristics\":null,\"style_medium\":\"Contemporary digital illustration\",\"text_render\":[],\"context\":\"A calm domestic interior illustration with a carefully balanced landscape composition, suitable for editorial art or a softly stylized home scene.\",\"artistic_style\":\"soft flat, gentle grain\"}"
+    }
+  }
+}

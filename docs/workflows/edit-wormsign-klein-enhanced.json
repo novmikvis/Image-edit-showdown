@@ -1,0 +1,223 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_11_wormsign_1mp.png"
+    }
+  },
+  "4": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "6": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "16",
+        0
+      ],
+      "negative": [
+        "14",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Replace only the kangaroo graphic on the yellow diamond road sign with a flat dark gray silhouette of a giant sand worm. Preserve the sign's weathered texture, lighting, dents, scratches, bullet holes, border, perspective, and placement exactly as shown.\",\"subjects\":[{\"description\":\"Weathered yellow diamond road sign with a dark border, scuffs, dents, scratches, and bullet holes; retain all existing details and wear.\",\"position\":\"Upper center, mounted on the wooden pole.\",\"action\":\"Display the new sand worm silhouette in the same area and at the same scale as the original kangaroo graphic.\"},{\"description\":\"Flat dark gray silhouette of a giant sand worm, with a long arched, segmented body, a tapered head, and a curling tail.\",\"position\":\"Centered on the face of the sign, replacing the kangaroo graphic.\",\"action\":\"Form the sign's animal warning graphic.\"},{\"description\":\"Weathered wooden pole, leafy trees, grassy field, blue sky, and scattered white clouds as in the reference.\",\"position\":\"Pole through the center; trees and field in the lower background; sky across the upper and right background.\",\"action\":\"Remain unchanged.\"}],\"style\":\"Preserve the reference's full-color outdoor photograph and existing visual treatment.\",\"color_palette\":[\"yellow\",\"dark gray\",\"weathered brown\",\"leaf green\",\"blue\",\"white\"],\"lighting\":\"Keep the original sunlight, shadows, and illumination unchanged.\",\"mood\":\"Unchanged from the reference.\",\"background\":\"Keep the original wooden pole, trees, grassy field, sky, and clouds unchanged.\",\"composition\":\"Preserve the original vertical framing, sign placement, scale, perspective, and surrounding scene.\",\"camera\":{\"angle\":\"Unchanged from reference.\",\"lens\":\"Unchanged from reference.\",\"depth_of_field\":\"Unchanged from reference.\"}}",
+      "clip": [
+        "17",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "10": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "5",
+        0
+      ],
+      "sigmas": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "13": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "3",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "clip": [
+        "9",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "19": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  }
+}

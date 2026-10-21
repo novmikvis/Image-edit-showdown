@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 832,
+      "height": 1248,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_11_wormsign_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A weathered yellow roadside warning sign on a rough wooden pole, bearing a dark silhouette of a giant sand worm, against a sunny rural landscape.\",\"objects\":[{\"description\":\"A large diamond-shaped yellow roadside sign with a dark border and a charcoal silhouette of a giant sand worm. The worm has a long, curved body and a distinct head, rendered as a bold graphic emblem. The metal face is weathered, with dents, scratches, scuffs, and visible bullet holes.\",\"location\":\"center foreground\",\"relationship\":\"Mounted in front of the wooden pole and prominent against the sky and foliage.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Diamond-shaped yellow sign with a dark border and charcoal-gray worm silhouette.\",\"texture\":\"Worn, scratched metal with chipped paint and dents.\",\"appearance_details\":\"Uneven surface wear and several small punctures mark the yellow face; the worm emblem is a solid, clean-edged silhouette.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Tilted as a diamond, facing the camera at a slight angle.\"},{\"description\":\"A thick, weathered wooden post with rough grain, cracks, and irregular sunlit patches, supporting the sign.\",\"location\":\"vertical center, behind the sign\",\"relationship\":\"Runs vertically through the frame and holds the warning sign.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Tall, narrow post in muted brown and olive tones.\",\"texture\":\"Rough, cracked, aged wood.\",\"appearance_details\":\"Deep grain and dark creases are visible above and below the sign.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and vertical.\"}],\"background_setting\":\"A rural roadside with leafy green trees and low grass beneath a blue sky with scattered soft white clouds. The background is slightly out of focus.\",\"lighting\":{\"conditions\":\"Warm, direct daylight.\",\"direction\":\"Sunlight falls from the upper right and front, brightening the sign and the right side of the post.\",\"shadows\":\"Distinct, irregular tree shadows cross parts of the sign and post; softer shadows fall across the foliage.\"},\"aesthetics\":{\"composition\":\"Vertical portrait composition with the sign centered prominently on a tall post; the sky and trees frame it on either side.\",\"color_scheme\":\"Vivid yellow against blue sky and deep green foliage, with warm brown wood and dark emblem contrast.\",\"mood_atmosphere\":\"Sunny, quiet rural roadside with an unusual warning emblem.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Moderate, with the sign and post sharp and the distant landscape softly blurred.\",\"focus\":\"Sharp focus on the sign’s weathered face and worm silhouette.\",\"camera_angle\":\"Slightly low angle looking up toward the sign.\",\"lens_focal_length\":\"Standard lens.\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A realistic roadside photograph featuring a weathered warning sign with an unusual creature emblem.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Replace the kangaroo emblem on the sign with a dark silhouette of a giant sand worm, preserving the sign’s weathered texture, lighting, dents, scratches, and bullet holes.\"}"
+    }
+  }
+}

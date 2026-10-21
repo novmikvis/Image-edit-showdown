@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A full-color documentary photograph of exactly five animals standing in a single row across the middle of a bare dirt clearing, ordered strictly from largest on the left to smallest on the right in a clean descending staircase of heights.\",\"subjects\":[{\"description\":\"A full-grown African elephant in three-quarter view facing slightly left, with enormous grey ears fanned outward, two pale curved tusks, deep wrinkles across its trunk and forehead, and its trunk hanging down and curling gently inward at the tip.\",\"position\":\"Far left of the row; its shoulder is roughly level with the bay horse’s withers.\",\"action\":\"Stands still, facing slightly left.\"},{\"description\":\"A bay horse in profile facing right, with a warm reddish-brown coat, black mane and tail, a white blaze running down the centre of its face, and black lower legs.\",\"position\":\"Immediately to the right of the elephant; its withers reach roughly to the elephant’s shoulder.\",\"action\":\"Stands in profile with its head turned slightly toward the camera.\"},{\"description\":\"A golden retriever with a long cream-gold coat, slightly wavy at the chest and tail, soft ears hanging against its cheeks, and a visible pink tongue.\",\"position\":\"Third from the left; its head reaches roughly to the horse’s knee.\",\"action\":\"Stands square and alert facing the camera, mouth open in a relaxed pant.\"},{\"description\":\"A grey tabby cat with a striped coat and darker rings along its tail.\",\"position\":\"Fourth from the left; its shoulder reaches roughly to the dog’s elbow.\",\"action\":\"Walks slowly to the right in profile, with one front paw lifted mid-step and its tail carried low and curved upward at the tip.\"},{\"description\":\"A single small brown field mouse with tiny pink ears and paws, no larger than the cat’s paw, and a long thin tail.\",\"position\":\"Far right of the row, sitting on the bare earth with its tail trailing behind it.\",\"action\":\"Sits in profile facing right.\"}],\"style\":\"Wide documentary photograph with natural animal proportions and accurate anatomical scale relationships.\",\"color_palette\":[\"grey\",\"pale grey\",\"reddish brown\",\"black\",\"cream-gold\",\"gold\",\"yellow-green\",\"dense green\",\"white\"],\"lighting\":\"Flat, diffuse light beneath a heavily overcast sky, with soft shadows directly beneath each animal and no strong highlights.\",\"mood\":\"Quiet, observational, and natural.\",\"background\":\"Dry compacted earth scattered with small pale stones and sparse tufts of yellow-green grass fills the foreground. Behind the animals, a low band of dense green scrub and bushes stretches across the middle distance. Rounded forested hills recede beyond the scrub into pale grey haze, and soft layered white and grey clouds fill the upper third of the frame. No other animals appear.\",\"composition\":\"Square frame with a wide horizontal view. The five animals form one uninterrupted row across the middle, each fully legible and spaced so their descending heights read clearly from left to right. Keep the foreground clearing, scrub band, distant forested hills, and cloud-filled upper third visible; maintain anatomically plausible size relationships among all five animals.\",\"camera\":{\"angle\":\"Animal eye level, viewing the elephant in three-quarter view and the horse, cat, and mouse in profile.\",\"lens\":\"50mm\",\"depth_of_field\":\"Deep depth of field, keeping both the animals and distant treeline legible.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1024,
+      "height": 1024
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}

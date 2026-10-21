@@ -1,0 +1,223 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_01_pisa_1mp.png"
+    }
+  },
+  "4": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "6": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "16",
+        0
+      ],
+      "negative": [
+        "14",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Straighten the Leaning Tower of Pisa so it stands vertically in the frame, preserving its current size, position, appearance, and the rest of the photograph.\",\"subjects\":[{\"description\":\"The white stone Leaning Tower of Pisa, with its stacked arcaded levels, circular upper gallery, and flagpole.\",\"position\":\"Centered in the frame, spanning from the lower foreground to the upper sky.\",\"action\":\"Stand vertically with the tower’s central axis aligned upright, retaining its existing scale and architectural details.\"}],\"style\":\"Full-color outdoor photograph; preserve the source image’s photographic style.\",\"color_palette\":[\"white stone\",\"blue sky\",\"white clouds\",\"green grass\",\"dark green trees\"],\"lighting\":\"Preserve the source image’s existing daylight and shadows.\",\"mood\":\"Unchanged from the reference.\",\"background\":\"Preserve the existing clouds, distant hills, trees, buildings, lawn, and people in their current positions and appearance.\",\"composition\":\"Preserve the source framing and composition, changing only the tower’s lean so it is vertical.\",\"camera\":{\"angle\":\"Unchanged from reference.\",\"lens\":\"Unchanged from reference.\",\"depth_of_field\":\"Unchanged from reference.\"}}",
+      "clip": [
+        "17",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "10": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "5",
+        0
+      ],
+      "sigmas": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "13": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "3",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "clip": [
+        "9",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "19": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  }
+}

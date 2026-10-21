@@ -1,0 +1,268 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_laughing-leo_1mp.png"
+    }
+  },
+  "4": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "6": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "22",
+        0
+      ],
+      "negative": [
+        "23",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Replace the man in image 1 with the person from image 2, transferring his recognizable face shape, skin tone, long dark hair, full beard, and glasses while preserving image 1’s pose, expression, clothing, setting, and framing.\",\"subjects\":[{\"description\":\"Adult man with the face shape and fair skin tone of the person in image 2, long dark hair, a full dark beard, and dark rectangular glasses. Keep image 1’s squinting, laughing expression with open mouth, head tilt, and gaze. He wears image 1’s dark 19th-century suit, patterned vest, high white collar, dark cravat, and white lapel flower.\",\"position\":\"Centered in the foreground as in image 1; his raised hand and small glass remain at frame-left.\",\"action\":\"Keep image 1’s seated pose and raised hand holding the drink. Do not carry over image 2’s expression or clothing.\"}],\"style\":\"Unchanged from image 1: warm-toned photographic film still.\",\"color_palette\":[\"unchanged from image 1: warm brown, dark charcoal, muted gold, cream, and white\"],\"lighting\":\"Unchanged from image 1: warm interior lighting.\",\"mood\":\"Unchanged from image 1: amused, laughing expression.\",\"background\":\"Unchanged from image 1: ornate carved interior backdrop and visible wood trim.\",\"composition\":\"Unchanged from image 1: square framing, same subject scale and placement, pose, and surrounding layout.\",\"camera\":{\"angle\":\"Unchanged from image 1.\",\"lens\":\"Unchanged from image 1.\",\"depth_of_field\":\"Unchanged from image 1.\"}}",
+      "clip": [
+        "17",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "10": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "5",
+        0
+      ],
+      "sigmas": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "13": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "3",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "clip": [
+        "9",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "19": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "20": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-2.jpg"
+    }
+  },
+  "21": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "20",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "22": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "16",
+        0
+      ],
+      "latent": [
+        "21",
+        0
+      ]
+    }
+  },
+  "23": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "14",
+        0
+      ],
+      "latent": [
+        "21",
+        0
+      ]
+    }
+  }
+}

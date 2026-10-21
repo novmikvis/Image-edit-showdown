@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A horizontal photograph taken from a customer's eye level inside a small sandwich shop, shot on a 35mm lens at a wide aperture so the chalkboard behind the counter is sharp while the foreground counter edge and the background fall softly out of focus. Warm tungsten light spills from a brass dome pendant lamp hanging just inside the upper left corner of the frame, while cool daylight leaks in from an unseen doorway on the far left.\n\nThe centre of the frame is filled by a large blackboard in a chunky reclaimed timber frame, its surface faintly streaked with old chalk swirls. Across the top, large white hand-lettered capitals read \"TODAY'S SANDWICHES\", underlined with a double wavy chalk line. Below the heading the board is divided into two columns of menu entries, each entry beginning with a small coloured chalk dot.\n\nThe left column lists four items. First, in salmon-red capitals, \"THE ITALIAN - 9.50\" followed by two smaller white cursive lines reading \"prosciutto, salami, provolone,\" and \"arugula, hot peppers on ciabatta\". Second, in pale yellow capitals, \"TURKEY CLUB - 8.75\" with two white lines reading \"roast turkey, bacon, avocado,\" and \"tomato, dijon-mayo on sourdough\". Third, in mint green capitals, \"THE CUBANO - 10.00\" followed by the underlined yellow words \"CHEF'S PICK\" and a small five-pointed chalk star, then two white lines reading \"slow-roast pork, ham, swiss,\" and \"pickles, mustard on a cuban roll\". Fourth, in pink capitals, \"MEATBALL SUB - 9.00\" with two white lines reading \"house meatballs, marinara,\" and \"mozzarella, basil on a hero roll\".\n\nThe right column lists three items. First, in mint green capitals, \"VEGGIE GARDEN - 8.25\" with two white lines reading \"roasted peppers, eggplant,\" and \"zucchini, pesto on focaccia\". Second, in pale orange capitals, \"SMOKED BRISKET - 11.50\" with a small yellow star above the word BRISKET, then two white lines reading \"12-hr brisket, slaw, pickles,\" and \"bbq aioli on brioche\". Third, in pale blue capitals, \"TUNA MELT - 8.50\" with two white lines reading \"albacore, sharp cheddar,\" and \"red onion, dill on rye\".\n\nBeneath both columns a single pale blue line reads \"ADD: avocado +1.50 - bacon +2 - egg +1.50\", and below it, in bouncy salmon-red script, \"Ask About Today's Soup!\" followed by a small chalk drawing of a steaming bowl. A narrow reclaimed-wood shelf runs along the base of the board holding a terracotta pot of fresh basil on the left and exactly nine glass mason jars in a row, filled variously with sliced cucumbers, red peppers, yellow peppers and green pickles, their brass lids catching the pendant light. On the right third of the frame, softly out of focus, a shop worker with dark hair in a low braid stands behind the counter in a white t-shirt and a charcoal canvas apron, looking down at her hands as she wraps a sandwich in white paper; a small dark name tag on her apron chest carries legible white lettering reading \"MARCO\". Behind her right shoulder rises an exposed red brick pillar, and a stack of white paper cups sits blurred in the extreme right foreground. A stainless steel display case edge cuts across the very bottom of the frame.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1376,
+      "height": 768
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1376,
+      "height": 768
+    }
+  }
+}

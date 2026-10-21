@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A square, wide-feeling documentary photograph of exactly five animals standing in a descending size order across a bare dirt clearing: an African elephant, bay horse, golden retriever, grey tabby cat, and small brown field mouse. Green scrub, hazy forested hills, and layered overcast clouds fill the background.\",\"objects\":[{\"description\":\"A full-grown African elephant stands at the far left in three-quarter view, its huge grey ears fanned outward and two pale curved tusks visible. Deep wrinkles cross its forehead and hanging trunk, which curls gently inward at the tip.\",\"location\":\"far left, across the middle of the frame\",\"relationship\":\"Largest animal in the row; the horse stands immediately to its right, with the horse's withers reaching roughly to the elephant's shoulder.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Massive, rounded grey body with broad ears, a long trunk, and two pale curved tusks.\",\"texture\":\"Rough, deeply wrinkled skin.\",\"appearance_details\":\"Ears spread outward; trunk hangs down with its tip curled gently inward.\",\"number_of_objects\":null,\"pose\":\"Standing on all four legs in three-quarter view.\",\"expression\":null,\"clothing\":null,\"action\":\"Standing still.\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Three-quarter view, facing slightly left.\"},{\"description\":\"A bay horse stands immediately to the elephant's right, with a warm reddish-brown coat, black mane and tail, a white blaze down the centre of its face, and black lower legs. Its head turns slightly toward the camera.\",\"location\":\"second from the left, across the middle of the frame\",\"relationship\":\"Smaller than the elephant and larger than the golden retriever; its withers reach roughly to the elephant's shoulder.\",\"relative_size\":\"medium-to-large\",\"shape_and_color\":\"Tall, muscular equine form in reddish brown with black mane, tail, and lower legs, plus a white facial blaze.\",\"texture\":\"Short, smooth coat with a slightly tousled mane and tail.\",\"appearance_details\":\"The white blaze runs down the centre of the face.\",\"number_of_objects\":null,\"pose\":\"Standing square on all four legs in profile.\",\"expression\":null,\"clothing\":null,\"action\":\"Standing still with its head turned slightly toward the camera.\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Profile facing right.\"},{\"description\":\"A golden retriever stands square and alert, with a long cream-gold coat that is slightly wavy across its chest and tail. Its mouth is open in a relaxed pant, showing a pink tongue, and its soft ears hang against its cheeks.\",\"location\":\"third from the left, near the centre of the row\",\"relationship\":\"Smaller than the horse and larger than the cat; its head reaches roughly to the horse's knee.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Sturdy, balanced dog with a cream-gold coat.\",\"texture\":\"Long, soft coat, slightly wavy at the chest and tail.\",\"appearance_details\":\"Open relaxed mouth with pink tongue visible; ears hang softly beside the cheeks.\",\"number_of_objects\":null,\"pose\":\"Standing square on all four legs, head held alert.\",\"expression\":\"Calm and friendly, with a relaxed pant.\",\"clothing\":null,\"action\":\"Standing alert and facing the camera.\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Facing directly toward the camera.\"},{\"description\":\"A grey tabby cat walks slowly in profile, its striped coat marked with darker rings along the tail. Its tail hangs low and curves upward at the tip, and one front paw is lifted mid-step.\",\"location\":\"fourth from the left, right of the dog\",\"relationship\":\"Smaller than the dog and larger than the mouse; its shoulder reaches roughly to the dog's elbow.\",\"relative_size\":\"small\",\"shape_and_color\":\"Compact grey cat with darker tabby stripes and a ringed tail.\",\"texture\":\"Short, soft-looking fur.\",\"appearance_details\":\"Tail carried low and curved upward at the tip; one front paw lifted mid-step.\",\"number_of_objects\":null,\"pose\":\"Walking with one front paw raised.\",\"expression\":null,\"clothing\":null,\"action\":\"Walking slowly to the right.\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Profile facing right.\"},{\"description\":\"A single small brown field mouse sits on the bare earth. Its long, thin tail trails behind it, and tiny pink ears and paws are visible.\",\"location\":\"far right, on the earth beside the cat\",\"relationship\":\"Smallest animal in the row, no larger than the cat's paw.\",\"relative_size\":\"tiny\",\"shape_and_color\":\"Small brown oval body with a fine tail and pink ears and paws.\",\"texture\":\"Fine, soft-looking fur.\",\"appearance_details\":\"Long thin tail trails behind its body.\",\"number_of_objects\":1,\"pose\":\"Sitting low on the ground.\",\"expression\":null,\"clothing\":null,\"action\":\"Sitting still.\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Profile facing right.\"}],\"background_setting\":\"A bare dirt clearing fills the foreground, with compacted dry earth, scattered small pale stones, and sparse yellow-green grass tufts. A low band of dense green scrub and bushes sits behind the animals. Rounded forested hills recede into pale grey haze beyond the scrub. Soft layered white and grey clouds fill the upper third of the frame. No other animals are present.\",\"lighting\":{\"conditions\":\"Flat, diffuse light beneath a heavily overcast sky, with no strong highlights.\",\"direction\":\"Even, soft illumination from the clouded sky.\",\"shadows\":\"Soft shadows directly beneath each animal.\"},\"aesthetics\":{\"composition\":\"Square frame with a wide, horizontal documentary composition; all five animals stand in a single row across the middle, ordered strictly from largest at left to smallest at right in a clean descending staircase. The distant treeline remains legible.\",\"color_scheme\":\"Natural muted earth tones, grey animals and clouds, green scrub, and hazy grey-green hills.\",\"mood_atmosphere\":\"Quiet, observational, and naturalistic.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Deep, keeping both the animals and distant treeline legible.\",\"focus\":\"Clear documentary detail across all five animals, with the landscape still discernible.\",\"camera_angle\":\"Animal eye level.\",\"lens_focal_length\":\"50mm standard lens.\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A natural-history documentary photograph showing five anatomically plausible animals in descending size order against a layered rural landscape.\",\"artistic_style\":\"realistic\"}"
+    }
+  }
+}

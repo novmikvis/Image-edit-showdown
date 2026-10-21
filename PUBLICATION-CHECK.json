@@ -1,0 +1,14 @@
+{
+  "images_verified": 210,
+  "executed_prompts_and_workflows_verified": 192,
+  "all_images_decode": true,
+  "dimensions_preserved": true,
+  "original_files_unchanged": true,
+  "private_machine_or_credential_patterns_found": 0,
+  "embedded_metadata_allowlist_checked": true,
+  "exif_or_gps_metadata_included": false,
+  "logs_and_private_build_files_included": false,
+  "physical_mobile_device_tested": false,
+  "thumbnails_verified": 32,
+  "thumbnail_metadata_included": false
+}

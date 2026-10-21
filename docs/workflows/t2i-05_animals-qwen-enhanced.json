@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a wide documentary photograph of five animals in a bare dirt clearing, with muted green scrub, rounded forested hills, and a pale overcast sky. Across the foreground, dry compacted earth is scattered with small pale stones and sparse yellow-green grass. Behind the clearing, dense green scrub and bushes form a low band, with rounded forested hills receding beyond them into pale grey haze. In the upper third, soft layers of white and grey cloud fill the sky. Across the middle of the frame, exactly five animals stand in a single row, ordered strictly from largest on the left to smallest on the right. Their heights form a clean descending staircase, with anatomically plausible, consistent scale relationships. At the far left, a full-grown African elephant stands in three-quarter view, facing slightly left. Its enormous grey ears fan outward, and two pale curved tusks frame the deeply wrinkled trunk and forehead. The trunk hangs down and curls gently inward at the tip, above the bare earth. Immediately to the elephant’s right, a bay horse stands in profile facing right, its withers reaching roughly to the elephant’s shoulder. Its warm reddish-brown coat contrasts with a black mane and tail, while a white blaze runs down the centre of its face and its lower legs are black. The horse’s head turns slightly toward the camera. Third from the left, a golden retriever stands square and alert, facing the camera, its head reaching roughly to the horse’s knee. Its long cream-gold coat is slightly wavy at the chest and tail, its soft ears hang against its cheeks, and its open mouth shows a pink tongue in a relaxed pant. Fourth in the row, a grey tabby cat walks slowly to the right in profile, its shoulder height reaching roughly to the dog’s elbow. Darker stripes mark its coat, with darker rings along its low-carried tail, which curves upward at the tip. One front paw is lifted mid-step above the dirt. On the far right, a single small brown field mouse sits on the bare earth in profile facing right, no larger than the cat’s paw. Its tiny pink ears and paws show against its brown fur, and its long thin tail trails behind it along the ground. No other animals appear anywhere in the frame. The perspective has the natural look of a 50mm lens, while the deep depth of field keeps both animals and the distant treeline legible. Flat, diffuse light from the heavily overcast sky leaves soft shadows directly beneath each animal and no strong highlights. The overall composition balances the descending animal row across the middle with open earth below and layered landscape above, using subdued natural colours and a calm documentary feel.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

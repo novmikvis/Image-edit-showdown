@@ -1,0 +1,223 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_05_paws_1mp.png"
+    }
+  },
+  "4": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "6": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "16",
+        0
+      ],
+      "negative": [
+        "14",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Change the shark into a cat’s paw reaching upward, change the movie title from “JAWS” to “PAWS,” and change the swimming woman into a goldfish. Preserve the original poster’s composition and painted aesthetic.\",\"subjects\":[{\"description\":\"Large cat’s forepaw replacing the shark, with pale gray fur and visible toes and claws, matching the original painted treatment.\",\"position\":\"Lower center, rising from the underwater area toward the water’s surface.\",\"action\":\"Reaches upward toward the goldfish.\"},{\"description\":\"Goldfish replacing the swimmer, with orange-gold scales, fins, and tail, rendered in the original poster’s painterly style.\",\"position\":\"Near the waterline in the upper middle, in the swimmer’s original location.\",\"action\":\"Swims horizontally along the surface.\"},{\"description\":\"The word “PAWS” in the same oversized, bold, dark red lettering as the original title.\",\"position\":\"Across the top of the poster above the waterline.\",\"action\":\"Serves as the movie title.\"}],\"style\":\"Vintage painted movie poster aesthetic, preserving the original artwork’s texture and treatment.\",\"color_palette\":[\"warm off-white\",\"dark red\",\"turquoise\",\"teal\",\"orange-gold\",\"pale gray\"],\"lighting\":\"Preserve the original lighting and tonal treatment.\",\"mood\":\"Suspenseful, matching the original poster.\",\"background\":\"Preserve the warm off-white upper field and turquoise underwater scene.\",\"composition\":\"Preserve the original tall poster layout: title at the top, goldfish at the waterline, and the reaching paw rising from the lower center.\",\"camera\":{\"angle\":\"Unchanged from reference.\",\"lens\":\"Unchanged from reference.\",\"depth_of_field\":\"Unchanged from reference.\"}}",
+      "clip": [
+        "17",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "10": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "5",
+        0
+      ],
+      "sigmas": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "13": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "3",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "clip": [
+        "9",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "19": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  }
+}

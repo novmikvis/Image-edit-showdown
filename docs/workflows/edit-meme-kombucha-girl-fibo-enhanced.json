@@ -1,0 +1,120 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1104,
+      "height": 944,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ],
+      "images.image_2": [
+        "10",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_kombucha-girl_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\n  \"short_description\": \"A two-panel indoor selfie meme shows the same woman in both panels, wearing round glasses and a dark top. She makes a disgusted grimace on the left and gives a raised-brow sideways glance on the right.\",\n  \"objects\": [\n    {\n      \"description\": \"The same adult woman depicted in the other panel, with a softly oval face, light skin, pulled-back light-brown to dark-blonde hair, and round brown translucent glasses. She wears a dark top.\",\n      \"location\": \"centered in the left panel, filling most of the lower frame\",\n      \"relationship\": \"Her face is the main subject of the left panel; a narrow white divider separates her depiction from the matching portrait on the right.\",\n      \"relative_size\": \"large within frame\",\n      \"shape_and_color\": \"Oval face, light skin, light-brown to dark-blonde hair, round brown glasses, and a dark top\",\n      \"texture\": \"Natural skin texture, fine pulled-back hair, and smooth translucent eyeglass frames\",\n      \"appearance_details\": \"Her nose is scrunched, brows drawn together, and lips pursed downward in a strong disgusted grimace.\",\n      \"number_of_objects\": null,\n      \"pose\": \"Close-up, head upright and slightly tucked toward the camera\",\n      \"expression\": \"Disgusted, with a scrunched nose and pursed, downturned lips\",\n      \"clothing\": \"Dark top\",\n      \"action\": \"Holding a close indoor selfie pose\",\n      \"gender\": \"Woman\",\n      \"skin_tone_and_texture\": \"Light skin with natural, softly lit texture\",\n      \"orientation\": \"Facing mostly toward the camera\"\n    },\n    {\n      \"description\": \"The same adult woman depicted in the left panel, with a softly oval face, light skin, pulled-back light-brown to dark-blonde hair, and round brown translucent glasses. She wears a dark top.\",\n      \"location\": \"centered in the right panel, filling most of the lower frame\",\n      \"relationship\": \"Her matching portrait forms the second half of the two-panel composition, separated from the left depiction by a narrow white divider.\",\n      \"relative_size\": \"large within frame\",\n      \"shape_and_color\": \"Oval face, light skin, light-brown to dark-blonde hair, round brown glasses, and a dark top\",\n      \"texture\": \"Natural skin texture, fine pulled-back hair, and smooth translucent eyeglass frames\",\n      \"appearance_details\": \"Her eyebrows are raised and her eyes glance sideways; her lips are closed and relaxed.\",\n      \"number_of_objects\": null,\n      \"pose\": \"Close-up, head tilted and turned three-quarter toward the right\",\n      \"expression\": \"Considering, with raised eyebrows and a sideways glance\",\n      \"clothing\": \"Dark top\",\n      \"action\": \"Holding a close indoor selfie pose\",\n      \"gender\": \"Woman\",\n      \"skin_tone_and_texture\": \"Light skin with natural, softly lit texture\",\n      \"orientation\": \"Head angled toward the right with a sideways glance\"\n    }\n  ],\n  \"background_setting\": \"A simple indoor room with an off-white textured ceiling above the subject and faint wall and doorway edges near the lower sides. The two close-up selfie panels are divided by a narrow vertical white strip.\",\n  \"lighting\": {\n    \"conditions\": \"Soft, warm indoor selfie lighting with a bright area behind the left side\",\n    \"direction\": \"Diffuse frontal light with brighter backlighting from the left\",\n    \"shadows\": \"Soft facial shadows with no sharply defined edges\"\n  },\n  \"aesthetics\": {\n    \"composition\": \"Two equal vertical panels in a close-up selfie composition, separated by a narrow white divider; one portrait centered in each panel\",\n    \"color_scheme\": \"Warm neutral tones, with off-white surroundings, light skin, brown hair and glasses, and dark clothing\",\n    \"mood_atmosphere\": \"Informal and humorous, with contrasting skeptical expressions\"\n  },\n  \"photographic_characteristics\": {\n    \"depth_of_field\": \"Moderate, with the room softly defined behind the faces\",\n    \"focus\": \"Soft smartphone selfie focus on the faces\",\n    \"camera_angle\": \"Close, approximately eye-level selfie angle\",\n    \"lens_focal_length\": \"Standard smartphone selfie perspective\"\n  },\n  \"style_medium\": \"photograph\",\n  \"text_render\": [],\n  \"context\": \"A casual two-panel reaction meme made from indoor smartphone selfies.\",\n  \"artistic_style\": \"realistic\",\n  \"edit_instruction\": \"Replace both panel subjects with the woman with a softly oval face, light skin, pulled-back light-brown hair, and round glasses; retain the left disgusted grimace and the right raised-brow sideways glance.\"\n}"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-1.png"
+    }
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_math-lady_1mp.png"
+    }
+  },
+  "4": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "6": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "22",
+        0
+      ],
+      "negative": [
+        "23",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Replace the woman in each of the four panels of the first image with the recognizable person from the second image, retaining her face shape, light skin tone, light brown hair, and round glasses. Preserve the template’s sideways-glancing confused expressions, head poses, close-up framing, and all other source properties. Keep the white math formulas and diagrams in their exact positions.\",\"subjects\":[{\"description\":\"The person from the second image, with an oval face, light skin, light brown hair pulled back, and round translucent brown glasses. Retain the template expression and head pose; do not carry over the source photo’s slight smile or clothing.\",\"position\":\"Upper-left panel, replacing the original woman within the existing close-up crop.\",\"action\":\"Glances sideways with the template’s confused expression.\"},{\"description\":\"The same recognizable person from the second image, with the same face shape, light skin, light brown hair, and round glasses. Retain the template expression and head pose; do not carry over the source photo’s slight smile or clothing.\",\"position\":\"Upper-right panel, replacing the original woman within the existing close-up crop.\",\"action\":\"Glances sideways with the template’s confused expression.\"},{\"description\":\"The same recognizable person from the second image, with the same face shape, light skin, light brown hair, and round glasses. Retain the template expression and head pose; do not carry over the source photo’s slight smile or clothing.\",\"position\":\"Lower-left panel, replacing the original woman within the existing close-up crop.\",\"action\":\"Glances sideways with the template’s confused expression.\"},{\"description\":\"The same recognizable person from the second image, with the same face shape, light skin, light brown hair, and round glasses. Retain the template expression and head pose; do not carry over the source photo’s slight smile or clothing.\",\"position\":\"Lower-right panel, replacing the original woman within the existing close-up crop.\",\"action\":\"Glances sideways with the template’s confused expression.\"}],\"style\":\"Preserve the original photographic meme collage and its existing appearance.\",\"color_palette\":[\"dark blue-gray\",\"warm beige\",\"light brown\",\"white\"],\"lighting\":\"Unchanged from the first image.\",\"mood\":\"Confused and contemplative, matching the template expressions.\",\"background\":\"Preserve the dark background in all four panels from the first image. Keep every white math formula and diagram unchanged and in its exact original position.\",\"composition\":\"Preserve the original four-panel grid, panel boundaries, close-up framing, and placement of all overlays. Replace only the woman’s identity in each panel.\",\"camera\":{\"angle\":\"Unchanged from the first image.\",\"lens\":\"Unchanged from the first image.\",\"depth_of_field\":\"Unchanged from the first image.\"}}",
+      "clip": [
+        "17",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "10": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "5",
+        0
+      ],
+      "sigmas": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "13": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "3",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "clip": [
+        "9",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "19": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "20": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-1.png"
+    }
+  },
+  "21": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "20",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "22": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "16",
+        0
+      ],
+      "latent": [
+        "21",
+        0
+      ]
+    }
+  },
+  "23": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "14",
+        0
+      ],
+      "latent": [
+        "21",
+        0
+      ]
+    }
+  }
+}

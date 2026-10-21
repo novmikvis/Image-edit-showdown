@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A wide documentary photograph taken at animal eye level on a bare dirt clearing, shot on a 50mm lens with a deep depth of field so both the animals and the distant treeline stay legible. The light is flat and diffuse under a heavily overcast sky, producing soft shadows directly beneath each animal and no strong highlights.\n\nExactly five animals stand in a single row across the middle of the frame, ordered strictly from largest on the left to smallest on the right, their heights forming a clean descending staircase. On the far left stands a full-grown African elephant in three-quarter view facing slightly left, its enormous grey ears fanned outward, two pale curved tusks visible, deep wrinkles across its trunk and forehead, and its trunk hanging down and curling gently inward at the tip. Immediately to its right stands a bay horse in profile facing right, its coat a warm reddish brown with a black mane and tail, a white blaze running down the centre of its face, and black lower legs; its head is turned slightly toward the camera and its withers reach roughly to the elephant's shoulder.\n\nThird in the row, a golden retriever stands square and alert facing the camera, its long cream-gold coat slightly wavy at the chest and tail, mouth open in a relaxed pant with the pink tongue visible, ears hanging soft against its cheeks, and its head reaching roughly to the horse's knee. Fourth, a grey tabby cat walks slowly to the right in profile, its striped coat marked with darker rings along the tail, tail carried low and curved upward at the tip, one front paw lifted mid-step, its shoulder height reaching roughly to the dog's elbow. On the far right, a single small brown field mouse sits on the bare earth in profile facing right, its long thin tail trailing behind it, tiny pink ears and paws visible, no larger than the cat's paw.\n\nNo other animals appear anywhere in the frame. The foreground is dry compacted earth scattered with small pale stones and sparse tufts of yellow-green grass. The middle distance behind the animals is a low band of dense green scrub and bushes, and beyond that a range of rounded forested hills recedes into pale grey haze. The upper third of the frame is filled with soft layered white and grey cloud. Scale relationships between all five animals remain anatomically plausible and consistent."
+    }
+  }
+}

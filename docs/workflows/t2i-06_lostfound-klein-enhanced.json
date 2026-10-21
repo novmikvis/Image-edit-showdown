@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A single live-action film still inside a 24-hour railway lost-and-found office at night, a few minutes after rain. The room is viewed through a glass wall and an open doorway from the corridor, with a deep, clearly organized foreground, midground, and background.\",\"subjects\":[{\"description\":\"A female clerk in her mid-30s with fair skin, dark hair tied back, and rectangular glasses, wearing a dark green cardigan over a white shirt and a silver name tag printed clearly with \\\"MARTA\\\". A thin silver ring is on her left index finger.\",\"position\":\"Foreground left, standing behind the counter.\",\"action\":\"She holds a clipboard in her left hand, its page printed clearly with \\\"PLATFORM 3\\\", and a blue pen in her right hand. She looks slightly to the right with an alert, neutral expression.\"},{\"description\":\"A short adult passenger with light skin, wearing an orange raincoat and a black cap.\",\"position\":\"Foreground right, beside the counter.\",\"action\":\"The passenger places a transparent plastic crate on the counter. The crate contains exactly five umbrellas: two closed black umbrellas, two closed red umbrellas, and one open yellow umbrella positioned in the center. These are the only umbrellas in the scene.\"},{\"description\":\"A brass bell, a stamp pad, a paper cup, a ring holding exactly three keys, and the transparent plastic crate of umbrellas.\",\"position\":\"On the countertop, arranged from the clerk's side toward the passenger's side; the bell is closest to the clerk and the keys are closest to the passenger.\",\"action\":\"The objects rest separately on the counter, with clear spacing and no duplicates.\"},{\"description\":\"Exactly three bags: a red hard-shell suitcase with a white sticker printed clearly with \\\"A17\\\"; a black duffel bag with a yellow tag printed clearly with \\\"B04\\\" and a slightly open zipper revealing a folded green sweater; and a blue backpack with a white tag printed clearly with \\\"C22\\\".\",\"position\":\"On the center floor in front of the counter, arranged left to right as red suitcase, black duffel, blue backpack. The suitcase is closest to the camera, and the backpack sits partly behind the duffel. Only the red suitcase has visible wheels.\",\"action\":\"The three bags rest on the floor, each distinct and unobstructed enough for its identifying text to read.\"},{\"description\":\"A tall male porter with medium-brown skin, short dark hair, and a navy uniform with a red scarf, carrying a cardboard box printed clearly with \\\"GLASS\\\".\",\"position\":\"Midground left, behind the bags and near the counter.\",\"action\":\"He carries the box in both hands.\"},{\"description\":\"A shorter female porter with olive skin and dark hair secured in a bun, wearing a charcoal uniform with a blue scarf and holding a brass desk lamp.\",\"position\":\"Midground right, behind the bags and near the counter.\",\"action\":\"She holds the lamp carefully with both hands. Her blue scarf remains distinct from the taller porter's red scarf.\"},{\"description\":\"A departures board displaying exactly four destination names, one per separate row: \\\"Hamburgevons\\\", \\\"Västerås\\\", \\\"青葉ヶ丘市\\\", and \\\"Южно-Щербицинск\\\". A small poster directly below it reads \\\"LOST & FOUND\\\".\",\"position\":\"On the back wall, with the board above the poster.\",\"action\":\"The four rows and the poster text are clearly legible and correctly spelled.\"},{\"description\":\"A convex security mirror with a curved reflection of the corridor, showing a janitor in work clothes pushing a mop bucket. The janitor appears only in the mirror reflection.\",\"position\":\"Upper right corner of the room, angled toward the corridor.\",\"action\":\"The mirror reflects corridor geometry consistently; the janitor and mop bucket are visible in the reflection and nowhere directly in the room.\"},{\"description\":\"A glass display cabinet with exactly four shelves. The second shelf from the top holds exactly three watches arranged left to right: one silver watch, one gold watch, and one black watch. A small orange cat sits on the bottom shelf.\",\"position\":\"Right side of the room, with all four shelves visible.\",\"action\":\"The watches remain in the stated order, and the cat is directly visible. Reflections in the cabinet glass align with the room and the cat's position.\"},{\"description\":\"Wet footprints on the floor, with a clear trail from the doorway ending near the red suitcase; the floor behind the counter is dry. A glass wall, an open doorway, and the glass cabinet carry physically consistent reflections.\",\"position\":\"Footprints cross the foreground floor from the doorway toward the red suitcase and stop there. The doorway opens onto a dim corridor.\",\"action\":\"The wet floor reflects nearby lights and objects; the corridor geometry in the glass and convex mirror remains consistent.\"}],\"style\":\"Full-color cinematic live-action photograph with coherent optics, realistic materials, natural anatomy, plausible posture, grips, contact, and occlusion; one continuous photographed moment with realistic lens behavior and natural contrast.\",\"color_palette\":[\"dark green\",\"white\",\"orange\",\"black\",\"red\",\"yellow\",\"navy\",\"charcoal\",\"blue\",\"brass\",\"silver\",\"gold\",\"wet grey\"],\"lighting\":\"Neutral overhead fluorescent light illuminates the office. A small warmer practical light glows near the back wall. Cool fluorescent light spills from the dim corridor through the open doorway, while wet floor and glass surfaces catch physically consistent reflections.\",\"mood\":\"Quiet, watchful late-night railway office atmosphere, grounded in an ordinary live-action moment.\",\"background\":\"The back wall holds the four-row departures board and the small lost-and-found poster. The right-side glass cabinet shows four distinct shelves, the three watches on the second shelf from the top, and the orange cat on the bottom shelf. The open doorway reveals a dim, cool-lit corridor; a convex security mirror in the upper right reflects the corridor and its janitor pushing a mop bucket.\",\"composition\":\"Wide horizontal frame with three readable depth layers. In the foreground, the clerk anchors the left and the short passenger the right, facing each other across the counter; the crate, bell, stamp pad, cup, and key ring are spaced between them. The three bags form a left-to-right row on the center floor, with wet footprints ending at the red suitcase. The two porters occupy the left and right midground with their prescribed heights, uniforms, scarf colors, box, and lamp. The board and poster anchor the back wall; the cabinet fills the right side, and the convex mirror sits in the upper right. Keep hands, objects, text, and reflections clearly separated and spatially consistent.\",\"camera\":{\"angle\":\"Eye-level view from the corridor through the glass wall and open doorway, keeping foreground, midground, and background visible.\",\"lens\":\"50mm full-frame perspective with natural live-action depth and proportions.\",\"depth_of_field\":\"Moderate depth of field keeps the clerk, passenger, objects, porters, readable signs, cabinet contents, and mirror reflection legible while preserving natural distance falloff.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1376,
+      "height": 768
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1376,
+      "height": 768
+    }
+  }
+}

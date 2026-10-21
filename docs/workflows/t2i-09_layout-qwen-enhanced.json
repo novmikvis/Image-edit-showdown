@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1184,
+      "height": 896,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a landscape contemporary illustration of a sunlit apartment corner, rendered in soft flat shapes and gentle grain over a warm muted palette. The back wall is plain warm off-white, with a subtly grainy surface and no decoration. Across the lower half, pale honey-toned floorboards run diagonally toward the window, their fine seams guiding the eye across the room. The four focal elements occupy clearly separated regions, with empty space between them and no overlap. At the right edge, a tall window fills the image’s right third from the top edge to the floor. Its chalky white frame has thin muntins dividing the glass into exactly six panes. Pale sunlight pours through the panes and falls across the floor in a hard-edged parallelogram stretching toward the lower-left corner. In the left third, a woman stands in three-quarter view, facing right toward the window. Her weight rests on her back foot, and her head and shoulders reach into the upper half of the frame. She wears a loose oatmeal linen shirt with sleeves pushed to the elbow and wide dark olive trousers, both softly defined by flat shapes and faint grain. Her dark hair is tied in a low bun, and her face is turned toward the light with a quiet, contemplative expression. One hand wraps around a small ceramic cup held at chest height; its matte surface appears muted cream or pale terracotta. Her feet are visible on the floor, with a little space around her shoes and the edge of her trousers. At the centre, between the woman and the window, a large monstera stands in a ribbed terracotta pot on the floor. Exactly seven broad split leaves spread from its stems, their shapes clearly separated against the plain wall. Three leaves turn toward the window, catching pale sunlight on their upper surfaces, while the other four remain in soft shade. The pot’s earthy surface has subtle horizontal ridges and a lightly grainy finish. In the lower-right corner, a short-haired ginger tabby cat lies directly inside the bright parallelogram of sunlight. It is stretched out on its side, front legs extended and eyes closed, with its body resting flat on the boards. Faint darker stripes run along its flank, and its white chin catches a small highlight. The lighting comes from the window on the right: pale late-morning sunlight creates crisp shadows on the floor and soft highlights on the plant leaves, the woman’s shirt and the cat’s fur. The negative space between the woman, plant, window and cat stays deliberately empty, keeping each subject distinct and easy to locate. The overall composition feels balanced and calm, with warm muted colours, gentle grain and a contemporary, softly rendered style.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

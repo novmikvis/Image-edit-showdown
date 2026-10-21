@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A contemporary flat illustration of a small laundrette at night, drawn in a clean vector style with crisp edges, no gradients and no texture, composed as a square.\n\nThe entire image is restricted to exactly three colours and nothing else: a deep slate navy, a dusty coral pink, and a pale warm sand. Every surface, every shape, every line and every piece of text uses one of these three colours only. There is no white, no black, no grey, no green and no blue outside the slate navy itself. Where depth or shading is needed it is achieved by flat blocks of these three colours against each other rather than by tinting, blending or adding new hues.\n\nThe composition is straight on, like a stage set. The back wall is deep slate navy and carries a row of exactly six front-loading washing machines in pale warm sand, their circular doors rendered as dusty coral discs, arranged in one even row across the middle of the frame. Above them, a horizontal sign in pale warm sand carries the legible words \"WASH & FOLD\" in slate navy capitals. To the left, a tall folding table in dusty coral holds three neatly stacked piles of laundry in pale sand. To the right, a single vending machine in pale sand has a coral panel and a small slate navy coin slot.\n\nIn the foreground, a lone figure in a dusty coral coat sits on a pale sand bench in three-quarter view, facing right, reading a folded newspaper rendered in pale sand with slate navy line marks standing in for text. A slate navy tiled floor with a simple pale sand grid recedes toward the machines. Through a window in the upper left corner, a coral crescent moon sits in a slate navy sky. The overall feel is calm, graphic and poster-like, and the three-colour restriction holds absolutely everywhere in the frame."
+    }
+  }
+}

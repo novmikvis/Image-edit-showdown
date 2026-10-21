@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "This is a square contemporary flat-vector illustration of a small laundrette at night, arranged like a straight-on stage set in deep slate navy, dusty coral pink, and pale warm sand. The deep slate navy back wall fills the background, its uninterrupted flat surface making the three colours read clearly across the scene. In the upper-left corner, a rectangular window breaks the wall, with a pale warm sand frame around a deep slate navy night sky. Within the window, a dusty coral pink crescent moon hangs against the navy, its curved silhouette cleanly separated from the sky. Across the upper part of the wall, a horizontal pale warm sand sign sits above the washing machines, spanning their central area. Centered on the sign, bold slate navy capitals read \"WASH & FOLD\", with generous spacing and crisp, even letterforms. Across the middle of the frame, exactly six pale warm sand front-loading washing machines stand in one even row, aligned at the same height. Each machine has a circular dusty coral pink door set into its front, with simple slate navy details that keep the doors and controls legible. On the far left, a tall dusty coral pink folding table stands beside the row, its broad top level with the machines’ lower section. Three neatly stacked piles of pale warm sand laundry rest on the tabletop, each pile formed from simple folded shapes with no texture. On the right side, a single pale warm sand vending machine stands apart from the washers, with a flat dusty coral pink panel and a small slate navy coin slot. In the lower foreground, a lone figure sits on a pale warm sand bench, placed slightly to the right of center and shown in three-quarter view facing right. The figure wears a dusty coral pink coat, its simple vector silhouette falling over a seated posture with the shoulders angled toward the folded newspaper. A slate navy hair shape and minimal facial profile suggest a calm, focused expression as the figure looks down to read. The folded newspaper is pale warm sand, held open in front of the figure, with slate navy line marks standing in for text rather than readable words. The bench runs horizontally beneath the figure, its pale warm sand seat and legs clearly separated from the navy floor. Across the lower half, a slate navy tiled floor extends toward the machines, its perspective lines drawing the eye back into the room. A simple pale warm sand grid marks the tiles, narrowing toward the back wall while keeping the stage-like view straight on. The lighting is suggested by even, soft interior illumination from above and to the left, expressed through flat colour contrast and short slate navy shadow blocks falling beneath the table, bench, and machines. All surfaces, shapes, lines, and lettering use only deep slate navy, dusty coral pink, and pale warm sand, with crisp edges and no gradients or texture. The overall composition feels calm, graphic, and poster-like, balanced around the even machine row, with the restricted three-colour palette carrying the quiet nighttime mood.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

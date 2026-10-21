@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1376,
+      "height": 768,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "Create a single photorealistic cinematic frame, not an illustration, not a collage, not stylized concept art. The image must look like a live-action film still with coherent optics, realistic materials, natural anatomy, and physically plausible lighting.\n\nScene: a 24-hour railway lost-and-found office at night, seen from the corridor through a glass wall and an open doorway, a few minutes after rain. The camera is at eye level, 50mm full-frame look, aspect ratio 16:9. The composition must be deep and layered, with foreground, midground, and background all clearly organized.\n\nForeground left:\nA female clerk in her mid-30s stands behind the counter. She wears a dark green cardigan over a white shirt, rectangular glasses, and a silver name tag with clearly readable text: \"MARTA\".\nShe holds a clipboard in her left hand. On the clipboard, clearly readable text says: \"PLATFORM 3\".\nShe holds a blue pen in her right hand.\nShe has a thin silver ring on her left index finger.\nHer expression is alert but neutral, looking slightly to the right, not at the camera.\n\nForeground right:\nA short passenger in an orange raincoat and black cap is placing a transparent plastic crate on the counter.\nInside the crate there are exactly 5 umbrellas:\n- 2 black umbrellas, closed\n- 2 red umbrellas, closed\n- 1 yellow umbrella, open\nThe yellow open umbrella must be in the center of the crate.\nThere must be no extra umbrellas anywhere else in the image.\n\nCountertop:\n- a brass bell\n- a stamp pad\n- a paper cup\n- a ring with 3 keys\n- plastic crate with umbrellas\nThe brass bell is closest to the clerk.\nThe keys are closest to the passenger.\n\nCenter floor in front of the counter:\nExactly 3 bags, arranged from left to right in this order:\n1. a red hard-shell suitcase with a white sticker reading \"A17\"\n2. a black duffel bag with a yellow tag reading \"B04\"\n3. a blue backpack with a white tag reading \"C22\"\nThe red suitcase is closest to the camera.\nThe blue backpack is partially behind the black duffel bag.\nOnly the red suitcase has visible wheels.\nThe black duffel bag zipper is slightly open, revealing a folded green sweater inside.\n\nMidground left:\nA taller porter in a navy uniform with a red scarf is carrying a cardboard box with clearly readable text: \"GLASS\".\n\nMidground right:\nA shorter porter in a charcoal uniform with a blue scarf is holding a brass desk lamp.\nDo not swap the scarf colors.\nDo not swap which porter is taller and which is shorter.\n\nBack wall:\nA departures board with exactly four readable destination names on separate rows:\n\"Hamburgevons\"\n\"Västerås\"\n\"青葉ヶ丘市\"\n\"Южно-Щербицинск\"\nBelow the board there is a small poster with clearly readable text:\n\"LOST & FOUND\"\n\nUpper right corner:\nA convex security mirror reflects a janitor in the corridor pushing a mop bucket.\nThe janitor must be visible only in the mirror reflection and must not be directly visible anywhere in the main scene.\n\nRight side of the room:\nA glass display cabinet with exactly 4 shelves.\nOn the second shelf from the top there are exactly 3 watches arranged left to right:\n- silver watch\n- gold watch\n- black watch\nOn the bottom shelf sits a small orange cat.\nThe cat must be directly visible, and its reflection in the cabinet glass must be consistent with the scene.\n\nFloor and environment:\nWet footprints enter from the doorway and stop near the red suitcase.\nThere are no wet footprints behind the counter.\nThe glass wall and cabinet must show realistic reflections.\nThe convex mirror reflection must match the corridor geometry.\nThe open doorway must show a dim corridor with cool fluorescent light.\nInside the office, the main light is neutral overhead fluorescent, with a small warmer practical light near the back wall.\nMaterials must be realistic: wet floor, glass, plastic crate, brass bell, fabric clothing, cardboard box, metal lamp.\n\nCritical constraints:\n- exact counts must be preserved\n- all short text must be legible and correctly spelled\n- no extra foreground people\n- no duplicate bags, watches, umbrellas, or countertop objects\n- correct left/right/front/behind relationships\n- realistic hands, grips, posture, and occlusion\n- reflections must be logically consistent\n- the final image must feel like one real photographed moment, not a collection of separately generated assets\n\nQuality target:\nextremely coherent, highly detailed, photorealistic, cinematic, natural contrast, realistic lens behavior, premium live-action still, believable spatial logic",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

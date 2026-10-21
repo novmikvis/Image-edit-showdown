@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A tightly framed photorealistic photograph of an elderly man holding a sleeping infant against his shoulder, shot on a 85mm lens at a very wide aperture so the plane of focus falls exactly on the man's eyes and the background dissolves into smooth unstructured blur. Fine Kodak Portra 400 grain sits evenly across the whole frame, heavier in the shadows, with the slightly warm highlight rolloff and soft magenta-leaning shadows of colour negative film.\n\nThe man is in his late seventies, seen in three-quarter view from his left, his head tilted down and slightly toward the baby. His skin is rendered with genuine detail: visible open pores across the nose and cheeks, fine crosshatched wrinkles at the outer corner of the eye, three deeper horizontal creases on the forehead, a spray of small brown sun spots across the temple, and translucent thinning skin over the back of the hand supporting the infant, where blue-grey veins and prominent tendons show through. Two days of white stubble catches the light along the jaw. His eyebrows are unruly and partly white, and one deep vertical line runs between them. His eyes are pale grey-blue, slightly watery, with a small crisp specular highlight from a window to the left, and the lower lids show the loose folds of age.\n\nHe wears a heather grey wool cardigan with visible knit texture and one small pill of fibre near the shoulder seam. The infant, no more than a few weeks old, is asleep with one cheek pressed flat against the cardigan, lips slightly parted, a single dark curl of fine hair on the crown, and one tiny hand curled into a fist resting on the man's collarbone with the fingernails clearly visible. The baby is swaddled in a pale cream cotton blanket with a soft waffle weave.\n\nThe light is a single large window source from the front left, soft but directional, modelling the man's face with a gentle falloff into shadow on the right side of his head and leaving a soft catchlight on the baby's cheek. The background is an unidentifiable warm brown interior, completely out of focus, with two dim out-of-focus highlights rendering as soft round bokeh discs in the upper right. No part of the image looks illustrated or smoothed: the texture of skin, wool and cotton all read as photographic.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 896,
+      "height": 1184
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 896,
+      "height": 1184
+    }
+  }
+}

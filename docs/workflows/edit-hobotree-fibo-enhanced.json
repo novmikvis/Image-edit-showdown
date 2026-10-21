@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_12_hobotree_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A green street bench and a planted tree sit on a clean urban sidewalk beside a brick facade and barred entrance.\",\"objects\":[{\"description\":\"A green street bench occupies the sidewalk where the person was lying, with its seat parallel to the curb.\",\"location\":\"lower center-left\",\"relationship\":\"The bench sits beside the brick facade, near the planted tree and behind the curb.\",\"relative_size\":\"medium within frame\",\"shape_and_color\":\"Long, horizontal bench with a green seat and back\",\"texture\":\"Painted, slightly worn material\",\"appearance_details\":\"Simple public street furniture with a backrest and supporting legs\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Aligned parallel to the curb\"},{\"description\":\"A planted street tree stands at the sidewalk edge near the wall, in the position of the parking meter.\",\"location\":\"center-right\",\"relationship\":\"The tree stands beside the bench and in front of the brick facade.\",\"relative_size\":\"medium within frame\",\"shape_and_color\":\"Upright brown trunk with a green leafy crown\",\"texture\":\"Rough bark and dense foliage\",\"appearance_details\":\"A young urban tree rooted in a small sidewalk opening\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright\"}],\"background_setting\":\"An urban sidewalk and street in front of a gray brick building with a tall barred metal entrance. The curb, pavement, and roadway are clear of litter.\",\"lighting\":{\"conditions\":\"Bright daylight\",\"direction\":\"Direct sunlight from the upper left\",\"shadows\":\"Distinct shadows fall across the pavement and road\"},\"aesthetics\":{\"composition\":\"Square street-level view, angled slightly downward; the bench and tree occupy the lower middle of the frame against the building facade.\",\"color_scheme\":\"Muted gray masonry and pavement with green accents from the bench and tree\",\"mood_atmosphere\":\"Plain, everyday urban street scene\"},\"photographic_characteristics\":{\"depth_of_field\":\"Deep, with the foreground and facade in focus\",\"focus\":\"Clear focus across the scene\",\"camera_angle\":\"Slightly elevated street-level angle\",\"lens_focal_length\":\"Moderate wide-angle\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A realistic documentary-style photograph of a tidy urban sidewalk.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Remove all trash from the street and sidewalk, replace the sleeping person with a green street bench, and replace the parking meter with a planted tree.\"}"
+    }
+  }
+}

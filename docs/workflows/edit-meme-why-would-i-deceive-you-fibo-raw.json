@@ -1,0 +1,130 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1360,
+      "height": 768,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ],
+      "images.image_2": [
+        "10",
+        0
+      ],
+      "images.image_3": [
+        "11",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_why-would-i-deceive-you_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "Image 1 is the template, a side-by-side split frame. Replace the man on the left half with the person in image 2. He must be clearly recognizable as the person in image 2, including face shape, skin tone, long dark hair, beard and glasses. Replace the woman on the right half with the person in image 3. She must be clearly recognizable as the person in image 3, including face shape, skin tone, hair color and round glasses.\nKeep everything else from image 1 exactly as is: the split-frame layout, the man's intense close-up stare and slightly open mouth, the woman's wide-eyed hopeful expression and slight smile, both head poses and gazes, the dark clothing and headset on the left, the warm indoor lighting and blurred backgrounds, and the framing. Do not carry over the reference photos' expressions, clothing or backgrounds."
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-2.jpg"
+    }
+  },
+  "11": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-1.png"
+    }
+  }
+}

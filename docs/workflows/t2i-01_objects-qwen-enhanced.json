@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 896,
+      "height": 1184,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a straight-on, deep-focus studio photograph of a white plywood calibration shelving unit, packed with saturated color against a white back panel. The unit fills the entire frame, with three horizontal white shelf boards dividing the tiers and no visible floor or ceiling. On the top tier at far left, a green printed circuit board stands upright against the back panel beside four cast-iron gears that decrease in size and lean against each other. Just right of the gears, a rusted five-pointed metal star rests beside a tangled loop of galvanised chain. Near the right side, a black wire-mesh cup holds exactly eight felt-tip markers, their caps showing red, yellow, green and blue. At far right, a cobalt blue glass vase holds exactly three dahlias: one pale yellow, one deep magenta and one coral pink. Along the front edge, four wooden alphabet blocks display coloured serif letters in order, \"T\", \"E\", \"S\" and \"T\", while a single white chicken egg rests at the centre.\n\nAcross the middle tier, two flat calibration charts stand propped side by side against the back panel. On the left, a matte chart framed in black contains exactly twenty-four colour patches in four rows of six, with small printed text along its bottom edge reading \"COLOUR RENDITION CHART\". On the right, a dense printed target is made up of small colour and greyscale squares. Across its top, a legible row reads \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\", \"13\", \"14\", \"15\", \"16\", \"17\", \"18\", \"19\", \"20\", \"21\" and \"22\". Down both sides, the legible letters run in order: \"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\" and \"L\". Immediately below the charts, a long horizontal grey-scale strip carries the printed text \"GRAY SCALE\" and a row of step numbers reading \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\", \"13\", \"14\", \"15\", \"16\", \"17\", \"18\" and \"19\".\n\nAlong the bottom tier from left to right, a brushed steel cocktail shaker is held by a hand entering at the left frame edge, followed by a chrome stand holding exactly four white golf balls stacked in a pyramid. Two dried ears of multicoloured corn lie beside a brown leather cylindrical case and a pair of black binoculars. Farther right, a purple fabric box bears an embroidered thin branch pattern, and a single yellow sunflower on a tall green stem leans right. In the lower centre, a round glass fish bowl is half filled with water and purple gravel, with one blue betta fish inside. Next to it, a yellow twin-bell alarm clock has a white face with hands showing ten past ten. At the lower right, a terracotta pot of small green cacti and a blue glass bottle sit beside one orange, one lemon and one peach resting directly on the shelf board. The lighting comes from an even, neutral daylight-balanced softbox at the front left, leaving soft shadows and no blown highlights. The overall composition is orderly and balanced across the three tiers, with white plywood and grey calibration tones framing vivid object colours in a studio test-chart style.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

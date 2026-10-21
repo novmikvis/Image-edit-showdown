@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 896,
+      "height": 1184,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A tightly framed photorealistic portrait of a late-seventies man holding a sleeping newborn against his shoulder. His pale grey-blue eyes are in crisp focus as he looks down toward the baby; detailed skin, white stubble, heather-grey wool, and a cream cotton swaddle retain natural photographic texture. A warm brown interior dissolves into soft blur behind them.\",\"objects\":[{\"description\":\"An elderly man in his late seventies, shown in three-quarter view from his left with his face and upper body filling the frame. He tilts his head down and slightly toward the infant. His face has visible open pores across the nose and cheeks, fine crosshatched wrinkles at the outer eye, three deeper horizontal forehead creases, small brown sun spots across the temple, a deep vertical line between unruly partly white eyebrows, and loose folds beneath pale grey-blue, slightly watery eyes. A crisp small window catchlight reflects in his eyes. Two days of white stubble catch the light along his jaw. The back of the hand supporting the infant has translucent thinning skin, blue-grey veins, and prominent tendons.\",\"location\":\"center and left foreground, with the face near the upper center\",\"relationship\":\"He cradles the sleeping infant against his shoulder, supporting the baby with one hand.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Human figure with a softly angular, bowed profile; warm, naturally varied skin tones, white stubble, and pale grey-blue eyes.\",\"texture\":\"Photographic skin detail with visible pores, wrinkles, sun spots, stubble, and veins; fine Portra-style grain across the image, heavier in the shadows.\",\"appearance_details\":\"The highlights have a slightly warm colour-negative rolloff, while shadows lean softly toward magenta. Nothing is smoothed or illustrated.\",\"number_of_objects\":null,\"pose\":\"Upper body held close to the infant; head tilted down and slightly toward the baby; one hand supports the infant.\",\"expression\":\"Quiet, tender concentration as he looks down at the infant.\",\"clothing\":\"Heather-grey wool cardigan with visible knit texture and one small pill of fibre near the shoulder seam.\",\"action\":\"Holding the sleeping infant securely against his shoulder.\",\"gender\":\"Man\",\"skin_tone_and_texture\":\"Naturally varied, aged skin with open pores, fine and deep wrinkles, small brown sun spots, loose lower eyelid folds, white jaw stubble, and translucent hand skin with blue-grey veins and prominent tendons.\",\"orientation\":\"Three-quarter view from his left, facing and looking down toward the infant.\"},{\"description\":\"A sleeping infant no more than a few weeks old, nestled against the man's shoulder. One cheek is pressed flat against the cardigan, the lips are slightly parted, and a single dark curl of fine hair rests on the crown. One tiny hand is curled into a fist on the man's collarbone, with its fingernails clearly visible.\",\"location\":\"Center-right foreground, nestled against the man's shoulder and upper chest\",\"relationship\":\"The infant rests against the man's cardigan, with a tiny fist on his collarbone and the man's hand supporting the baby.\",\"relative_size\":\"medium within frame\",\"shape_and_color\":\"Small curled human figure with soft natural skin tones, a dark curl, and a pale cream swaddle.\",\"texture\":\"Photographic newborn skin, fine hair, and soft cotton; a gentle catchlight falls on the baby's cheek.\",\"appearance_details\":\"The infant's cheek is visibly compressed where it rests against the wool; tiny fingernails are distinct on the curled fist.\",\"number_of_objects\":null,\"pose\":\"Sleeping while nestled against the man's shoulder, one hand curled into a fist on his collarbone.\",\"expression\":\"Peaceful, asleep, with lips slightly parted.\",\"clothing\":\"Swaddled in a pale cream cotton blanket with a soft waffle weave.\",\"action\":\"Sleeping against the man's shoulder.\",\"gender\":\"Unspecified\",\"skin_tone_and_texture\":\"Soft, natural newborn skin, photographed without smoothing.\",\"orientation\":\"Curled inward toward the man, with one cheek pressed against his cardigan.\"},{\"description\":\"Two dim, soft, round out-of-focus highlights rendered as bokeh discs against the indistinct warm brown interior.\",\"location\":\"Upper-right background\",\"relationship\":\"They sit behind the man and infant in the completely defocused background.\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Two round, dim highlights in warm, muted tones.\",\"texture\":\"Smooth, soft-edged optical blur.\",\"appearance_details\":\"Both highlights remain indistinct and unobtrusive.\",\"number_of_objects\":2,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Round discs in the upper-right background.\"}],\"background_setting\":\"An unidentifiable warm brown interior, entirely out of focus and without discernible detail. Two dim round bokeh highlights appear in the upper right. The window providing the light is outside the frame.\",\"lighting\":{\"conditions\":\"A single large window source gives soft but directional light, with gently warm highlight rolloff characteristic of colour-negative film.\",\"direction\":\"From the front left, creating a crisp window catchlight in the man's eyes and a soft catchlight on the infant's cheek.\",\"shadows\":\"Gentle falloff into shadow on the right side of the man's head; shadows retain detail, lean softly magenta, and show slightly heavier film grain.\"},\"aesthetics\":{\"composition\":\"Tightly framed portrait, with the man's face and upper body prominent and the infant nestled against his shoulder; the eyes sit precisely on the plane of focus.\",\"color_scheme\":\"Warm skin and brown tones, heather grey wool, pale cream cotton, warm highlights, and soft magenta-leaning shadows.\",\"mood_atmosphere\":\"Intimate, tender, quiet, and unposed.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Extremely shallow from a very wide aperture; the background dissolves into smooth, unstructured blur with two soft round bokeh discs.\",\"focus\":\"The plane of focus falls exactly on the man's eyes; skin, wool, and cotton remain natural and photographic, while the background is fully defocused.\",\"camera_angle\":\"Close, eye-level portrait view, showing the man in three-quarter view from his left.\",\"lens_focal_length\":\"85mm portrait lens at a very wide aperture.\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A photorealistic, intimate family portrait with the tactile detail and warm highlight rolloff of colour-negative film.\",\"artistic_style\":\"realistic\"}"
+    }
+  }
+}

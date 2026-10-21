@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1248,
+      "height": 832,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a three-quarter overhead realistic food photograph of a cheese board, with honey-toned oak and pale neutral surroundings. A round pale birch board rests centrally on the honey-toned oak tabletop, whose grain runs faintly beneath the arrangement. A shallow depth of field leaves the board and food in crisp focus while the far edge of the table falls gently out of focus. Across the upper-left part of the board, a loose bunch of red-purple grapes remains attached to its woody stem. Immediately clockwise, a thick triangular wedge of firm pale yellow cheese shows a natural rind and a few small irregular holes. On the upper-right side, two soft white-rinded brie wedges are stacked, their cut faces revealing a visibly creamy interior. Below them, a crumbling wedge of blue-veined cheese displays dense blue-grey marbling across its pale, uneven surface. A single fresh rosemary sprig lies diagonally across the board’s lower-left area, its narrow green leaves contrasting with the wood. Exactly three shelled walnut halves are scattered on the table between the rosemary and a small hammered brass dish. The dish sits toward the lower right of the board, holding mixed almonds, cashews and walnut pieces in a small mound. Its long ornate handle extends toward the lower-right edge, catching slender warm highlights across the hammered brass. Off the board on the left, a rustic sourdough boule has a dark blistered crust and a lightly floured surface. Exactly three cut slices fan out in front of it, each showing an open, irregular crumb with uneven air pockets. Behind the board, two small white fluted ramekins stand side by side, the left one filled with dark red fruit preserve. A bright specular highlight glints on the preserve, while the right ramekin contains whole green cornichons with glossy skins. In the upper-left tabletop area, four loose grapes have rolled apart, each casting its own small shadow. On the right side, a clear glass jar of amber honey stands with a wooden honey dipper inside, its handle leaning right. A small cream paper label on the jar has a bold dark first line reading \"MIEL DE FORET\" and a smaller second line reading \"RECOLTE 2024\". A crumpled oatmeal linen napkin enters from the lower-left corner, its soft folds partly framing the sourdough slices and table edge. In the deep background at upper right, a pale blurred corner of a wooden chair back appears against a soft white wall. Hard late-afternoon sunlight enters from the upper right through an unseen window, laying two bright diagonal bands across the tabletop. The light rakes across the food and wood, casting long soft-edged shadows toward the lower left and highlights on grapes, glass, cheese and brass. The overall composition feels abundant yet orderly, balanced around the round board, with warm wood, pale cheeses, deep fruit tones, natural materials, and a relaxed rustic mood.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

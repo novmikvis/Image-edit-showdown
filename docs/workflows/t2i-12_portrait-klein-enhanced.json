@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A tightly framed photorealistic portrait photograph of an elderly man holding a sleeping infant against his shoulder, captured in three-quarter view from the man's left with his head tilted down and slightly toward the baby.\",\"subjects\":[{\"description\":\"An elderly man in his late seventies with visible open pores across his nose and cheeks, fine crosshatched wrinkles at the outer eye, three deeper horizontal forehead creases, small brown sun spots across his temple, translucent thinning skin on the back of his supporting hand with blue-grey veins and prominent tendons, two days of white stubble along his jaw, unruly partly white eyebrows, and one deep vertical line between them. His pale grey-blue eyes are slightly watery, with loose folds beneath the lower lids and a small crisp window specular highlight. He wears a heather grey wool cardigan with visible knit texture and one small fibre pill near the shoulder seam.\",\"position\":\"Dominating the close frame, with his face near the upper center and the infant resting against his shoulder in the lower frame.\",\"action\":\"Holding the infant securely against his shoulder, head inclined down and slightly toward the baby.\"},{\"description\":\"A sleeping infant no more than a few weeks old, with one cheek pressed flat against the cardigan, slightly parted lips, a single dark curl of fine hair on the crown, and one tiny curled fist resting on the man's collarbone with clearly visible fingernails. The infant is swaddled in a pale cream cotton blanket with a soft waffle weave.\",\"position\":\"Against the man's shoulder in the lower center of the frame, cheek pressed into the heather grey cardigan.\",\"action\":\"Sleeping with one tiny fist resting on the man's collarbone.\"}],\"style\":\"Photographic portrait with fine Kodak Portra 400 colour-negative film grain evenly across the frame and heavier in the shadows, slightly warm highlight rolloff, soft magenta-leaning shadows, and visible natural skin, wool, and cotton texture.\",\"color_palette\":[\"heather grey\",\"pale cream\",\"warm brown\",\"soft magenta\",\"blue-grey\"],\"lighting\":\"A single large window source from the front left provides soft but directional light, modelling the man's face with a gentle falloff into shadow on the right side of his head and leaving a soft catchlight on the baby's cheek.\",\"mood\":\"Quiet and tender, with the infant asleep against the man's shoulder.\",\"background\":\"An unidentifiable warm brown interior dissolving into smooth, unstructured blur, with exactly two dim, soft round bokeh discs in the upper right.\",\"composition\":\"Tight vertical portrait crop, with the man's face and eyes prominent and the infant nestled against his shoulder. Preserve the three-quarter view from his left and the slight downward tilt of his head; keep the background fully abstract and out of focus.\",\"camera\":{\"angle\":\"Close three-quarter view from the man's left, framing his face and the infant against his shoulder.\",\"lens\":\"85mm lens at a very wide aperture.\",\"depth_of_field\":\"Very shallow depth of field with the plane of focus exactly on the man's eyes; the background dissolves into smooth unstructured blur, while retaining the visible details of the infant's cheek, fist, and blanket.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 896,
+      "height": 1184
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 896,
+      "height": 1184
+    }
+  }
+}

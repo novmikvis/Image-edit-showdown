@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A flat graphic design poster, printed on uncoated paper and photographed straight on so the whole sheet fills the frame with no perspective and no shadow. The design is built from six pieces of text, each at its own size, position and angle, over a background of overlapping soft-edged geometric shapes in mustard yellow, deep teal and warm off-white.\n\nThe title occupies the upper half and is by far the largest element: the two words \"NIGHT MARKET\" set in a heavy condensed sans-serif, stacked on two lines, flush left against the left margin, in deep teal, with the second word slightly overlapping a large mustard circle behind it. Immediately beneath the title, at roughly one fifth of its size, a subtitle reads \"AN EVENING OF FOOD, NOISE AND NEON\" in widely letterspaced small capitals, in warm off-white on a teal band.\n\nRotated about fifteen degrees counter-clockwise and placed across the middle right of the sheet, a date line reads \"FRIDAY 12 SEPTEMBER\" in a bold italic serif, in near-black. Below and to the left of it, running vertically up the left edge with the letters rotated ninety degrees, a tagline reads \"EAT LATE, WALK SLOW\" in a thin monospaced face, in mustard yellow.\n\nIn the lower third, a short credit block sits flush right in three tight lines of very small grey type reading \"PRESENTED BY THE HARBOUR SOCIETY\", \"SOUND BY KESTREL COLLECTIVE\" and \"DESIGN BY ATELIER NINE\". Finally, in the bottom left corner, an RSVP element is set inside a thin rounded rectangle outlined in near-black, containing the single word \"RSVP\" in small bold capitals above a smaller line reading \"HARBOURSOCIETY.ORG\".\n\nEvery one of the six text elements is crisp, correctly spelled and clearly legible at its own scale, none overlaps another to the point of illegibility, and the composition stays balanced with generous empty paper between the blocks.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 896,
+      "height": 1184
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 896,
+      "height": 1184
+    }
+  }
+}

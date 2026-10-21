@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 880,
+      "height": 1184,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_02_giraffe_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A full-body photograph of a giraffe standing on grass, its neck markedly shorter than typical while its left-facing head sits just above its shoulders.\",\"objects\":[{\"description\":\"A single giraffe with a large orange-brown body patterned by irregular cream-white patches, long pale legs, a dark-tufted tail, and a markedly compact neck. Its head sits just above the shoulders and faces left.\",\"location\":\"center foreground\",\"relationship\":\"The giraffe stands alone on the lawn, with leafy trees filling the background.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Tall, sturdy body with long legs; orange-brown coat divided by cream-white markings.\",\"texture\":\"Short coat with a slightly coarse appearance; smooth-looking pale markings.\",\"appearance_details\":\"Small horns, rounded ears, dark eye, pale muzzle, and dark tail tuft are visible. The body and legs retain the giraffe's characteristic proportions while the neck is substantially shorter.\",\"number_of_objects\":1,\"pose\":\"Standing on all four legs with its head held upright.\",\"expression\":\"Calm, neutral animal expression.\",\"clothing\":null,\"action\":\"Standing still and looking toward the left.\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, in side view, facing left.\"}],\"background_setting\":\"An outdoor grassy lawn bordered by dense leafy green trees and shrubs, with a small area of pale blue sky visible near the upper-right edge.\",\"lighting\":{\"conditions\":\"Bright natural daylight.\",\"direction\":\"Sunlight falls from the front-left and above.\",\"shadows\":\"Defined shadows lie across the grass beneath and to the right of the giraffe.\"},\"aesthetics\":{\"composition\":\"Vertical full-body framing, with the giraffe centered and visible from head to hooves against a leafy background.\",\"color_scheme\":\"Rich greens contrasted with warm orange-brown and cream-white markings.\",\"mood_atmosphere\":\"Quiet, natural, and observational.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Deep, with the giraffe and much of the foliage clearly visible.\",\"focus\":\"The giraffe is in clear focus.\",\"camera_angle\":\"Near eye level with the giraffe's torso.\",\"lens_focal_length\":\"Standard to mildly wide-angle.\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A realistic wildlife photograph of a giraffe standing in a leafy outdoor enclosure.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Significantly shorten the giraffe's neck while preserving its identity, pose, appearance, and the rest of the scene.\"}"
+    }
+  }
+}

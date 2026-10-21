@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1376,
+      "height": 768,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a horizontal realistic photograph of a sandwich-shop counter, with a warm timber-and-brick interior and a chalkboard menu. Seen from a customer’s eye level through a 35mm lens at a wide aperture, the chalkboard is sharp while the near counter edge and deeper background fall softly out of focus. A brass dome pendant lamp hangs just inside the upper-left corner, and the unseen doorway at the far left casts a cooler daylight tint into the room. Across the centre, a large blackboard sits in a chunky reclaimed-timber frame; faint old chalk swirls streak its matte surface. Across the top of the board, large white hand-lettered capitals read \"TODAY'S SANDWICHES\", with a double wavy chalk underline. The left column begins with a coloured chalk dot and salmon-red capitals reading \"THE ITALIAN - 9.50\"; two smaller white cursive lines below read \"prosciutto, salami, provolone,\" and \"arugula, hot peppers on ciabatta\". Below it, a dot precedes pale-yellow capitals reading \"TURKEY CLUB - 8.75\", followed by the smaller white lines \"roast turkey, bacon, avocado,\" and \"tomato, dijon-mayo on sourdough\". In the middle of the left column, mint-green capitals read \"THE CUBANO - 10.00\"; underlined yellow lettering below reads \"CHEF'S PICK\", beside a small five-pointed chalk star, and two white lines read \"slow-roast pork, ham, swiss,\" and \"pickles, mustard on a cuban roll\". Near the lower-left of the board, pink capitals read \"MEATBALL SUB - 9.00\", with smaller white cursive lines reading \"house meatballs, marinara,\" and \"mozzarella, basil on a hero roll\". At the top of the right column, a coloured dot sits beside mint-green capitals reading \"VEGGIE GARDEN - 8.25\", above the white lines \"roasted peppers, eggplant,\" and \"zucchini, pesto on focaccia\". Below, pale-orange capitals read \"SMOKED BRISKET - 11.50\"; a small yellow star sits above BRISKET, and the two white lines read \"12-hr brisket, slaw, pickles,\" and \"bbq aioli on brioche\". Lower in the right column, pale-blue capitals read \"TUNA MELT - 8.50\", with smaller white lines reading \"albacore, sharp cheddar,\" and \"red onion, dill on rye\". Beneath both columns, a single pale-blue line reads \"ADD: avocado +1.50 - bacon +2 - egg +1.50\". Directly below it, bouncy salmon-red script reads \"Ask About Today's Soup!\", followed by a small chalk drawing of a steaming bowl. Along the board’s base, a narrow reclaimed-wood shelf holds a terracotta pot of fresh basil at the left end and exactly nine glass mason jars in a row. The jars contain sliced cucumbers, red peppers, yellow peppers, and green pickles, while their brass lids catch warm pendant highlights. On the right third, softly out of focus, a dark-haired shop worker with a low braid wears a white t-shirt and charcoal canvas apron, looking down at her hands as she wraps a sandwich in white paper. A small dark name tag on the apron chest carries legible white lettering reading \"MARCO\". Behind her right shoulder, an exposed red-brick pillar rises into the soft background; a stack of white paper cups is blurred in the extreme right foreground. A stainless-steel display-case edge cuts across the very bottom of the frame. Warm tungsten light falls from the pendant above-left, leaving gentle shadows under the shelf and jars, while cool doorway daylight spills in from the far left. The overall composition balances the crisp, densely lettered board against the softer worker and foreground, with warm wood, muted chalk colours, and cool daylight lending the realistic photograph an inviting, lived-in mood.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

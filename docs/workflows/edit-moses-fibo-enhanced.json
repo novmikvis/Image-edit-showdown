@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1360,
+      "height": 768,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_08_moses_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"An older bearded man in layered robes stands among dark rocky formations, holding a rounded stone tablet in one hand and a matching tablet upright in his outstretched right hand.\",\"objects\":[{\"description\":\"An older man with swept-back gray hair and a long white-gray beard stands upright, looking toward the right side of the frame. His left hand holds a rounded stone tablet beside his torso, while his right arm extends horizontally to the right and his hand grips a second matching tablet upright.\",\"location\":\"center foreground\",\"relationship\":\"He holds one stone tablet beside his torso and the second at the end of his outstretched arm.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Human figure with gray hair and beard, wearing dark brown and deep red robes.\",\"texture\":\"Coarse hair and beard, layered woven fabrics, and visible skin texture.\",\"appearance_details\":\"Weathered face, swept-back gray hair, long beard, dark wrist bracer with small studs, and a patterned sash at the waist.\",\"number_of_objects\":null,\"pose\":\"Standing upright, torso facing mostly forward; left arm bent to hold a tablet near his torso and right arm extended horizontally to the right holding the other tablet.\",\"expression\":\"Serious and intent, mouth slightly open, gaze directed to the right.\",\"clothing\":\"Dark brown tunic beneath a deep red robe with dark trim and a narrow pale stripe, a patterned red-and-blue sash, and a dark studded bracer.\",\"action\":\"Holding two stone tablets, one beside his torso and one in his outstretched right hand.\",\"gender\":\"Male\",\"skin_tone_and_texture\":\"Light skin with a weathered, natural texture.\",\"orientation\":\"Facing mostly forward with his head and gaze turned slightly right.\"},{\"description\":\"A tall, rounded-top brown stone tablet with several rows of pale carved symbolic markings, held upright beside the man's torso.\",\"location\":\"left of center foreground\",\"relationship\":\"Held in the man's left hand beside his torso; it matches the tablet in his outstretched right hand.\",\"relative_size\":\"Medium within frame\",\"shape_and_color\":\"Tall rounded rectangle in dark brown stone with pale markings.\",\"texture\":\"Rough, weathered stone with uneven edges and shallow carved marks.\",\"appearance_details\":\"Multiple horizontal rows of irregular pale symbols cover its front surface.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, front facing the camera.\"},{\"description\":\"A second rounded-top brown stone tablet with rows of pale carved symbolic markings, matching the tablet beside the man's torso.\",\"location\":\"right foreground at the end of the man's outstretched arm\",\"relationship\":\"Gripped upright in the man's right hand, opposite the first tablet.\",\"relative_size\":\"Medium within frame\",\"shape_and_color\":\"Tall rounded rectangle in dark brown stone with pale markings.\",\"texture\":\"Rough, weathered stone with uneven edges and shallow carved marks.\",\"appearance_details\":\"Several horizontal rows of irregular pale symbols cover its visible front surface.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, front angled slightly toward the camera.\"}],\"background_setting\":\"A rugged rocky landscape at dusk or night, with large irregular blue-black rock formations behind the man and a muted orange-red glow in the upper-left distance.\",\"lighting\":{\"conditions\":\"Dramatic low light with cool blue illumination and a warm orange-red glow in the distance.\",\"direction\":\"Cool light falls from the front-left, with warm light visible from the upper-left background.\",\"shadows\":\"Deep, soft-edged shadows across the rocks and folds of the man's robes.\"},\"aesthetics\":{\"composition\":\"Landscape medium-long shot with the man near center; his extended arm and the second tablet lead toward the right edge.\",\"color_scheme\":\"High-contrast cool blues and blacks balanced by deep reds, browns, and a warm orange glow.\",\"mood_atmosphere\":\"Solemn, dramatic, and biblical.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Moderate depth of field, with the man and tablets clear and the rocky background visible.\",\"focus\":\"Sharp focus on the man and both tablets.\",\"camera_angle\":\"Eye-level view.\",\"lens_focal_length\":\"Standard lens, approximately 35mm–50mm.\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A dramatic biblical film still showing a robed, bearded man presenting two stone tablets in a rocky landscape.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Add a second rounded stone tablet with pale carved symbols to the man's outstretched right hand.\"}"
+    }
+  }
+}

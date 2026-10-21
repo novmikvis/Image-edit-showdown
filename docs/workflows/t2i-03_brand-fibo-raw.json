@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1184,
+      "height": 896,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A flat, straight-on presentation board for a fictional cloud software company, photographed as a clean digital mockup sheet on a pure white background with no perspective distortion and no drop shadow around the sheet itself. The sheet is divided by thin light grey hairlines into six rectangular panels arranged in a two-row grid, each panel labelled in the upper left with tiny grey uppercase text.\n\nThe upper left panel is labelled \"PRIMARY LOGO\" and contains a wordmark reading \"NIMBRA\" in a modern geometric sans-serif, preceded by a mark of two overlapping rounded clouds, the rear cloud pale periwinkle and the front cloud saturated indigo blue. Directly below it, a panel labelled \"ALTERNATE LOGO\" repeats the same lockup at a smaller size. Below that, a small square panel labelled \"APP ICON\" shows the cloud mark alone, white on a rounded-corner navy tile.\n\nThe second column contains two stacked panels. The upper one, labelled \"REVERSED LOGO\", shows the white \"NIMBRA\" lockup on a solid navy card. The lower one, labelled \"BUSINESS CARD\", shows a white card bearing the small cloud mark, the name \"ALEX MORGAN\" in bold dark type, the line \"HEAD OF PLATFORM\" beneath it, and three tiny lines of grey contact text below that.\n\nThe large panel occupying the entire right half of the top row is labelled \"HOMEPAGE MOCKUP\" and shows a browser window with a thin navigation bar carrying five small menu words and a blue pill-shaped button reading \"GET STARTED\". Its headline reads \"WORK BETTER.\" on the first line and \"FROM ANYWHERE.\" on the second, the final two words rendered in indigo while the rest is near-black. Two short lines of small grey body text sit beneath, followed by a solid indigo button reading \"TRY FREE\" and an outlined button reading \"BOOK A DEMO\". To the right of the text floats a pale dashboard card showing a small rising line chart and a large legible figure reading \"98.6%\".\n\nIn the bottom row, a panel labelled \"COLOUR PALETTE\" shows exactly five swatch rectangles in a row, from left to right: near-black navy, saturated indigo, soft periwinkle, pale lavender, and off-white, each with two tiny lines of grey text beneath giving a name and a hex code. The adjacent panel labelled \"TYPOGRAPHY\" shows a very large letterform pair \"Aa\" above the typeface name \"INTER\" and four progressively smaller lines of specimen text. A narrow panel labelled \"ICONOGRAPHY\" holds a grid of ten thin-line outline icons in two rows of five: cloud, shield, user, clock, message, folder, document, sliders, bell, and grid. The final panel, labelled \"PACKAGING\", shows a matte navy cube-shaped box in soft three-quarter perspective with the white cloud mark and \"NIMBRA\" wordmark on its front face and two small lines of white text near its lower edge. A single line of small dark centred text sits directly beneath the entire sheet reading \"BRAND GUIDELINES 2024\". All type is crisp and legible, the layout is airy and precisely aligned, and the only colours present are navy, indigo, periwinkle, lavender, white and neutral grey."
+    }
+  }
+}

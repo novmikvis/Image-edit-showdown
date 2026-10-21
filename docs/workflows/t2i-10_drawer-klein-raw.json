@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A hand-drawn editorial illustration presented as a flat overhead catalogue of the contents of a household junk drawer, arranged on a pale cream background in an even grid of five columns and four rows. Every object is drawn in a loose ink line with flat watercolour fill, sits fully separated from its neighbours with clear cream space around it, and has a small handwritten label in grey beneath it.\n\nReading left to right along the top row: a brass door key labelled \"SPARE KEY\", a roll of beige masking tape labelled \"TAPE\", a red-handled screwdriver labelled \"PHILLIPS\", a tangle of black earphones labelled \"EARPHONES\", and a single AA battery labelled \"BATTERY\".\n\nSecond row: a pair of small steel scissors with orange handles labelled \"SCISSORS\", a folded paper tape measure labelled \"TAPE MEASURE\", three brass thumbtacks grouped together labelled \"TACKS\", a blue plastic lighter labelled \"LIGHTER\", and a rubber band ball labelled \"ELASTICS\".\n\nThird row: a coil of green garden twine labelled \"TWINE\", a chrome bottle opener labelled \"OPENER\", two paper clips labelled \"CLIPS\", a small tube of superglue labelled \"GLUE\", and a yellow carpenter's pencil labelled \"PENCIL\".\n\nBottom row: a folded set of allen keys labelled \"ALLEN KEYS\", a white plastic wall plug labelled \"WALL PLUG\", a single silver coin labelled \"COIN\", a strip of four plasters labelled \"PLASTERS\", and a tiny brass padlock with no key labelled \"PADLOCK\".\n\nAcross the very top of the sheet, above the grid, a hand-lettered title reads \"CONTENTS OF ONE DRAWER\" in dark grey capitals, and directly beneath it a smaller line in italic grey reads \"catalogued on a wet Sunday\". All twenty objects are drawn at a consistent scale relative to each other, all labels are correctly spelled and legible, and the grid stays regular with even gutters.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1184,
+      "height": 896
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1184,
+      "height": 896
+    }
+  }
+}

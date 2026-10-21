@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A horizontal full-color photograph inside a small sandwich shop, composed from a customer's eye level. A large blackboard in a chunky reclaimed-timber frame fills the center of the frame. Its surface is faintly streaked with old chalk swirls. The board is divided into two menu columns, with every entry beginning with a small coloured chalk dot. Across the top, large white hand-lettered capitals read \\\"TODAY'S SANDWICHES\\\", underlined by a double wavy chalk line. In the left column, the first entry is in salmon-red capitals: \\\"THE ITALIAN - 9.50\\\", followed by two smaller white cursive lines reading \\\"prosciutto, salami, provolone,\\\" and \\\"arugula, hot peppers on ciabatta\\\". The second entry is in pale yellow capitals: \\\"TURKEY CLUB - 8.75\\\", followed by two white lines reading \\\"roast turkey, bacon, avocado,\\\" and \\\"tomato, dijon-mayo on sourdough\\\". The third entry is in mint green capitals: \\\"THE CUBANO - 10.00\\\", followed by underlined yellow words \\\"CHEF'S PICK\\\", a small five-pointed chalk star, and two white lines reading \\\"slow-roast pork, ham, swiss,\\\" and \\\"pickles, mustard on a cuban roll\\\". The fourth entry is in pink capitals: \\\"MEATBALL SUB - 9.00\\\", followed by two white lines reading \\\"house meatballs, marinara,\\\" and \\\"mozzarella, basil on a hero roll\\\". In the right column, the first entry is in mint green capitals: \\\"VEGGIE GARDEN - 8.25\\\", followed by two white lines reading \\\"roasted peppers, eggplant,\\\" and \\\"zucchini, pesto on focaccia\\\". The second entry is in pale orange capitals: \\\"SMOKED BRISKET - 11.50\\\", with a small yellow star above \\\"BRISKET\\\", followed by two white lines reading \\\"12-hr brisket, slaw, pickles,\\\" and \\\"bbq aioli on brioche\\\". The third entry is in pale blue capitals: \\\"TUNA MELT - 8.50\\\", followed by two white lines reading \\\"albacore, sharp cheddar,\\\" and \\\"red onion, dill on rye\\\". Beneath both columns, one pale blue line reads \\\"ADD: avocado +1.50 - bacon +2 - egg +1.50\\\". Below it, bouncy salmon-red script reads \\\"Ask About Today's Soup!\\\", followed by a small chalk drawing of a steaming bowl. A narrow reclaimed-wood shelf runs along the board's base, holding a terracotta pot of fresh basil at the left and exactly nine glass mason jars in a row, filled variously with sliced cucumbers, red peppers, yellow peppers, and green pickles; their brass lids catch the pendant light.\",\"subjects\":[{\"description\":\"A large blackboard with a chunky reclaimed-timber frame, a surface faintly streaked with old chalk swirls, two menu columns, small coloured chalk dots, white, salmon-red, pale yellow, mint green, pink, pale orange and pale blue chalk lettering, a double wavy underline, a small five-pointed star, and a small steaming-bowl chalk drawing. The board carries the exact menu wording, capitalization, punctuation, and line breaks specified in the scene.\",\"position\":\"Dominating the center of the frame, with its top heading above the two columns and its add-on and soup lines beneath them.\",\"action\":\"Displays the sandwich menu in hand lettering, with each menu entry preceded by a small coloured chalk dot.\"},{\"description\":\"A brass dome pendant lamp.\",\"position\":\"Hanging just inside the upper-left corner of the frame.\",\"action\":\"Spills warm tungsten light across the shop and catches the brass jar lids.\"},{\"description\":\"A narrow reclaimed-wood shelf, a terracotta pot of fresh basil, and exactly nine glass mason jars in one row. The jars are filled variously with sliced cucumbers, red peppers, yellow peppers, and green pickles, and have brass lids.\",\"position\":\"The shelf runs along the base of the blackboard; the basil pot sits at the left end and the nine jars stand in a row beside it.\",\"action\":\"Holds the basil and jars beneath the menu board.\"},{\"description\":\"A shop worker with dark hair in a low braid, wearing a white t-shirt and charcoal canvas apron. A small dark name tag on the apron chest carries legible white lettering reading \\\"MARCO\\\".\",\"position\":\"Softly out of focus behind the counter on the right third of the frame, with an exposed red brick pillar behind her right shoulder.\",\"action\":\"Looks down at her hands while wrapping a sandwich in white paper.\"},{\"description\":\"A stack of white paper cups.\",\"position\":\"Softly blurred in the extreme right foreground.\",\"action\":\"Rests near the counter.\"},{\"description\":\"The stainless-steel edge of a display case.\",\"position\":\"Cuts across the very bottom of the frame.\",\"action\":\"Forms the bottom foreground edge.\"}],\"style\":\"Full-color indoor photograph with an ordinary small-shop appearance and natural photographic detail.\",\"color_palette\":[\"blackboard black\",\"reclaimed timber brown\",\"salmon red\",\"pale yellow\",\"mint green\",\"pink\",\"pale orange\",\"pale blue\",\"terracotta\",\"red brick\",\"charcoal gray\",\"white\"],\"lighting\":\"Warm tungsten light spills from the brass dome pendant lamp in the upper left. Cool daylight leaks in from an unseen doorway on the far left. The pendant light catches the brass jar lids; the chalkboard remains sharply legible while the foreground counter edge and background fall softly out of focus.\",\"mood\":\"Warm, practical neighborhood sandwich shop atmosphere.\",\"background\":\"The chalkboard and its reclaimed-wood frame fill the central view. Behind the softly blurred worker on the right third, an exposed red brick pillar rises behind her right shoulder. Cool daylight enters from an unseen doorway far left. The foreground remains soft, with white paper cups at the extreme right and the stainless-steel display case edge crossing the bottom.\",\"composition\":\"Wide horizontal composition from a customer's eye level. The central chalkboard is the sharp focal plane and occupies most of the frame. The pendant lamp enters near the upper-left corner; the worker stands behind the counter in the right third. The shelf and its basil pot and exactly nine jars line the base of the board. The foreground counter edge and background are softly out of focus.\",\"camera\":{\"angle\":\"Customer's eye level, facing the counter and central chalkboard.\",\"lens\":\"35mm lens at a wide aperture.\",\"depth_of_field\":\"Shallow depth of field; the chalkboard and its lettering are sharp while the foreground counter edge, paper cups, worker, and background fall softly out of focus.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1376,
+      "height": 768
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1376,
+      "height": 768
+    }
+  }
+}

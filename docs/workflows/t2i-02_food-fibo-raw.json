@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1248,
+      "height": 832,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A three-quarter overhead photograph of a round pale birch cheese board resting on a honey-toned oak table, shot on an 85mm lens at a shallow aperture so the far edge of the table falls gently out of focus. Hard late-afternoon sunlight rakes in from the upper right through an unseen window, throwing long soft-edged shadows to the lower left and casting two bright diagonal bands of light across the tabletop.\n\nOn the board, arranged clockwise from the upper left: a loose bunch of red-purple grapes still on a woody stem, a thick triangular wedge of firm pale yellow cheese with a natural rind and a few small irregular holes, a stacked pair of soft white-rinded brie wedges with a visibly creamy interior, and a crumbling wedge of blue-veined cheese with dense blue-grey marbling. A single sprig of fresh rosemary lies diagonally across the lower left of the board. Exactly three shelled walnut halves sit scattered on the wood between the rosemary and a small hammered brass dish holding a mound of mixed almonds, cashews and walnut pieces, its long ornate handle extending to the lower right.\n\nOff the board to the left, a rustic sourdough boule with a dark blistered crust sits with exactly three slices cut and fanned in front of it, each slice showing an open irregular crumb. Behind the board stand two small white fluted ramekins: the left one filled with dark red fruit preserve catching a specular highlight, the right one filled with whole green cornichons. Four loose grapes have rolled onto the bare table in the upper left, each casting its own small shadow. On the right stands a clear glass jar of amber honey with a wooden honey dipper resting inside and leaning right; a small cream paper label on the jar carries two legible lines of printed text reading \"MIEL DE FORET\" above smaller type reading \"RECOLTE 2024\". A crumpled oatmeal linen napkin enters the frame from the lower left corner. In the deep background upper right, the pale blurred corner of a wooden chair back is just visible against a soft white wall."
+    }
+  }
+}

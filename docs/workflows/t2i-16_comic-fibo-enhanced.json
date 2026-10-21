@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A square contemporary comic page in four equal panels follows the same young woman from an empty mug in her kitchen to a rainy walk, a café visit, and a happy return with coffee. Clean black ink, flat muted colors, even white gutters, and thin black panel borders unify the page.\",\"objects\":[{\"description\":\"The young woman stands in her kitchen, looking down into an empty mug with a flat, tired expression. Her short dark bob with blunt fringe, round wire-rimmed glasses, and small mole on her anatomical left cheek are clear and consistent.\",\"location\":\"Top-left panel, centered\",\"relationship\":\"The main subject, holding the empty mug below her face.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Compact human figure; dark hair, mustard yellow jumper, and dark blue jeans\",\"texture\":\"Smooth, flat-color comic rendering\",\"appearance_details\":\"Young woman with the same recognizable features and clothing used throughout all four panels.\",\"number_of_objects\":null,\"pose\":\"Standing, shoulders relaxed, head tilted down toward the mug.\",\"expression\":\"Flat and mildly weary.\",\"clothing\":\"Mustard yellow crew-neck jumper and dark blue jeans.\",\"action\":\"Looking into an empty white mug.\",\"gender\":\"Woman\",\"skin_tone_and_texture\":\"Warm medium skin tone, rendered with smooth flat color.\",\"orientation\":\"Facing slightly toward the viewer, gaze lowered.\"},{\"description\":\"A simple empty white mug held upright in the woman's hands, its open rim angled so the viewer can see inside.\",\"location\":\"Top-left panel, in front of the woman's chest\",\"relationship\":\"Held by the woman as she looks into it.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Small cylindrical white mug with a curved handle\",\"texture\":\"Smooth ceramic\",\"appearance_details\":\"Clearly empty, with no visible liquid or decoration.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, open rim tipped slightly toward the viewer.\"},{\"description\":\"One clean white speech balloon with a black outline and a tapered tail directed toward the woman.\",\"location\":\"Top-left panel, above the woman\",\"relationship\":\"The woman's dialogue balloon.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Rounded white balloon with a thin black outline\",\"texture\":\"Flat white fill\",\"appearance_details\":\"Comfortable space for legible lettering; tail points clearly to the woman.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal, with its tail angled toward the woman's head.\"},{\"description\":\"The same young woman walks along a rainy street, recognizable by her short dark bob with blunt fringe, round wire-rimmed glasses, and small mole on her anatomical left cheek. Her consistent outfit remains visible.\",\"location\":\"Top-right panel, slightly left of center\",\"relationship\":\"The main subject, walking past the shop beneath a transparent umbrella.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Human figure with dark hair, mustard yellow jumper, and dark blue jeans\",\"texture\":\"Smooth, flat-color comic rendering\",\"appearance_details\":\"Her hairstyle, glasses, mole, and clothing match the other panels.\",\"number_of_objects\":null,\"pose\":\"Walking with a natural stride, upper body upright.\",\"expression\":\"Neutral and focused on her path.\",\"clothing\":\"Mustard yellow crew-neck jumper and dark blue jeans.\",\"action\":\"Walking to the right under an umbrella.\",\"gender\":\"Woman\",\"skin_tone_and_texture\":\"Warm medium skin tone, rendered with smooth flat color.\",\"orientation\":\"Facing and moving to the right.\"},{\"description\":\"A transparent umbrella with a simple dark outline and a visible central shaft, shown clearly against the rainy street.\",\"location\":\"Top-right panel, above the woman\",\"relationship\":\"Held over the woman as she walks.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Shallow dome in transparent pale gray with a dark shaft\",\"texture\":\"Clear, lightly reflective surface\",\"appearance_details\":\"Sparse rain strokes remain visible through and around the canopy.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, canopy open above the woman.\"},{\"description\":\"A compact shopfront along the rainy street, with a prominent green awning and a simple window; no readable shop lettering.\",\"location\":\"Top-right panel, behind the woman\",\"relationship\":\"The woman walks to the right past the storefront.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Rectangular façade with a muted green awning\",\"texture\":\"Flat painted surfaces, lightly softened by rain\",\"appearance_details\":\"Kept simple so the woman and umbrella remain the focus.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and parallel to the picture plane.\"},{\"description\":\"Sparse diagonal ink strokes indicate steady rain without obscuring the figures or setting.\",\"location\":\"Top-right panel, across the street scene\",\"relationship\":\"Surrounds the woman, umbrella, and shopfront.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Thin diagonal black strokes\",\"texture\":\"Crisp ink lines\",\"appearance_details\":\"Sparse and evenly spaced, with a clear diagonal direction.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Diagonal strokes slanting across the panel.\"},{\"description\":\"A small rectangular caption box with a white fill, thin black outline, and centered, legible lettering.\",\"location\":\"Top-left corner of the top-right panel\",\"relationship\":\"Sits above the rainy street action without covering the woman or shop.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Horizontal white rectangle with a black outline\",\"texture\":\"Flat fill\",\"appearance_details\":\"Neat comic caption treatment with clear margins around the text.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal and level.\"},{\"description\":\"The same young woman stands at a café counter, seen from the counter's perspective and facing the viewer. Her short dark bob with blunt fringe, round wire-rimmed glasses, and small mole on her anatomical left cheek remain consistent.\",\"location\":\"Bottom-left panel, centered beyond the counter\",\"relationship\":\"The customer facing the viewer and the unseen barista.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Human figure with dark hair, mustard yellow jumper, and dark blue jeans\",\"texture\":\"Smooth, flat-color comic rendering\",\"appearance_details\":\"Her recognizable facial features and clothing match the other panels.\",\"number_of_objects\":null,\"pose\":\"Standing upright at the counter, facing forward.\",\"expression\":\"Calm and matter-of-fact.\",\"clothing\":\"Mustard yellow crew-neck jumper and dark blue jeans.\",\"action\":\"Ordering coffee from the barista.\",\"gender\":\"Woman\",\"skin_tone_and_texture\":\"Warm medium skin tone, rendered with smooth flat color.\",\"orientation\":\"Facing the viewer.\"},{\"description\":\"The café counter forms a simple foreground edge across the lower part of the panel.\",\"location\":\"Bottom-left panel, lower foreground\",\"relationship\":\"Separates the viewer's counter-side perspective from the woman standing across it.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Horizontal counter in muted warm brown\",\"texture\":\"Smooth, lightly grained surface\",\"appearance_details\":\"Kept low enough to leave the woman's face and upper body prominent.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal across the panel.\"},{\"description\":\"A barista's arm enters from beyond the right edge, with a hand extended to offer a paper cup.\",\"location\":\"Bottom-left panel, entering from the right edge\",\"relationship\":\"The arm reaches across the counter toward the woman.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Warm skin tone with a simple dark sleeve\",\"texture\":\"Smooth, flat-color comic rendering\",\"appearance_details\":\"Only the arm and hand are visible; the barista remains off-panel.\",\"number_of_objects\":1,\"pose\":\"Arm extended inward, hand supporting the cup.\",\"expression\":null,\"clothing\":\"Dark sleeve.\",\"action\":\"Offering the paper cup to the woman.\",\"gender\":null,\"skin_tone_and_texture\":\"Warm skin tone, rendered with smooth flat color.\",\"orientation\":\"Extending inward from the right edge toward the woman.\"},{\"description\":\"A plain paper cup held out by the barista, with a dark lid and no logo or lettering.\",\"location\":\"Bottom-left panel, near the right side above the counter\",\"relationship\":\"Held by the barista's arm and offered to the woman.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Tapered white paper cup with a dark lid\",\"texture\":\"Matte paper and smooth lid\",\"appearance_details\":\"Unbranded, clean, and easy to distinguish from the white speech balloons.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright in the barista's hand.\"},{\"description\":\"Two separate clean white speech balloons with black outlines: one tail points to the woman, and the smaller one points toward the off-panel barista at the right edge.\",\"location\":\"Bottom-left panel, above the counter between the woman and the right edge\",\"relationship\":\"The larger balloon belongs to the woman; the smaller balloon belongs to the off-panel barista.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Two rounded white balloons with thin black outlines\",\"texture\":\"Flat white fill\",\"appearance_details\":\"Both balloons have clear space for legible lettering. The smaller balloon's tail points off the panel's right edge.\",\"number_of_objects\":2,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal, arranged above the counter with tails directed to their speakers.\"},{\"description\":\"The same young woman is back in her kitchen beside the same window, holding a paper cup with both hands. Her short dark bob with blunt fringe, round wire-rimmed glasses, small mole on her anatomical left cheek, and outfit remain consistent.\",\"location\":\"Bottom-right panel, centered by the window\",\"relationship\":\"The main subject, holding the cup close to herself.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Human figure with dark hair, mustard yellow jumper, and dark blue jeans\",\"texture\":\"Smooth, flat-color comic rendering\",\"appearance_details\":\"Her hairstyle, glasses, mole, and clothing match the other panels.\",\"number_of_objects\":null,\"pose\":\"Standing in the same spot as in the first panel, holding the cup in both hands.\",\"expression\":\"Smiling with her eyes closed.\",\"clothing\":\"Mustard yellow crew-neck jumper and dark blue jeans.\",\"action\":\"Enjoying a sip of coffee.\",\"gender\":\"Woman\",\"skin_tone_and_texture\":\"Warm medium skin tone, rendered with smooth flat color.\",\"orientation\":\"Facing slightly toward the viewer.\"},{\"description\":\"A plain white paper cup with a dark lid, held securely in both of the woman's hands.\",\"location\":\"Bottom-right panel, in front of the woman's chest\",\"relationship\":\"Held by the woman as she enjoys the coffee.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Tapered white paper cup with a dark lid\",\"texture\":\"Matte paper and smooth lid\",\"appearance_details\":\"Unbranded, with the same simple design as the cup offered at the café.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, held in both hands.\"},{\"description\":\"A white speech balloon with a black outline and a tapered tail pointing toward the woman.\",\"location\":\"Bottom-right panel, above the woman\",\"relationship\":\"The woman's dialogue balloon.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Rounded white balloon with a thin black outline\",\"texture\":\"Flat white fill\",\"appearance_details\":\"Comfortable space for clear, legible lettering.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal, with its tail directed toward the woman's head.\"},{\"description\":\"The kitchen window seen in the first panel, repeated in the same position to establish the woman's return to the same spot.\",\"location\":\"Bottom-right panel, behind and beside the woman\",\"relationship\":\"Matches the single window in the top-left kitchen panel.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Simple rectangular window with a pale frame\",\"texture\":\"Smooth, flat-color surfaces\",\"appearance_details\":\"A restrained view beyond the glass; no extra readable text or prominent objects.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and parallel to the picture plane.\"},{\"description\":\"The hand-lettered coffee sound effect sits near the cup in compact black capitals.\",\"location\":\"Bottom-right panel, near the paper cup\",\"relationship\":\"Visually punctuates the woman's sip.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Short black hand-lettered capitals\",\"texture\":\"Crisp ink lettering\",\"appearance_details\":\"Lightly playful lettering that remains comfortably legible and does not overlap the cup.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal.\"}],\"background_setting\":\"A square comic page divided into a strict two-by-two grid of four equal rectangular panels. Even white gutters separate the panels, and every panel has a thin black border. The top-left and bottom-right panels share the same simple kitchen with a pale green tiled backsplash and one window; the woman stands in the same spot by that window in both. The top-right panel shows a rainy street and shopfront. The bottom-left panel shows the interior of a café from the counter's perspective. Background details stay sparse so the character and dialogue remain clear.\",\"lighting\":{\"conditions\":\"Soft, even comic lighting; cool overcast daylight on the rainy street and gentle neutral indoor light in the kitchen and café.\",\"direction\":\"Diffuse light from the kitchen window and street sky, with soft ambient fill indoors.\",\"shadows\":\"Minimal soft shadows, keeping the flat colors and linework clear.\"},\"aesthetics\":{\"composition\":\"Strict two-by-two comic grid with equal panels, even white gutters, and thin black panel borders. Each panel uses a medium framing that keeps the woman's face and upper body prominent while showing the essential props and action.\",\"color_scheme\":\"Muted flat colors with confident black ink: mustard yellow and dark blue on the woman, pale green in the kitchen, and restrained cool grays in the rain.\",\"mood_atmosphere\":\"Dry, understated humor that shifts from weary to quietly content.\"},\"photographic_characteristics\":null,\"style_medium\":\"Digital comic illustration\",\"text_render\":[{\"text\":\"Out of coffee.\",\"location\":\"Top-left panel, inside the speech balloon above the woman\",\"size\":\"Medium\",\"color\":\"Black\",\"font\":\"Clean, legible comic lettering\",\"appearance_details\":\"Correctly spelled, comfortably spaced, centered within the balloon.\"},{\"text\":\"TWO MINUTES LATER\",\"location\":\"Top-left corner of the top-right panel, inside the caption box\",\"size\":\"Small\",\"color\":\"Black\",\"font\":\"Bold, clean comic lettering\",\"appearance_details\":\"Uppercase, correctly spelled, centered and comfortably legible.\"},{\"text\":\"Large, please.\",\"location\":\"Bottom-left panel, inside the larger speech balloon pointing to the woman\",\"size\":\"Medium\",\"color\":\"Black\",\"font\":\"Clean, legible comic lettering\",\"appearance_details\":\"Correct punctuation, comfortably spaced, centered within the balloon.\"},{\"text\":\"Coming up.\",\"location\":\"Bottom-left panel, inside the smaller speech balloon pointing off-panel right\",\"size\":\"Small\",\"color\":\"Black\",\"font\":\"Clean, legible comic lettering\",\"appearance_details\":\"Correct punctuation, comfortably spaced, centered within the smaller balloon.\"},{\"text\":\"Better.\",\"location\":\"Bottom-right panel, inside the speech balloon above the woman\",\"size\":\"Medium\",\"color\":\"Black\",\"font\":\"Clean, legible comic lettering\",\"appearance_details\":\"Correct punctuation, comfortably spaced, centered within the balloon.\"},{\"text\":\"SIP\",\"location\":\"Bottom-right panel, beside the paper cup\",\"size\":\"Small\",\"color\":\"Black\",\"font\":\"Hand-lettered comic capitals\",\"appearance_details\":\"Compact, playful sound effect with crisp lines and clear lettering.\"}],\"context\":\"A four-panel slice-of-life comic page with a concise coffee-run setup and payoff.\",\"artistic_style\":\"clean contemporary ink\"}"
+    }
+  }
+}

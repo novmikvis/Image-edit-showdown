@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1184,
+      "height": 896,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A contemporary illustration of a sunlit apartment corner in the late morning, drawn with soft flat shapes, gentle grain and a warm muted palette, composed in landscape.\n\nExactly four elements carry the composition and each occupies its own clearly separated region of the frame, with no two overlapping.\n\nA tall window fills the right third of the image from top edge to floor, its frame painted chalky white, divided into six panes by thin muntins, with pale sunlight pouring through it and casting a hard-edged parallelogram of light across the floor toward the lower left corner.\n\nA woman stands in the left third, in three-quarter view facing right toward the window, her weight on her back foot. She wears a loose oatmeal linen shirt with the sleeves pushed to the elbow and wide dark olive trousers, her dark hair tied in a low bun, one hand wrapped around a small ceramic cup held at chest height. Her head and shoulders reach into the upper half of the frame; her feet are visible on the floor.\n\nA large monstera plant occupies the centre of the frame between the woman and the window, standing in a ribbed terracotta pot on the floor. It has exactly seven broad split leaves, three of them turned toward the window and catching the light on their upper surfaces, the rest in soft shade.\n\nA cat lies in the lower right, directly inside the bright parallelogram of sunlight on the floorboards, stretched out on its side with its front legs extended and its eyes closed. It is a short-haired ginger tabby with faint darker stripes along its flank and a white chin.\n\nNothing else of substance appears: the back wall is a plain warm off-white, the floor is pale honey-toned boards running diagonally toward the window, and the negative space between the four elements stays deliberately empty so each one reads separately and in its stated place."
+    }
+  }
+}

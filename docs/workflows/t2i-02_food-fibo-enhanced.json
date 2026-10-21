@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1248,
+      "height": 832,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A three-quarter overhead food photograph of a pale birch cheese board on a honey-toned oak table, arranged with cheeses, grapes, sourdough, preserves, cornichons, nuts, rosemary, and amber honey. Late-afternoon sunlight creates two diagonal bands across the tabletop and long, soft-edged shadows.\",\"objects\":[{\"description\":\"A round serving board made from pale birch, with a subtle natural grain and clean, slightly rounded edge.\",\"location\":\"center\",\"relationship\":\"Supports the cheeses, grapes, and rosemary; rests on the oak table.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Round, pale cream with light birch grain.\",\"texture\":\"Smooth, finely grained wood.\",\"appearance_details\":\"Natural, understated finish with no visible markings.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Flat on the table, viewed from above at a three-quarter angle.\"},{\"description\":\"A loose bunch of ripe red-purple grapes attached to a visible woody stem.\",\"location\":\"upper-left area of the board\",\"relationship\":\"Begins the clockwise food arrangement on the board.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Cluster of rounded grapes in deep red-purple tones with a brown stem.\",\"texture\":\"Smooth, slightly glossy grape skins; dry, woody stem.\",\"appearance_details\":\"Natural variations in grape size and color.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Loosely gathered, with the stem angled across the board.\"},{\"description\":\"A thick triangular wedge of firm pale-yellow cheese with a natural rind and a few small, irregular holes.\",\"location\":\"upper portion of the board, just clockwise from the grape bunch\",\"relationship\":\"Sits between the grape bunch and the brie wedges in the clockwise arrangement.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Triangular wedge, pale yellow with a muted golden natural rind.\",\"texture\":\"Firm, dense interior with a dry natural rind.\",\"appearance_details\":\"A few small, uneven holes are visible in the cut face.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Resting on its rind with the cut face visible.\"},{\"description\":\"Two soft white-rinded brie wedges stacked together, their cut faces showing a creamy interior.\",\"location\":\"upper-right area of the board, clockwise from the firm cheese\",\"relationship\":\"Follow the firm cheese and precede the blue-veined cheese in the clockwise arrangement.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Two triangular wedges with ivory interiors and soft white rinds.\",\"texture\":\"Velvety rind and visibly soft, creamy interior.\",\"appearance_details\":\"The stacked cut faces reveal a slightly glossy, pale interior.\",\"number_of_objects\":2,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Stacked at a slight angle with the cut faces turned upward.\"},{\"description\":\"A crumbling wedge of blue-veined cheese with dense blue-grey marbling.\",\"location\":\"lower-right area of the board, clockwise from the brie\",\"relationship\":\"Completes the clockwise sequence of cheeses around the board.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Rough triangular wedge in ivory, blue, and grey tones.\",\"texture\":\"Crumbly, uneven surface with dense marbling.\",\"appearance_details\":\"Distinct blue-grey veins run through the exposed cut face.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Resting on its rind with the marbled face visible.\"},{\"description\":\"A single fresh rosemary sprig with fine needle-like leaves.\",\"location\":\"lower-left area of the board\",\"relationship\":\"Lies across the board opposite the blue cheese and near the scattered walnuts on the table.\",\"relative_size\":\"small\",\"shape_and_color\":\"Slender, branching sprig in fresh green.\",\"texture\":\"Firm, fine leaves with a subtly matte surface.\",\"appearance_details\":\"Fresh, intact needles extend along the woody stem.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Placed diagonally across the board.\"},{\"description\":\"Exactly three shelled walnut halves, scattered individually on the bare wood.\",\"location\":\"on the table between the rosemary and the brass dish\",\"relationship\":\"Form a small scattering beside the board and near the dish of mixed nuts.\",\"relative_size\":\"small\",\"shape_and_color\":\"Three lobed halves in warm tan and brown.\",\"texture\":\"Dry, deeply wrinkled surfaces.\",\"appearance_details\":\"Each half is distinct and separated from the others.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Scattered flat on the tabletop.\"},{\"description\":\"A small hammered brass dish filled with a mound of mixed almonds, cashews, and walnut pieces. Its long ornate handle extends toward the lower right.\",\"location\":\"lower-right area of the table beside the board\",\"relationship\":\"Sits beyond the scattered walnut halves, with its handle pointing away toward the lower-right edge.\",\"relative_size\":\"small\",\"shape_and_color\":\"Shallow golden brass bowl with an elongated handle.\",\"texture\":\"Dimpled hammered metal; dry, varied nut surfaces.\",\"appearance_details\":\"The handle has delicate ornamentation; the nut mound visibly includes almonds, cashews, and walnut pieces.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Dish upright, handle extending diagonally toward the lower right.\"},{\"description\":\"A rustic sourdough boule with a dark blistered crust, accompanied by exactly three cut slices fanned in front of it. Each slice shows an open, irregular crumb.\",\"location\":\"left of the board\",\"relationship\":\"The boule sits behind its fanned slices, beside the board and near the entering linen napkin.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Rounded loaf and three pale beige slices with dark brown crusts.\",\"texture\":\"Crust is rough and blistered; interior crumb is airy and irregular.\",\"appearance_details\":\"Three distinct slices are cut from the loaf and fanned so their crumb is visible.\",\"number_of_objects\":4,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Boule upright on the table; slices lie in a fan in front.\"},{\"description\":\"Two small white fluted ramekins: the left holds dark red fruit preserve with a bright specular highlight, and the right holds whole green cornichons.\",\"location\":\"behind the board\",\"relationship\":\"Stand side by side along the far edge of the board, with preserve on the left and cornichons on the right.\",\"relative_size\":\"small\",\"shape_and_color\":\"Two short, round white dishes with vertically fluted sides; contents are dark red and green.\",\"texture\":\"Smooth glazed ceramic; preserve is glossy and cornichons have subtly bumpy skins.\",\"appearance_details\":\"A distinct highlight glints on the preserve; whole cornichons are visible in the neighboring ramekin.\",\"number_of_objects\":2,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, side by side, with their contents visible from above.\"},{\"description\":\"Exactly four loose grapes that have rolled away from the bunch.\",\"location\":\"upper-left area of the bare table\",\"relationship\":\"Scattered near the board's upper-left side, separate from the bunch on the board.\",\"relative_size\":\"small\",\"shape_and_color\":\"Four round grapes in red-purple tones.\",\"texture\":\"Smooth, slightly glossy skins.\",\"appearance_details\":\"Each grape casts its own small shadow.\",\"number_of_objects\":4,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Individually resting on the tabletop.\"},{\"description\":\"A clear glass jar filled with amber honey, with a wooden honey dipper resting inside and leaning to the right. A small cream paper label on the jar bears two printed lines.\",\"location\":\"right side of the board\",\"relationship\":\"Stands on the table beside the board; the dipper leans within the jar, and the label faces the camera.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Clear cylindrical glass jar with golden amber contents, a warm brown wooden dipper, and a cream label.\",\"texture\":\"Transparent smooth glass, viscous glossy honey, matte paper, and finely grained wood.\",\"appearance_details\":\"The label reads “MIEL DE FORET” above “RECOLTE 2024”.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright jar with the dipper leaning to the right.\"},{\"description\":\"A crumpled oatmeal-colored linen napkin entering the scene from the corner.\",\"location\":\"lower-left corner\",\"relationship\":\"Partly enters the frame beside the bread and below the left side of the board.\",\"relative_size\":\"medium\",\"shape_and_color\":\"Soft, irregular fabric shape in warm oatmeal beige.\",\"texture\":\"Woven, softly rumpled linen.\",\"appearance_details\":\"Natural folds and creases catch the sunlight.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Partly cropped by the lower-left frame edge.\"},{\"description\":\"A pale, softly blurred corner of a wooden chair back.\",\"location\":\"deep background, upper right\",\"relationship\":\"Appears beyond the table against the white wall, separate from the food arrangement.\",\"relative_size\":\"small\",\"shape_and_color\":\"Pale wood with a softly curved corner.\",\"texture\":\"Smooth wood, softened by background blur.\",\"appearance_details\":\"Only the corner of the chair back is visible.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, partly visible in the upper-right background.\"}],\"background_setting\":\"A honey-toned oak tabletop fills the frame, its grain visible beneath the serving arrangement. Two bright diagonal bands of sunlight cross the wood. The far edge of the table falls gently out of focus; a soft white wall and the blurred pale corner of a wooden chair back appear in the deep upper-right background.\",\"lighting\":{\"conditions\":\"Hard late-afternoon sunlight enters through an unseen window, with two bright diagonal bands of light across the tabletop.\",\"direction\":\"Raking in from the upper right.\",\"shadows\":\"Long, soft-edged shadows fall toward the lower left; the four loose grapes each cast a small distinct shadow.\"},\"aesthetics\":{\"composition\":\"Three-quarter overhead still life, with the round board centered and the surrounding bread, ramekins, honey, walnuts, and napkin arranged around it.\",\"color_scheme\":\"Warm honey and oak tones balanced with pale birch, creamy cheeses, red-purple grapes, green cornichons, and brass accents.\",\"mood_atmosphere\":\"Inviting, rustic, sunlit, and quietly abundant.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Shallow aperture; the far edge of the table and background soften gently out of focus.\",\"focus\":\"Sharp focus across the board and food arrangement, with a gentle falloff toward the distant table edge.\",\"camera_angle\":\"Three-quarter overhead.\",\"lens_focal_length\":\"85mm lens.\"},\"style_medium\":\"photograph\",\"text_render\":[{\"text\":\"MIEL DE FORET\",\"location\":\"upper line of the cream paper label on the honey jar, right side of the image\",\"size\":\"small\",\"color\":\"dark brown\",\"font\":\"clean printed serif typeface\",\"appearance_details\":\"Legible uppercase text, centered on the label.\"},{\"text\":\"RECOLTE 2024\",\"location\":\"second line of the cream paper label on the honey jar, directly below “MIEL DE FORET”\",\"size\":\"very small\",\"color\":\"dark brown\",\"font\":\"clean printed serif typeface\",\"appearance_details\":\"Legible uppercase text, smaller than the line above.\"}],\"context\":\"A photorealistic editorial food still life for a refined rustic cheese and charcuterie spread.\",\"artistic_style\":\"realistic\"}"
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 896,
+      "height": 1184,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "This is a tightly framed photorealistic portrait photograph of an elderly man holding a sleeping infant, against a warm brown interior. The background falls into a completely unstructured blur, with two dim, soft round bokeh discs in the upper-right corner. No distinct furniture or objects emerge from the warm brown tones. Across the centre, the man appears in his late seventies, turned in three-quarter view from his left, his head tilted down and slightly toward the infant. His eyes sit near the sharpest plane of focus, while the rest of the scene softens gently with the very shallow depth of field. On his face, open pores are visible across the nose and cheeks, and fine crosshatched wrinkles gather at the outer corners of his eyes. Three deeper horizontal creases cross his forehead, a spray of small brown sun spots marks his temple, and one deep vertical line runs between his brows. His unruly eyebrows are partly white, and two days of white stubble catch the light along his jaw. Near the centre of the frame, his pale grey-blue eyes look down toward the infant; they appear slightly watery, with loose folds beneath the lower lids. A crisp small specular highlight in each visible eye reflects the window light from the front left. Along the lower-right side, the back of the hand supporting the baby shows translucent thinning skin, blue-grey veins, and prominent tendons. In the foreground, a heather grey wool cardigan fills much of the lower frame, its knit texture visible and one small pill of fibre near the shoulder seam. The infant rests against the man's shoulder, one cheek pressed flat against the cardigan and lips slightly parted in sleep. On the crown, one dark curl of fine hair is visible, while a tiny curled fist rests on the man's collarbone with its fingernails clearly visible. Across the baby's body, a pale cream cotton blanket wraps in a soft waffle weave, with its folds gathered around the small shoulder. At the left edge, a large window just outside the frame supplies soft but directional light from the front left. Its gentle illumination falls across the man's face, fading into shadow on the right side of his head and leaving a soft catchlight on the baby's cheek. Fine Kodak Portra 400 grain sits evenly across the image, more pronounced in the shadows, while highlights roll off with a slight warmth and the shadows lean softly toward magenta. The overall composition is intimate and close, balancing the man's sharply rendered eyes against the softly blurred infant and background in a warm, tender palette with a natural colour-negative film character.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 896,
+      "height": 1184,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A flat graphic design poster, printed on uncoated paper and photographed straight on so the whole sheet fills the frame with no perspective and no shadow. The design is built from six pieces of text, each at its own size, position and angle, over a background of overlapping soft-edged geometric shapes in mustard yellow, deep teal and warm off-white.\n\nThe title occupies the upper half and is by far the largest element: the two words \"NIGHT MARKET\" set in a heavy condensed sans-serif, stacked on two lines, flush left against the left margin, in deep teal, with the second word slightly overlapping a large mustard circle behind it. Immediately beneath the title, at roughly one fifth of its size, a subtitle reads \"AN EVENING OF FOOD, NOISE AND NEON\" in widely letterspaced small capitals, in warm off-white on a teal band.\n\nRotated about fifteen degrees counter-clockwise and placed across the middle right of the sheet, a date line reads \"FRIDAY 12 SEPTEMBER\" in a bold italic serif, in near-black. Below and to the left of it, running vertically up the left edge with the letters rotated ninety degrees, a tagline reads \"EAT LATE, WALK SLOW\" in a thin monospaced face, in mustard yellow.\n\nIn the lower third, a short credit block sits flush right in three tight lines of very small grey type reading \"PRESENTED BY THE HARBOUR SOCIETY\", \"SOUND BY KESTREL COLLECTIVE\" and \"DESIGN BY ATELIER NINE\". Finally, in the bottom left corner, an RSVP element is set inside a thin rounded rectangle outlined in near-black, containing the single word \"RSVP\" in small bold capitals above a smaller line reading \"HARBOURSOCIETY.ORG\".\n\nEvery one of the six text elements is crisp, correctly spelled and clearly legible at its own scale, none overlaps another to the point of illegibility, and the composition stays balanced with generous empty paper between the blocks."
+    }
+  }
+}

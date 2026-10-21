@@ -1,0 +1,120 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ],
+      "images.image_2": [
+        "10",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_laughing-leo_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A long-haired, bearded man with dark glasses laughs with a squint and open mouth, holding a small glass of amber drink in a warmly lit, ornate interior. He wears a dark 19th-century suit with a patterned vest and white lapel flower.\",\"objects\":[{\"description\":\"A man with an oval, softly rounded face, long dark hair pulled back with loose lengths at the sides, a full beard and mustache, and dark rectangular glasses. His face, hair, beard, skin tone, and glasses match the person in image 2; his expression and pose match the template.\",\"location\":\"Centered foreground\",\"relationship\":\"The main subject; one raised hand holds the glass near the lower-left side of his face, and the white flower rests on his lapel.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Oval, light warm-toned face; long dark hair and beard; dark glasses; dark coat over a tan patterned vest\",\"texture\":\"Natural skin texture, wavy hair and beard, woven suit fabric\",\"appearance_details\":\"Dark rectangular glasses with rounded corners; high white collar, dark cravat, patterned tan vest, and a white flower on the lapel.\",\"number_of_objects\":null,\"pose\":\"Upper body facing forward with a slight head tilt; one arm raised to hold a small glass.\",\"expression\":\"Squinting, laughing expression with mouth open and gaze directed forward.\",\"clothing\":\"Dark 19th-century suit, patterned vest, high white collar, dark cravat, and white lapel flower.\",\"action\":\"Holding a small glass of amber drink near his face while laughing.\",\"gender\":\"Man\",\"skin_tone_and_texture\":\"Light warm-toned skin with natural visible texture.\",\"orientation\":\"Mostly forward-facing, with a slight head tilt.\"},{\"description\":\"A small clear glass containing a brownish amber drink, held in the man's raised hand.\",\"location\":\"Lower-left foreground, beside the man's face\",\"relationship\":\"Held by the man near his face.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Small transparent glass with a narrow stem and bowl; amber-brown liquid\",\"texture\":\"Smooth, reflective glass\",\"appearance_details\":\"The man's fingers curl around the glass.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright with a slight tilt.\"}],\"background_setting\":\"Dim, warm interior with an ornate pale carved relief filling much of the background and a vertical decorative panel along the left side.\",\"lighting\":{\"conditions\":\"Warm, dim indoor light with an amber cast\",\"direction\":\"Softly lit from the front and left\",\"shadows\":\"Soft, subdued shadows across the face and suit.\"},\"aesthetics\":{\"composition\":\"Centered medium shot, cropped around the man's torso and head; the raised hand and glass sit to the lower left.\",\"color_scheme\":\"Warm amber, brown, tan, and dark charcoal tones, accented by the white collar and flower.\",\"mood_atmosphere\":\"Humorous, convivial, and slightly old-fashioned.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Moderately shallow, with the background softly rendered.\",\"focus\":\"The man's face and upper body are in focus; the carved background is softer.\",\"camera_angle\":\"Eye-level\",\"lens_focal_length\":\"Standard portrait lens, approximately 50–85mm.\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A humorous reaction portrait with the close, warm-toned look of a vintage period-film still.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Replace the man with the person in image 2, preserving his recognizable face shape, skin tone, long dark hair, beard, and glasses while retaining the template's squinting open-mouthed laugh, head tilt, gaze, raised hand holding a small glass, 19th-century suit, patterned vest, high collar, white lapel flower, ornate carved background, warm lighting, and framing.\"}"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-2.jpg"
+    }
+  }
+}

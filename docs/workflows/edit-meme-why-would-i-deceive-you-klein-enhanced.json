@@ -1,0 +1,313 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_why-would-i-deceive-you_1mp.png"
+    }
+  },
+  "4": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "6": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "26",
+        0
+      ],
+      "negative": [
+        "27",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Replace the man in the left half of the split-frame template, image 1, with the person from image 2, and replace the woman in the right half with the person from image 3. Transfer only their identities while preserving the template’s expressions, head poses, gazes, clothing, headset, lighting, blurred backgrounds, framing, split layout, and overlays.\",\"subjects\":[{\"description\":\"The person from image 2, retaining his recognizable face shape, skin tone, long dark hair, full dark beard, and glasses. Match the template’s intense close-up stare and slightly open mouth. Preserve the dark clothing and headset from image 1; do not carry over the smiling expression, clothing, or background from image 2.\",\"position\":\"Close-up filling the left half of the frame, in the same placement and scale as the original man in image 1.\",\"action\":\"Faces toward frame-right with the template’s intense stare and slightly open mouth.\"},{\"description\":\"The person from image 3, retaining her recognizable face shape, skin tone, brown hair color, and round glasses. Match the template’s wide-eyed hopeful expression and slight smile. Preserve the template’s hair placement and do not carry over the reference photo’s expression, clothing, or background.\",\"position\":\"Close-up filling the right half of the frame, in the same placement and scale as the original woman in image 1.\",\"action\":\"Keeps the template’s head pose and gaze toward frame-left, with wide eyes and a slight smile.\"}],\"style\":\"Full-color photographic meme still, matching the source image’s medium and appearance.\",\"color_palette\":[\"dark brown\",\"black\",\"warm beige\",\"muted blue\"],\"lighting\":\"Preserve the source’s warm indoor lighting and existing face shadows.\",\"mood\":\"Preserve the source’s contrast between the man’s intense expression and the woman’s hopeful expression.\",\"background\":\"Preserve the original blurred indoor backgrounds on both sides, the central split, and all existing overlays.\",\"composition\":\"Preserve the side-by-side split frame, close-up scale, head positions, framing, and central divider from image 1.\",\"camera\":{\"angle\":\"Unchanged from reference image 1.\",\"lens\":\"Unchanged from reference image 1.\",\"depth_of_field\":\"Unchanged from reference image 1.\"}}",
+      "clip": [
+        "17",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "10": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "11": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "5",
+        0
+      ],
+      "sigmas": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "13": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "3",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ],
+      "latent": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "clip": [
+        "9",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "19": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ]
+    }
+  },
+  "20": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-2.jpg"
+    }
+  },
+  "21": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "20",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "22": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "16",
+        0
+      ],
+      "latent": [
+        "21",
+        0
+      ]
+    }
+  },
+  "23": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "14",
+        0
+      ],
+      "latent": [
+        "21",
+        0
+      ]
+    }
+  },
+  "24": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-1.png"
+    }
+  },
+  "25": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "24",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    }
+  },
+  "26": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "22",
+        0
+      ],
+      "latent": [
+        "25",
+        0
+      ]
+    }
+  },
+  "27": {
+    "class_type": "ReferenceLatent",
+    "inputs": {
+      "conditioning": [
+        "23",
+        0
+      ],
+      "latent": [
+        "25",
+        0
+      ]
+    }
+  }
+}

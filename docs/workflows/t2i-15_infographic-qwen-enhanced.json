@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1184,
+      "height": 896,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a straight-on photograph of a minimalist infographic page about residents’ commutes, printed on warm off-white paper with deep ink blue, muted brick red, sage green, and warm grey accents. The matte paper fills the frame, with a faint paper fibre texture and a strict left-aligned grid organizing the chart areas and bottom timeline. Across the top, a large, bold, deep ink blue headline reads \"HOW THE TOWN GETS TO WORK\". Directly beneath it, a smaller warm grey line reads \"SURVEY OF 1,200 RESIDENTS, SPRING 2024\". Below the heading on the left half, a vertical bar chart occupies a clearly defined rectangular area, leaving balanced space for the donut chart on the right. Along the chart’s left edge, a thin vertical axis has four evenly spaced marks labelled \"0\", \"10\", \"20\" and \"30\", with a small \"%\" beside the top mark. Five bars stand on a fine warm grey horizontal baseline, each with a clean rectangular shape and a muted, consistent finish. From left to right, the bars are labelled beneath the baseline in small grey capitals as \"WALK\", \"BUS\", \"CAR\", \"BICYCLE\" and \"TRAIN\". Above them, the printed values read \"18\", \"22\", \"31\", \"17\" and \"12\" in the same left-to-right order, with their heights following those values and the third, brick red bar rising highest. On the right half, a clean donut chart sits level with the bars, its circular ring divided into exactly three unequal segments with smooth, precise edges. The deep ink blue segment is largest and occupies roughly half the ring; a sage green segment and a muted brick red segment complete the circle. Inside the hollow centre, a large deep ink blue figure reads \"62%\", with a smaller grey line beneath it reading \"COMMUTE ALONE\". To the right of the ring, three compact legend rows align vertically, each beginning with a small solid square in a matching segment colour. The rows read \"ALONE\", \"SHARED\" and \"OTHER\" from top to bottom, with deep ink blue, sage green and brick red squares respectively. Along the bottom of the page, a thin sage green timeline runs horizontally beneath both chart areas, with four evenly spaced circular dots resting on the line. Beneath the dots, the years read \"2010\", \"2015\", \"2020\" and \"2024\" from left to right in small grey type. Above the same dots, smaller figures read \"41\", \"48\", \"55\" and \"62\", aligned to their corresponding years. In the bottom-right corner, a small grey credit line reads \"SOURCE: TOWN TRANSPORT OFFICE\". The lighting is soft and even, as if from a broad source above the page, with only a faint edge shadow and no strong glare across the printed surface. The overall composition feels orderly and restrained, balancing the denser bar chart on the left with the ring and legend on the right, while the warm neutral paper and muted accent palette preserve a calm editorial style.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

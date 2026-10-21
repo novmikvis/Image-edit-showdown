@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A flat, straight-on presentation board for a fictional cloud software company, photographed as a clean digital mockup sheet on a pure white background with no perspective distortion and no drop shadow around the sheet itself. The sheet is divided by thin light grey hairlines into six rectangular panels arranged in a two-row grid, each panel labelled in the upper left with tiny grey uppercase text.\n\nThe upper left panel is labelled \"PRIMARY LOGO\" and contains a wordmark reading \"NIMBRA\" in a modern geometric sans-serif, preceded by a mark of two overlapping rounded clouds, the rear cloud pale periwinkle and the front cloud saturated indigo blue. Directly below it, a panel labelled \"ALTERNATE LOGO\" repeats the same lockup at a smaller size. Below that, a small square panel labelled \"APP ICON\" shows the cloud mark alone, white on a rounded-corner navy tile.\n\nThe second column contains two stacked panels. The upper one, labelled \"REVERSED LOGO\", shows the white \"NIMBRA\" lockup on a solid navy card. The lower one, labelled \"BUSINESS CARD\", shows a white card bearing the small cloud mark, the name \"ALEX MORGAN\" in bold dark type, the line \"HEAD OF PLATFORM\" beneath it, and three tiny lines of grey contact text below that.\n\nThe large panel occupying the entire right half of the top row is labelled \"HOMEPAGE MOCKUP\" and shows a browser window with a thin navigation bar carrying five small menu words and a blue pill-shaped button reading \"GET STARTED\". Its headline reads \"WORK BETTER.\" on the first line and \"FROM ANYWHERE.\" on the second, the final two words rendered in indigo while the rest is near-black. Two short lines of small grey body text sit beneath, followed by a solid indigo button reading \"TRY FREE\" and an outlined button reading \"BOOK A DEMO\". To the right of the text floats a pale dashboard card showing a small rising line chart and a large legible figure reading \"98.6%\".\n\nIn the bottom row, a panel labelled \"COLOUR PALETTE\" shows exactly five swatch rectangles in a row, from left to right: near-black navy, saturated indigo, soft periwinkle, pale lavender, and off-white, each with two tiny lines of grey text beneath giving a name and a hex code. The adjacent panel labelled \"TYPOGRAPHY\" shows a very large letterform pair \"Aa\" above the typeface name \"INTER\" and four progressively smaller lines of specimen text. A narrow panel labelled \"ICONOGRAPHY\" holds a grid of ten thin-line outline icons in two rows of five: cloud, shield, user, clock, message, folder, document, sliders, bell, and grid. The final panel, labelled \"PACKAGING\", shows a matte navy cube-shaped box in soft three-quarter perspective with the white cloud mark and \"NIMBRA\" wordmark on its front face and two small lines of white text near its lower edge. A single line of small dark centred text sits directly beneath the entire sheet reading \"BRAND GUIDELINES 2024\". All type is crisp and legible, the layout is airy and precisely aligned, and the only colours present are navy, indigo, periwinkle, lavender, white and neutral grey.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1184,
+      "height": 896
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1184,
+      "height": 896
+    }
+  }
+}

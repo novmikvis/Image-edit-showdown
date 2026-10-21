@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1248,
+      "height": 832,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "A three-quarter overhead photograph of a round pale birch cheese board resting on a honey-toned oak table, shot on an 85mm lens at a shallow aperture so the far edge of the table falls gently out of focus. Hard late-afternoon sunlight rakes in from the upper right through an unseen window, throwing long soft-edged shadows to the lower left and casting two bright diagonal bands of light across the tabletop.\n\nOn the board, arranged clockwise from the upper left: a loose bunch of red-purple grapes still on a woody stem, a thick triangular wedge of firm pale yellow cheese with a natural rind and a few small irregular holes, a stacked pair of soft white-rinded brie wedges with a visibly creamy interior, and a crumbling wedge of blue-veined cheese with dense blue-grey marbling. A single sprig of fresh rosemary lies diagonally across the lower left of the board. Exactly three shelled walnut halves sit scattered on the wood between the rosemary and a small hammered brass dish holding a mound of mixed almonds, cashews and walnut pieces, its long ornate handle extending to the lower right.\n\nOff the board to the left, a rustic sourdough boule with a dark blistered crust sits with exactly three slices cut and fanned in front of it, each slice showing an open irregular crumb. Behind the board stand two small white fluted ramekins: the left one filled with dark red fruit preserve catching a specular highlight, the right one filled with whole green cornichons. Four loose grapes have rolled onto the bare table in the upper left, each casting its own small shadow. On the right stands a clear glass jar of amber honey with a wooden honey dipper resting inside and leaning right; a small cream paper label on the jar carries two legible lines of printed text reading \"MIEL DE FORET\" above smaller type reading \"RECOLTE 2024\". A crumpled oatmeal linen napkin enters the frame from the lower left corner. In the deep background upper right, the pale blurred corner of a wooden chair back is just visible against a soft white wall.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

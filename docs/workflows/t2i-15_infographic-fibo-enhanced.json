@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1184,
+      "height": 896,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A straight-on photograph of a flat, meticulously aligned printed infographic on a warm off-white page, with a left-side bar chart, a right-side donut chart and legend, and a four-point timeline along the bottom.\",\"objects\":[{\"description\":\"A flat infographic page filling the frame, printed on warm off-white stock with a strict left-aligned grid, generous spacing, and a restrained palette of deep ink blue, muted brick red, sage green, and warm grey.\",\"location\":\"full frame\",\"relationship\":\"The page contains all charts, labels, and credit line, arranged on a consistent grid.\",\"relative_size\":\"fills frame\",\"shape_and_color\":\"rectangular page in warm off-white\",\"texture\":\"matte, smooth printed paper\",\"appearance_details\":\"Clean, crisp print with no folds, border decoration, or extraneous marks.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"upright landscape page, viewed straight on\"},{\"description\":\"A bold, uppercase headline in deep ink blue at the top of the page.\",\"location\":\"top-left, spanning the page above the charts\",\"relationship\":\"Aligned to the main left margin, above the smaller survey subtitle.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"single horizontal line of deep ink blue text\",\"texture\":\"crisp, flat printed ink\",\"appearance_details\":\"Heavy, clean sans-serif lettering with precise spacing.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"horizontal\"},{\"description\":\"A smaller survey subtitle in warm grey, placed directly beneath the headline.\",\"location\":\"top-left, directly below the headline\",\"relationship\":\"Shares the headline's left alignment and sits above both charts.\",\"relative_size\":\"small\",\"shape_and_color\":\"single horizontal line of warm grey text\",\"texture\":\"crisp, flat printed ink\",\"appearance_details\":\"Uppercase sans-serif lettering with clear, even spacing.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"horizontal\"},{\"description\":\"A vertical bar chart with exactly five solid bars of distinct heights, ordered left to right. The third bar is tallest and muted brick red; the other bars use deep ink blue and sage green. Values sit directly above the bars, and category labels sit beneath the baseline.\",\"location\":\"left half of the page below the subtitle\",\"relationship\":\"The five bars rise from the chart baseline; the separate vertical axis and its labels sit to their left.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"five narrow rectangular bars in deep ink blue, sage green, and muted brick red\",\"texture\":\"flat, uniform printed color\",\"appearance_details\":\"Heights correspond to values 18, 22, 31, 17, and 12 in order; the third bar is visibly tallest and extends slightly above the 30 axis mark.\",\"number_of_objects\":5,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"upright, evenly spaced along a horizontal baseline\"},{\"description\":\"A thin horizontal baseline and a labelled vertical axis with four evenly spaced numeric marks and a small percent symbol at the top.\",\"location\":\"left half, beside and beneath the five-bar chart\",\"relationship\":\"The vertical axis stands to the left of the bars; the baseline runs beneath all five bars and their category labels.\",\"relative_size\":\"small within frame\",\"shape_and_color\":\"fine warm grey lines with small warm grey labels\",\"texture\":\"clean, flat printed ink\",\"appearance_details\":\"Straight, delicate axis lines with evenly spaced marks and labels.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"vertical axis meets horizontal baseline\"},{\"description\":\"A clean donut chart formed by exactly three unequal colored segments with a hollow center. Deep ink blue occupies roughly half the ring, with smaller sage green and muted brick red segments.\",\"location\":\"right half of the page below the subtitle\",\"relationship\":\"The hollow center contains the main percentage and its caption; a three-item color-matched legend sits to the chart's right.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"circular ring segmented in deep ink blue, sage green, and muted brick red\",\"texture\":\"smooth, flat printed color\",\"appearance_details\":\"The three segments are separated cleanly, with consistent ring thickness and a clear, open center.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"upright circular chart viewed face-on\"},{\"description\":\"A large deep ink blue percentage centered in the donut's hollow, with a small grey uppercase caption immediately beneath it.\",\"location\":\"center of the donut chart\",\"relationship\":\"The percentage and caption are centered within the ring and do not overlap its colored segments.\",\"relative_size\":\"medium\",\"shape_and_color\":\"large deep ink blue numerals above a small warm grey text line\",\"texture\":\"crisp, flat printed ink\",\"appearance_details\":\"Clear hierarchy, with the percentage substantially larger than the caption.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"centered and horizontal\"},{\"description\":\"A vertical legend of exactly three rows, each with a small solid color square followed by a short warm grey uppercase label. The square colors match the donut segments.\",\"location\":\"right of the donut chart\",\"relationship\":\"Aligned beside the ring, with deep ink blue, sage green, and muted brick red squares corresponding to the three entries from top to bottom.\",\"relative_size\":\"small\",\"shape_and_color\":\"three small squares in deep ink blue, sage green, and muted brick red, each paired with warm grey text\",\"texture\":\"flat printed color and crisp ink\",\"appearance_details\":\"Even row spacing, consistent square size, and left-aligned labels.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"vertical stack\"},{\"description\":\"A simple horizontal timeline with a thin sage green line and exactly four evenly spaced dots. Small figures sit above the dots, with year labels beneath them.\",\"location\":\"along the bottom of the page\",\"relationship\":\"The four dots sit directly on the line; each figure and year are centered on the same vertical guide as its dot.\",\"relative_size\":\"medium across the page\",\"shape_and_color\":\"thin sage green horizontal line with four sage green dots\",\"texture\":\"flat, clean printed ink\",\"appearance_details\":\"Four identical dots, evenly spaced with consistent alignment.\",\"number_of_objects\":4,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"horizontal\"},{\"description\":\"A small warm grey uppercase source credit, set neatly in the bottom-right corner.\",\"location\":\"bottom-right corner\",\"relationship\":\"Sits beneath the main chart area and to the right of the timeline.\",\"relative_size\":\"small\",\"shape_and_color\":\"single horizontal line of warm grey text\",\"texture\":\"crisp, flat printed ink\",\"appearance_details\":\"Compact uppercase sans-serif lettering.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"horizontal\"}],\"background_setting\":\"A warm off-white printed infographic page fills the landscape frame. The sparse, orderly layout uses a strict left-aligned grid: headline and survey subtitle across the top; five-bar chart on the left; three-segment donut chart and legend on the right; timeline along the bottom; and a small source credit at bottom right. No other objects or background elements are visible.\",\"lighting\":{\"conditions\":\"Even, neutral studio lighting suitable for documenting a printed page.\",\"direction\":\"Soft frontal illumination, aligned with the camera.\",\"shadows\":\"Minimal, faint edge shading only; no glare or hard shadows.\"},\"aesthetics\":{\"composition\":\"Straight-on, full-page landscape composition with precise grid alignment, generous spacing, and clear separation between the left bar chart, right donut chart, and bottom timeline.\",\"color_scheme\":\"Restrained palette of warm off-white, deep ink blue, muted brick red, sage green, and warm grey.\",\"mood_atmosphere\":\"Clear, calm, factual, and editorial.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Deep, with the entire page and all printed details in focus.\",\"focus\":\"Sharp, even focus across the page; numerals and fine chart lines are crisp.\",\"camera_angle\":\"Straight-on, perpendicular to the page.\",\"lens_focal_length\":\"Normal lens, approximately 50mm equivalent.\"},\"style_medium\":\"photograph\",\"text_render\":[{\"text\":\"HOW THE TOWN GETS TO WORK\",\"location\":\"top-left headline\",\"size\":\"large\",\"color\":\"deep ink blue\",\"font\":\"bold sans-serif\",\"appearance_details\":\"Uppercase, crisp, cleanly spaced, on one line.\"},{\"text\":\"SURVEY OF 1,200 RESIDENTS, SPRING 2024\",\"location\":\"directly beneath the headline\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase, on one line.\"},{\"text\":\"0\",\"location\":\"bottom of the bar chart's vertical axis\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Axis mark label.\"},{\"text\":\"10\",\"location\":\"first evenly spaced mark above 0 on the bar chart's vertical axis\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Axis mark label.\"},{\"text\":\"20\",\"location\":\"second evenly spaced mark above 0 on the bar chart's vertical axis\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Axis mark label.\"},{\"text\":\"30\",\"location\":\"top mark of the bar chart's vertical axis\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Axis mark label.\"},{\"text\":\"%\",\"location\":\"beside the top of the bar chart's vertical axis\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Small percent symbol.\"},{\"text\":\"18\",\"location\":\"directly above the first bar\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over the bar.\"},{\"text\":\"22\",\"location\":\"directly above the second bar\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over the bar.\"},{\"text\":\"31\",\"location\":\"directly above the third, tallest bar\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over the bar.\"},{\"text\":\"17\",\"location\":\"directly above the fourth bar\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over the bar.\"},{\"text\":\"12\",\"location\":\"directly above the fifth bar\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over the bar.\"},{\"text\":\"WALK\",\"location\":\"beneath the first bar's baseline position\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase category label, centered beneath its bar.\"},{\"text\":\"BUS\",\"location\":\"beneath the second bar's baseline position\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase category label, centered beneath its bar.\"},{\"text\":\"CAR\",\"location\":\"beneath the third bar's baseline position\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase category label, centered beneath its bar.\"},{\"text\":\"BICYCLE\",\"location\":\"beneath the fourth bar's baseline position\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase category label, centered beneath its bar.\"},{\"text\":\"TRAIN\",\"location\":\"beneath the fifth bar's baseline position\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase category label, centered beneath its bar.\"},{\"text\":\"62%\",\"location\":\"center of the donut chart\",\"size\":\"large\",\"color\":\"deep ink blue\",\"font\":\"bold sans-serif\",\"appearance_details\":\"Crisp numerals and percent symbol, centered in the hollow.\"},{\"text\":\"COMMUTE ALONE\",\"location\":\"center of the donut, directly beneath 62%\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase, centered on one line.\"},{\"text\":\"ALONE\",\"location\":\"top row of the legend to the right of the donut\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase, preceded by a deep ink blue square.\"},{\"text\":\"SHARED\",\"location\":\"middle row of the legend to the right of the donut\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase, preceded by a sage green square.\"},{\"text\":\"OTHER\",\"location\":\"bottom row of the legend to the right of the donut\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase, preceded by a muted brick red square.\"},{\"text\":\"41\",\"location\":\"above the first timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over its dot.\"},{\"text\":\"48\",\"location\":\"above the second timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over its dot.\"},{\"text\":\"55\",\"location\":\"above the third timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over its dot.\"},{\"text\":\"62\",\"location\":\"above the fourth timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered over its dot.\"},{\"text\":\"2010\",\"location\":\"beneath the first timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered beneath its dot.\"},{\"text\":\"2015\",\"location\":\"beneath the second timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered beneath its dot.\"},{\"text\":\"2020\",\"location\":\"beneath the third timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered beneath its dot.\"},{\"text\":\"2024\",\"location\":\"beneath the fourth timeline dot\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Centered beneath its dot.\"},{\"text\":\"SOURCE: TOWN TRANSPORT OFFICE\",\"location\":\"bottom-right corner\",\"size\":\"small\",\"color\":\"warm grey\",\"font\":\"sans-serif\",\"appearance_details\":\"Uppercase, set on one line.\"}],\"context\":\"A clean, editorial printed infographic summarizing town commuting survey results.\",\"artistic_style\":\"realistic editorial print\"}"
+    }
+  }
+}

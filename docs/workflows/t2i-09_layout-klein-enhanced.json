@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A contemporary illustration of a sunlit apartment corner in the late morning, composed in landscape. Exactly four elements carry the composition, each in a clearly separated region with no overlap: a tall window on the right, a woman on the left, a monstera at center, and a cat in the lower right. The back wall is plain warm off-white, and pale honey-toned floorboards run diagonally toward the window. The negative space between the four elements stays deliberately empty.\",\"subjects\":[{\"description\":\"A tall window with a chalky white frame, divided into exactly six panes by thin muntins.\",\"position\":\"Filling the right third of the frame from the top edge to the floor.\",\"action\":\"Pale sunlight pours through the panes and casts a hard-edged parallelogram of light across the floor toward the lower-left corner.\"},{\"description\":\"A woman with dark hair tied in a low bun, wearing a loose oatmeal linen shirt with sleeves pushed to the elbows and wide dark olive trousers. She holds a small ceramic cup.\",\"position\":\"Standing in the left third, with her head and shoulders in the upper half and her feet visible on the floor.\",\"action\":\"She faces three-quarter view toward the window, rests her weight on her back foot, and holds the cup at chest height with one hand.\"},{\"description\":\"A large monstera with exactly seven broad split leaves, standing in a ribbed terracotta pot.\",\"position\":\"Centered between the woman and the window, with the pot on the floor.\",\"action\":\"Three leaves turn toward the window and catch the light on their upper surfaces; the remaining leaves sit in soft shade.\"},{\"description\":\"A short-haired ginger tabby with faint darker stripes along its flank and a white chin.\",\"position\":\"In the lower-right region, directly within the bright parallelogram of sunlight on the floorboards.\",\"action\":\"It lies stretched out on its side with its front legs extended and its eyes closed.\"}],\"style\":\"Contemporary illustration with soft flat shapes, gentle grain, and a warm muted palette.\",\"color_palette\":[\"warm off-white\",\"oatmeal\",\"dark olive\",\"terracotta\",\"ginger\",\"pale honey\"],\"lighting\":\"Pale late-morning sunlight pours through the window, with three monstera leaves catching light on their upper surfaces and a hard-edged parallelogram cast across the floor toward the lower left; the other leaves remain in soft shade.\",\"mood\":\"Quiet and spacious, with deliberate empty space separating the four elements.\",\"background\":\"A plain warm off-white back wall and pale honey-toned floorboards running diagonally toward the window.\",\"composition\":\"Landscape arrangement: the woman occupies the left third, the seven-leaf monstera stands at center, the six-pane window fills the right third from top to floor, and the cat lies in the lower right within the sunlit floor patch. Keep the four elements in distinct, non-overlapping regions and preserve open negative space between them.\",\"camera\":{\"angle\":\"Eye-level, straight-on view of the apartment corner.\",\"lens\":\"Natural perspective with no visible distortion.\",\"depth_of_field\":\"Even, crisp focus across the illustration.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1184,
+      "height": 896
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1184,
+      "height": 896
+    }
+  }
+}

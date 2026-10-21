@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A square four-panel comic page drawn in a clean contemporary style with confident black ink linework and flat muted colour, laid out as a strict two-by-two grid of equal rectangular panels separated by even white gutters, with a thin black border around each panel.\n\nThe same character appears in all four panels and must stay recognisably identical throughout: a young woman with a short dark bob cut with a blunt fringe, round wire-rimmed glasses, a small mole on her left cheek, a mustard yellow crew-neck jumper and dark blue jeans. Her jumper, hair shape, glasses and mole are consistent in every panel.\n\nIn the top left panel, she stands in a kitchen holding an empty white mug, looking down into it with a flat expression. A speech balloon above her reads \"Out of coffee.\" The kitchen behind her has a pale green tiled backsplash and a single window.\n\nIn the top right panel, she is outside on a rainy street in the same clothes, now under a transparent umbrella, walking to the right past a shop with a green awning. A small caption box in the upper left corner of the panel reads \"TWO MINUTES LATER\". Rain is drawn as sparse diagonal ink strokes.\n\nIn the bottom left panel, she stands inside a café at the counter, seen from behind the counter's perspective, facing the viewer. A barista's arm reaches in from the right edge holding out a paper cup. Her speech balloon reads \"Large, please.\" and a second smaller balloon from off-panel right, with its tail pointing off the edge, reads \"Coming up.\"\n\nIn the bottom right panel, she is back in the same kitchen from the first panel, in the same spot by the window, now holding the paper cup with both hands and smiling with her eyes closed. A speech balloon reads \"Better.\" and a small sound effect in hand-lettered capitals near the cup reads \"SIP\".\n\nAll four balloons are clean white with black outlines and tails pointing correctly at their speaker, all lettering is correctly spelled and comfortably legible, the panels stay the same size, and the gutters remain even across the page.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1024,
+      "height": 1024
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}

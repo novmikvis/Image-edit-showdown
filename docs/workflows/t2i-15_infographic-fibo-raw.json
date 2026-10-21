@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1184,
+      "height": 896,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A flat printed infographic page photographed straight on, filling the frame, laid out on a warm off-white background with a strict left-aligned grid and a restrained palette of deep ink blue, muted brick red, sage green and warm grey.\n\nAcross the top, a headline in deep ink blue reads \"HOW THE TOWN GETS TO WORK\", and beneath it a single smaller grey line reads \"SURVEY OF 1,200 RESIDENTS, SPRING 2024\".\n\nThe left half of the page below the headline holds a vertical bar chart with exactly five bars of clearly different heights, standing on a thin horizontal baseline, with a labelled vertical axis marked at four evenly spaced points reading \"0\", \"10\", \"20\" and \"30\" followed by a small \"%\" at the top. The bars, left to right, are labelled beneath the baseline in small grey capitals as \"WALK\", \"BUS\", \"CAR\", \"BICYCLE\" and \"TRAIN\". The tallest bar is the third one, in brick red, and each bar carries its own value printed directly above it, reading in order \"18\", \"22\", \"31\", \"17\" and \"12\", so the printed numbers match the relative bar heights.\n\nThe right half holds a donut chart, a clean ring with a hollow centre, divided into exactly three unequal segments coloured deep ink blue, sage green and brick red, with the largest segment occupying roughly half the ring. In the hollow centre, a large figure reads \"62%\" with a small grey line beneath it reading \"COMMUTE ALONE\". To the right of the donut sits a three-item legend, each item a small coloured square followed by a short label, reading \"ALONE\", \"SHARED\" and \"OTHER\" from top to bottom, the square colours matching the corresponding ring segments.\n\nAlong the bottom of the page runs a simple horizontal timeline with four evenly spaced dots on a thin sage line, each dot labelled beneath with a year reading \"2010\", \"2015\", \"2020\" and \"2024\", and above each dot a very small figure reading \"41\", \"48\", \"55\" and \"62\". In the bottom right corner, a small grey credit line reads \"SOURCE: TOWN TRANSPORT OFFICE\".\n\nAll numerals are crisp and correctly formed, no label is duplicated or garbled, the chart geometry is clean and mathematically plausible, and the alignment of every element to the underlying grid is exact."
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1248,
+      "height": 832,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_03_wave_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A small surfer rides the steep blue face of a towering curling wave in a Japanese ukiyo-e woodblock print, amid wooden boats and distant Mount Fuji.\",\"objects\":[{\"description\":\"A towering curling ocean wave dominates the composition, its deep indigo and blue face edged with pale foam and fine white spray.\",\"location\":\"Across the left and center foreground\",\"relationship\":\"The surfer rides its steep face; wooden boats sit among the surrounding swells.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Tall curling blue form with a dark indigo interior and pale foam crest\",\"texture\":\"Flat woodblock color with fine printed linework and stippled spray\",\"appearance_details\":\"Foam curls into small claw-like shapes along the crest and breaks into flecks across the water.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Curling upward from the left and arcing over toward the center\"},{\"description\":\"A small, stylized surfer crouches on a narrow board, balancing with arms out as they ride the wave.\",\"location\":\"On the steep blue face of the dominant wave, near the center-left\",\"relationship\":\"The board follows the wave's downward slope beneath the surfer.\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Compact human figure above a slim pale board, with dark blue and muted tan accents\",\"texture\":\"Simplified printed linework and flat color\",\"appearance_details\":\"The figure is tiny against the wave, with minimal facial and body detail.\",\"number_of_objects\":null,\"pose\":\"Crouched low with knees bent and arms extended for balance\",\"expression\":\"Not discernible at this scale\",\"clothing\":\"Minimal dark swimwear\",\"action\":\"Riding the breaking wave\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Facing diagonally down the wave toward the right\"},{\"description\":\"Three slender wooden fishing boats carry small crews through the rough water.\",\"location\":\"Across the lower half of the image\",\"relationship\":\"The boats ride between the large curling wave and the smaller foreground swells.\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Long narrow hulls in muted tan and brown\",\"texture\":\"Fine woodblock linework suggesting timber and rippling water\",\"appearance_details\":\"Each boat is angled with the swell, with tiny figures visible aboard.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Tilted diagonally along the direction of the swells\"},{\"description\":\"A distant snow-capped Mount Fuji rises above the water.\",\"location\":\"Near the center-right horizon\",\"relationship\":\"The mountain appears in the open gap between the waves and behind the boats.\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Pale triangular mountain with a white summit and muted blue-gray base\",\"texture\":\"Flat printed color with delicate linework\",\"appearance_details\":\"Its crisp peak contrasts with the foaming waves around it.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright in the distance\"}],\"background_setting\":\"Open sea beneath a warm cream-colored, lightly clouded sky, rendered on aged-paper texture. A vertical Japanese calligraphic cartouche sits near the upper-left edge, and smaller distant waves frame Mount Fuji.\",\"lighting\":{\"conditions\":\"Even, diffuse daylight in the traditional print palette\",\"direction\":\"Broad ambient light from above\",\"shadows\":\"Minimal, with form conveyed mainly through ink outlines and areas of blue\"},\"aesthetics\":{\"composition\":\"Dynamic diagonal arrangement, with the large curling wave sweeping across the left and center and the boats, surfer, and mountain providing smaller points of scale.\",\"color_scheme\":\"Deep indigo and blue against pale foam, muted tan boats, and a warm cream sky\",\"mood_atmosphere\":\"Powerful, energetic, and dramatic\"},\"photographic_characteristics\":null,\"style_medium\":\"Japanese ukiyo-e woodblock print\",\"text_render\":[],\"context\":\"A traditional Japanese woodblock seascape illustration.\",\"artistic_style\":\"ukiyo-e woodblock\",\"edit_instruction\":\"Add a small surfer crouched on a narrow board, riding the steep face of the dominant blue wave in the ukiyo-e woodblock style.\"}"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 2048,
+      "height": 512,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"An airy, ultra-wide social banner for “SLOW MAIL,” with a cream paper aeroplane and dotted trail at left, crisp serif lettering in the center, and three outlined icon badges at right, all set against a fine-grained aubergine-to-amber gradient.\",\"objects\":[{\"description\":\"A thin-line outline drawing of a paper aeroplane, its pointed nose angled upward to the right. A dotted cream trail curves behind it toward the left edge.\",\"location\":\"Left third, centered vertically within the horizontal band\",\"relationship\":\"The dotted trail flows behind the aeroplane toward the left edge; the mark balances the headline across the banner.\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Angular folded-paper silhouette in pale cream\",\"texture\":\"Fine, clean linework\",\"appearance_details\":\"Minimal outline with no fill; the dotted trail is subtle and evenly spaced.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Tilted upward to the right\"},{\"description\":\"Two lines of crisp typography, left-aligned and vertically centered. The headline reads “SLOW MAIL” in a wide cream serif with generous letterspacing. Beneath it, the smaller subline reads “LETTERS THAT TAKE THEIR TIME” in pale amber.\",\"location\":\"Center third\",\"relationship\":\"The headline and subline form the central typographic focus, between the aeroplane mark and the divider.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Wide cream headline lettering above a smaller pale amber line\",\"texture\":\"Smooth, crisp printed lettering\",\"appearance_details\":\"The headline is roughly three times the subline’s size; both lines have comfortable clearance from the top and bottom edges.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal, left-aligned\"},{\"description\":\"A single thin vertical cream rule separating the central text from the badges.\",\"location\":\"Between the center text and the right third\",\"relationship\":\"Provides a light visual divider without interrupting the banner’s horizontal flow.\",\"relative_size\":\"Narrow and tall within the band\",\"shape_and_color\":\"Straight vertical cream line\",\"texture\":\"Smooth, fine stroke\",\"appearance_details\":\"Runs through most of the band’s height while leaving clear space at the top and bottom.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Vertical\"},{\"description\":\"Three small circular badges, evenly spaced along the horizontal axis and outlined in cream. Each has a tiny centered icon with a very small label beneath it: a stamp icon above “POST,” an envelope icon above “WRITE,” and a clock icon above “WAIT.”\",\"location\":\"Right third\",\"relationship\":\"The badge row follows the divider and balances the aeroplane mark on the left.\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Three cream-outlined circles with cream icons and labels\",\"texture\":\"Fine, clean linework\",\"appearance_details\":\"Badges are evenly spaced and legible at banner scale; each icon and label is centered within its circle.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, aligned in a horizontal row\"}],\"background_setting\":\"An ultra-wide, short letterbox banner with a smooth horizontal gradient from deep aubergine at the far left through dusty plum in the center to burnt amber at the far right. Subtle fine-grain noise overlays the gradient. All elements sit comfortably inside the narrow band, with clear space near the top and bottom edges and no cropping.\",\"lighting\":{\"conditions\":\"Even, flat graphic illumination\",\"direction\":\"Uniform across the banner\",\"shadows\":\"No prominent shadows\"},\"aesthetics\":{\"composition\":\"Ultra-wide 4:1 banner composition arranged in three clear zones: aeroplane mark at left, left-aligned typography in the center, and three evenly spaced badges at right, separated by a thin vertical rule. Keep all important elements away from the top and bottom edges.\",\"color_scheme\":\"Deep aubergine, dusty plum, and burnt amber gradient with pale cream and pale amber details\",\"mood_atmosphere\":\"Calm, unhurried, refined, and quietly playful\"},\"photographic_characteristics\":null,\"style_medium\":\"Digital graphic design\",\"text_render\":[{\"text\":\"SLOW MAIL\",\"location\":\"Center third, upper line\",\"size\":\"Large\",\"color\":\"Cream\",\"font\":\"Wide serif typeface\",\"appearance_details\":\"Generous letterspacing; crisp, left-aligned, and vertically centered within the band.\"},{\"text\":\"LETTERS THAT TAKE THEIR TIME\",\"location\":\"Center third, directly beneath the headline\",\"size\":\"Small, about one third of the headline size\",\"color\":\"Pale amber\",\"font\":\"Serif typeface\",\"appearance_details\":\"Crisp, left-aligned, with comfortable clearance from the top and bottom edges.\"},{\"text\":\"POST\",\"location\":\"Inside the first circular badge, beneath the stamp icon\",\"size\":\"Very small\",\"color\":\"Cream\",\"font\":\"Clean, legible typeface\",\"appearance_details\":\"Centered beneath the tiny icon.\"},{\"text\":\"WRITE\",\"location\":\"Inside the second circular badge, beneath the envelope icon\",\"size\":\"Very small\",\"color\":\"Cream\",\"font\":\"Clean, legible typeface\",\"appearance_details\":\"Centered beneath the tiny icon.\"},{\"text\":\"WAIT\",\"location\":\"Inside the third circular badge, beneath the clock icon\",\"size\":\"Very small\",\"color\":\"Cream\",\"font\":\"Clean, legible typeface\",\"appearance_details\":\"Centered beneath the tiny icon.\"}],\"context\":\"A polished social banner for a slow-mail or letter-writing concept, designed for a narrow, ultra-wide horizontal placement.\",\"artistic_style\":\"Minimal, elegant, textured\"}"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_06_constanza_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A balding man with a full, thick head of dark brown hair sits in a softly focused indoor interview setting, wearing glasses, a brown checked jacket, a white shirt, and a patterned tie.\",\"objects\":[{\"description\":\"A middle-aged man with a full, thick head of dark brown hair, including dense coverage across the crown and hairline. He wears round wire-frame glasses and a brown checked jacket over a white shirt with a patterned tie.\",\"location\":\"center foreground\",\"relationship\":\"The man is the main subject, seated in front of a leafy indoor plant and a pale wall.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Upright human figure with dark brown hair, a brown jacket, white shirt, and multicolored tie.\",\"texture\":\"Soft, slightly low-resolution broadcast image; textured checked fabric and smooth hair.\",\"appearance_details\":\"Light skin, rounded face, receding hairline covered by dense hair, and thin metal glasses.\",\"number_of_objects\":null,\"pose\":\"Seated, facing mostly forward with his shoulders angled slightly.\",\"expression\":\"Serious and attentive, with his mouth slightly open.\",\"clothing\":\"Brown checked jacket, white collared shirt, and patterned tie.\",\"action\":\"Speaking while seated.\",\"gender\":\"Man\",\"skin_tone_and_texture\":\"Light skin with a smooth appearance.\",\"orientation\":\"Upright and facing toward the camera.\"},{\"description\":\"A lush indoor plant with broad green leaves, partly visible behind the man.\",\"location\":\"left background\",\"relationship\":\"The foliage fills the background beside and behind the seated man.\",\"relative_size\":\"medium within frame\",\"shape_and_color\":\"Dense cluster of broad green leaves.\",\"texture\":\"Glossy, leafy foliage.\",\"appearance_details\":\"Several overlapping leaves extend toward the center of the frame.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, with leaves spreading outward.\"}],\"background_setting\":\"An indoor interview setting with a pale lavender-gray wall, a leafy green plant at left, and partially visible framed decor near the upper left. The background is softly focused.\",\"lighting\":{\"conditions\":\"Soft, even indoor lighting.\",\"direction\":\"Mostly frontal, with gentle illumination across the man's face.\",\"shadows\":\"Minimal, soft shadows.\"},\"aesthetics\":{\"composition\":\"Centered medium close-up portrait, cropped around the man's torso and head.\",\"color_scheme\":\"Warm browns and muted purples contrasted with vivid green foliage.\",\"mood_atmosphere\":\"Calm, conversational, and informal.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Moderate, with the background softly out of focus.\",\"focus\":\"Soft focus with visible broadcast-image blur.\",\"camera_angle\":\"Eye-level.\",\"lens_focal_length\":\"Standard lens (approximately 35mm–50mm).\"},\"style_medium\":\"Photograph\",\"text_render\":[],\"context\":\"A television interview portrait.\",\"artistic_style\":\"Realistic\",\"edit_instruction\":\"Give the man a full, thick head of dark brown hair.\"}"
+    }
+  }
+}

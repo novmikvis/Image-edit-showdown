@@ -1,0 +1,130 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1360,
+      "height": 768,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ],
+      "images.image_2": [
+        "10",
+        0
+      ],
+      "images.image_3": [
+        "11",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_why-would-i-deceive-you_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\n  \"short_description\": \"A close-up split-screen portrait pairs a long-haired, bearded man with glasses, staring intently with his mouth slightly open, and a light-skinned woman with round glasses, wide eyes, and a hopeful slight smile.\",\n  \"objects\": [\n    {\n      \"description\": \"A man with the long dark hair, beard, glasses, face shape, and skin tone of the supplied male identity, framed in an intense close-up. His hair falls along the sides of his face, and his beard and glasses are clearly visible.\",\n      \"location\": \"left half, filling most of the panel\",\n      \"relationship\": \"The left subject faces toward the woman on the right; a headset sits around his ear and cheek.\",\n      \"relative_size\": \"large within frame\",\n      \"shape_and_color\": \"Oval face, long dark hair, dark beard, and dark-framed glasses\",\n      \"texture\": \"Natural skin texture, textured facial hair, and soft strands of hair\",\n      \"appearance_details\": \"His face is warmly lit, with deeper shadow across one side.\",\n      \"number_of_objects\": null,\n      \"pose\": \"Head held at the same slight angle as the template, with his face turned toward the right.\",\n      \"expression\": \"Intense, focused stare with lips slightly parted\",\n      \"clothing\": \"Dark clothing, mostly cropped by the close framing\",\n      \"action\": \"Looking toward the woman on the right\",\n      \"gender\": \"Man\",\n      \"skin_tone_and_texture\": \"Light-to-medium warm-toned skin with natural texture\",\n      \"orientation\": \"Upright, facing right\"\n    },\n    {\n      \"description\": \"A light-skinned woman with the face shape and light brown hair of the supplied female identity, wearing round glasses. Her hair is pulled back from her face, with some length visible along the sides.\",\n      \"location\": \"right half, filling most of the panel\",\n      \"relationship\": \"She faces toward the man on the left, opposite him across the vertical split.\",\n      \"relative_size\": \"large within frame\",\n      \"shape_and_color\": \"Oval face, light brown hair, and round glasses with thin brown frames\",\n      \"texture\": \"Natural skin texture, smooth glasses frames, and soft hair strands\",\n      \"appearance_details\": \"Her eyes are wide and directed toward the man.\",\n      \"number_of_objects\": null,\n      \"pose\": \"Head held at the same slight angle as the template, turned toward the left.\",\n      \"expression\": \"Wide-eyed and hopeful, with a slight smile\",\n      \"clothing\": \"Dark clothing, mostly cropped by the close framing\",\n      \"action\": \"Looking toward the man on the left\",\n      \"gender\": \"Woman\",\n      \"skin_tone_and_texture\": \"Fair skin with natural texture\",\n      \"orientation\": \"Upright, facing left\"\n    },\n    {\n      \"description\": \"A dark over-ear headset with a curved blue-gray section visible beside the man's cheek.\",\n      \"location\": \"Along the right side of the man's face and neck\",\n      \"relationship\": \"The headset is worn by the man in the left panel.\",\n      \"relative_size\": \"Small\",\n      \"shape_and_color\": \"Curved dark headset with a muted blue-gray accent\",\n      \"texture\": \"Smooth, slightly reflective surface\",\n      \"appearance_details\": \"Part of the headset is cropped by the close framing.\",\n      \"number_of_objects\": null,\n      \"pose\": null,\n      \"expression\": null,\n      \"clothing\": null,\n      \"action\": null,\n      \"gender\": null,\n      \"skin_tone_and_texture\": null,\n      \"orientation\": \"Curving around the man's ear and cheek\"\n    }\n  ],\n  \"background_setting\": \"A side-by-side split-frame with a narrow dark vertical divider. The left panel has a dim, softly blurred indoor background with warm brown tones; the right panel has a softly blurred warm interior with a brighter area near the divider.\",\n  \"lighting\": {\n    \"conditions\": \"Warm indoor light, brighter across the woman's face and more contrasty across the man's face\",\n    \"direction\": \"Soft side lighting, with warm light falling across both faces\",\n    \"shadows\": \"Soft facial shadows, deeper on the man's left side\"\n  },\n  \"aesthetics\": {\n    \"composition\": \"Tight close-up portrait composition, divided vertically into two equal side-by-side panels; both faces fill their respective halves.\",\n    \"color_scheme\": \"Warm browns and muted dark tones, with natural skin tones and subtle blue-gray headset detail\",\n    \"mood_atmosphere\": \"Tense but conversational, with an intense stare opposite a hopeful expression\"\n  },\n  \"photographic_characteristics\": {\n    \"depth_of_field\": \"Shallow, with both faces prominent against blurred backgrounds\",\n    \"focus\": \"Faces and glasses in clear focus\",\n    \"camera_angle\": \"Eye-level\",\n    \"lens_focal_length\": \"Standard to portrait lens\"\n  },\n  \"style_medium\": \"photograph\",\n  \"text_render\": [],\n  \"context\": \"A photographic two-person split-screen reaction meme.\",\n  \"artistic_style\": \"realistic\",\n  \"edit_instruction\": \"Replace the left subject's identity with a long-haired, bearded man wearing glasses, preserving his intense stare, slightly open mouth, head pose, dark clothing, and headset. Replace the right subject's identity with a light-skinned woman with light brown hair and round glasses, preserving her wide-eyed hopeful expression, slight smile, head pose, and gaze. Keep the split-frame layout, warm indoor lighting, blurred backgrounds, and framing.\"\n}"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-2.jpg"
+    }
+  },
+  "11": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-1.png"
+    }
+  }
+}

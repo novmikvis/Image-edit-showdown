@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 944,
+      "height": 1120,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_04_earring_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A young woman in a blue and pale yellow head covering looks toward the viewer against a dark backdrop, her face and pearl earring brightly illuminated by warm room light in a finely textured oil painting.\",\"objects\":[{\"description\":\"A young woman turns her head over her shoulder and looks toward the viewer, with her face brightly lit by warm indoor illumination. Her blue head covering, pale trailing cloth, ochre-brown garment, and white collar retain the portrait’s painterly detail.\",\"location\":\"Center-right foreground\",\"relationship\":\"The main subject, set against the dark backdrop; a pearl earring hangs beside her face.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Upright human figure with a softly lit, fair-toned face; blue and pale yellow head covering, ochre-brown clothing, and white collar.\",\"texture\":\"Softly blended painted skin, layered fabric, and fine crackled paint surface\",\"appearance_details\":\"Dark eyes, slightly parted red lips, and warm highlights across the face and clothing.\",\"number_of_objects\":null,\"pose\":\"Head turned over one shoulder, with the upper body angled away from the viewer.\",\"expression\":\"Quiet and attentive, with a calm gaze.\",\"clothing\":\"Blue head wrap with pale yellow cloth trailing behind, an ochre-brown garment, and a white collar.\",\"action\":\"Looking toward the viewer over her shoulder.\",\"gender\":\"Young woman\",\"skin_tone_and_texture\":\"Fair skin with softly blended, smooth painted highlights.\",\"orientation\":\"Three-quarter profile, facing toward the left side of the frame while looking back toward the viewer.\"},{\"description\":\"A single luminous pearl earring with a small metal fitting hangs beside the woman’s face.\",\"location\":\"Right side of the woman’s face\",\"relationship\":\"Worn by the woman beneath her ear and highlighted by the brighter room light.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Round, bright white pearl with a small metallic attachment.\",\"texture\":\"Smooth, glossy pearl with a reflective surface\",\"appearance_details\":\"A crisp pale highlight makes the pearl stand out against the dark background.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Hanging vertically.\"}],\"background_setting\":\"A plain, nearly black brown painted backdrop with no visible furnishings; warm, bright indoor room illumination reaches the portrait subject.\",\"lighting\":{\"conditions\":\"Bright, warm indoor illumination, as if the room lights are on.\",\"direction\":\"Softly directed from the front-left, illuminating the face, pearl, and upper clothing.\",\"shadows\":\"Soft, gentle shadows remain around the face and against the dark backdrop.\"},\"aesthetics\":{\"composition\":\"Close-up portrait composition, with the woman’s head and shoulders filling the center-right of the frame and dark negative space to the left.\",\"color_scheme\":\"Deep brown-black background, vivid blue and pale yellow cloth, warm ochre clothing, and bright skin highlights.\",\"mood_atmosphere\":\"Quiet, intimate, and warmly illuminated.\"},\"photographic_characteristics\":null,\"style_medium\":\"Oil painting\",\"text_render\":[],\"context\":\"A classical portrait painting with a brighter indoor lighting effect.\",\"artistic_style\":\"Dutch Golden Age\",\"edit_instruction\":\"Turn on the room lights to illuminate the portrait more brightly while preserving the painting’s original style.\"}"
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1184,
+      "height": 896,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a minimalist digital mockup sheet for a fictional cloud software company, on pure white with navy, indigo, periwinkle, lavender, white, and grey. The sheet faces the viewer straight on, with no perspective distortion or drop shadow around its edges; thin light grey hairlines define six main rectangles in two rows, with finer dividers forming the labeled sections. In the upper-left section, a tiny grey uppercase label reads \"PRIMARY LOGO\", above a large \"NIMBRA\" wordmark in geometric sans-serif lettering. To its left, two overlapping rounded clouds form the mark, the rear cloud pale periwinkle and the front one saturated indigo. Directly below, the section labeled \"ALTERNATE LOGO\" repeats the same lockup at a smaller size, with generous clear space around it. Beneath that, a small square section labeled \"APP ICON\" contains the white cloud mark centered on a rounded-corner navy tile. In the second column, the upper block is labeled \"REVERSED LOGO\" and presents the white \"NIMBRA\" lockup on a solid navy card. Below it, \"BUSINESS CARD\" sits above a white card with the small cloud mark, \"ALEX MORGAN\" in bold dark type, and \"HEAD OF PLATFORM\" on the next line. Three tiny grey lines below read \"alex@nimbra.example\", \"nimbra.example\", and \"+1 555 010 2024\". Across the right half of the top row, the broad section labeled \"HOMEPAGE MOCKUP\" contains a browser window with a slim navigation bar. Its five small menu words read \"PRODUCT\", \"SOLUTIONS\", \"RESOURCES\", \"PRICING\", and \"ABOUT\", followed by a blue pill button reading \"GET STARTED\". The prominent headline reads \"WORK BETTER.\" on its first line and \"FROM ANYWHERE.\" on its second, with the final two words in indigo and the rest near-black. Two short grey lines below read \"Bring every project into focus.\" and \"Work moves with your team.\" A solid indigo button reads \"TRY FREE\", beside an outlined button reading \"BOOK A DEMO\"; to their right, a pale dashboard card holds a small rising line chart and the large figure \"98.6%\". Across the lower row, the section labeled \"COLOUR PALETTE\" shows exactly five swatches in a left-to-right row: near-black navy, saturated indigo, soft periwinkle, pale lavender, and off-white. Two tiny grey lines beneath each give its name and hex code: \"Near-black navy\" and \"#10162B\"; \"Saturated indigo\" and \"#4F46E5\"; \"Soft periwinkle\" and \"#A5B4FC\"; \"Pale lavender\" and \"#E9E5FF\"; \"Off-white\" and \"#F8F8F5\". Beside it, \"TYPOGRAPHY\" sits above the very large letterform pair \"Aa\", the typeface name \"INTER\", and four progressively smaller specimen lines reading \"Work flows clearly.\", \"Teams stay in sync.\", \"Projects move forward.\", and \"Cloud tools, made simple.\" The adjacent \"ICONOGRAPHY\" block contains ten thin-line outline icons in two rows of five: cloud, shield, user, clock, message, folder, document, sliders, bell, and grid. At the far right, the \"PACKAGING\" section shows a matte navy cube-shaped box in soft three-quarter perspective, with the white cloud mark and \"NIMBRA\" wordmark on its front face and two small white lines near the lower edge reading \"CLOUD PLATFORM\" and \"SECURE BY DESIGN\". Directly beneath the sheet, one small dark centred line reads \"BRAND GUIDELINES 2024\". The lighting is soft and even, leaving the white sheet bright and shadow-free while a faint grounded shadow falls from the three-dimensional box onto its immediate surface. The overall composition feels airy and precisely aligned, balancing crisp typography and simple geometric marks in a restrained palette of navy, indigo, periwinkle, lavender, white, and neutral grey.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

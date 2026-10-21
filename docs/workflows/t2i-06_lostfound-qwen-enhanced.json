@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1376,
+      "height": 768,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a photorealistic cinematic live-action film still of a 24-hour railway lost-and-found office at night, in a 16:9 aspect ratio and a cool blue-grey palette. From an eye-level 50mm full-frame viewpoint in the corridor, the room is seen through a glass wall and open doorway, with distinct foreground, midground, and background layers. The muted grey office walls meet a wet, dark floor that carries soft reflections from the glass, ceiling lights, and objects near the counter. Across the upper back wall, a departures board shows four separate rows of bold pale lettering: “Hamburgevons,” “Västerås,” “青葉ヶ丘市,” and “Южно-Щербицинск.” Directly below it, a small poster has the clear white uppercase words “LOST & FOUND” on a dark field. In the upper-right corner, a convex security mirror reflects the dim corridor and a janitor pushing a mop bucket; the janitor appears only in that reflection. On the foreground left, a female clerk in her mid-thirties stands behind the counter in a dark green cardigan, white shirt, and rectangular glasses, looking slightly right with an alert, neutral expression. Her silver name tag reads “MARTA” in small, crisp uppercase lettering, and the clipboard in her left hand reads “PLATFORM 3” in clear dark capitals. A blue pen rests in her right hand, and a thin silver ring circles her left index finger. Across the counter, a brass bell sits closest to the clerk, followed by a stamp pad and paper cup, while a ring holding three keys lies closest to the passenger. On the foreground right, a short passenger in an orange raincoat and black cap places a transparent plastic crate on the counter. Inside it are exactly five umbrellas: two closed black ones, two closed red ones, and one open yellow one centered in the crate; no other umbrellas are visible. At the center of the floor in front of the counter, exactly three bags stand from left to right: a red hard-shell suitcase, a black duffel, and a blue backpack partly behind the duffel. The suitcase is closest to the camera, has the only visible wheels, and bears a white sticker marked “A17”; the duffel’s yellow tag reads “B04,” and the backpack’s white tag reads “C22.” The duffel zipper is slightly open, revealing a folded green sweater inside. Wet footprints enter through the doorway and stop near the red suitcase, leaving the floor behind the counter dry. In the midground left, a taller porter wears a navy uniform and red scarf while carrying a cardboard box marked “GLASS” in clear dark capitals. In the midground right, a shorter porter in a charcoal uniform and blue scarf holds a brass desk lamp. Along the right side, a glass display cabinet has exactly four shelves, with three watches arranged left to right on its second shelf: silver, gold, and black. A small orange cat sits on the bottom shelf, plainly visible beside its consistent reflection in the cabinet glass; the other shelves appear empty. The glass wall and cabinet reflect the room and its contents in alignment with their positions, while the convex mirror shows the corridor geometry. Cool fluorescent light enters from the dim corridor, and neutral overhead fluorescent light spreads through the office, casting soft shadows across the wet floor. A small warm practical light near the back wall adds a muted amber glow to the grey surfaces and glass. The overall composition feels balanced and deep, with a restrained cool palette, warm accents, cinematic realism, and the quiet tension of one believable late-night moment.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

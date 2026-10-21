@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"An extremely wide, short social banner, composed for a 4:1 horizontal letterbox strip. Keep the full design within the narrow horizontal band, with generous clear space above and below and no element cropped by the frame. Arrange all elements along one horizontal axis, using the full width.\",\"subjects\":[{\"description\":\"A thin-line outline drawing of a paper aeroplane in pale cream, with a dotted pale-cream trail curving away behind it toward the left edge.\",\"position\":\"In the left third, comfortably inside the frame edges.\",\"action\":\"Tilted upward to the right.\"},{\"description\":\"The headline “SLOW MAIL” in a wide cream serif typeface with generous letterspacing. Directly beneath it, the subline “LETTERS THAT TAKE THEIR TIME” in pale amber lettering at about one third of the headline size. Both lines are crisp, correctly spelled and clearly legible.\",\"position\":\"In the center third, vertically centered and left-aligned, with comfortable clearance from the top and bottom edges.\",\"action\":\"The headline and subline form a two-line text block.\"},{\"description\":\"Exactly three small, evenly spaced circular badges, each outlined in cream and containing a tiny centered icon with a very small label beneath it: a stamp icon labeled “POST,” an envelope icon labeled “WRITE,” and a clock icon labeled “WAIT.”\",\"position\":\"In the right third, arranged evenly along the horizontal axis and fully within the frame.\",\"action\":\"Each badge presents its icon and label.\"},{\"description\":\"A single thin vertical cream rule.\",\"position\":\"Between the center text and the badges, running through most of the band’s height while staying clear of the top and bottom edges.\",\"action\":\"Divides the text area from the badges.\"}],\"style\":\"Minimal, airy 2D graphic banner with crisp typography, fine linework, and a subtle fine-grain noise texture.\",\"color_palette\":[\"deep aubergine\",\"dusty plum\",\"burnt amber\",\"pale cream\",\"pale amber\"],\"lighting\":\"Even graphic color with no directional lighting.\",\"mood\":\"Calm, spacious and unhurried.\",\"background\":\"A smooth horizontal gradient transitions from deep aubergine at the far left through dusty plum in the center to burnt amber at the far right, overlaid with subtle fine-grain noise.\",\"composition\":\"A 4:1 horizontal layout divided into thirds: paper aeroplane mark at left, left-aligned two-line text in the center, and three evenly spaced icon badges at right. A thin vertical cream rule separates the text and badges. Keep every element comfortably within the narrow band, with clear space near its top and bottom edges and nothing cropped.\",\"camera\":{\"angle\":\"Straight-on, flat graphic view.\",\"lens\":\"Not applicable to a 2D graphic.\",\"depth_of_field\":\"Uniform sharpness across the entire banner.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 2048,
+      "height": 512
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 2048,
+      "height": 512
+    }
+  }
+}

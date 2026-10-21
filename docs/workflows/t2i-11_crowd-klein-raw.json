@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A wide fantasy landscape painted in ink and watercolour on cold-pressed paper, with visible paper tooth, bleeding pigment edges, granulating washes and confident dark ink linework over soft colour. The palette is indigo, sepia, pale ochre and thin sea green, kept translucent so the paper glows through.\n\nThe subject is a city built across the tops of five enormous rock spires that rise out of a sea of low cloud. Each spire is crowned with tiled roofs, narrow towers, laundry lines and small round windows, painted in warm sepia and ochre with ink outlines. The spires are connected to one another by four long winding suspension bridges that sag in gentle catenary curves, their cables drawn as fine ink strokes, each bridge crossing at a different height so they layer over one another in depth.\n\nMore than forty human figures populate the scene, and every one of them is rendered only as a small dark ink silhouette with no facial features or detail. They are distributed deliberately: a dense group of roughly fifteen crowds the widest bridge in the centre middle-ground, moving in both directions; about ten more are scattered singly along the two higher bridges to the left; six lean over railings on the rooftop terraces of the largest spire on the right; a cluster of five sits along a low wall in the near foreground, seen from behind, looking out across the cloud sea; and the remaining figures appear as tiny specks on the furthest spire, small enough to read as marks rather than bodies. The silhouettes get progressively smaller and paler with distance.\n\nThree thin-necked birds glide in the empty air between the spires. The cloud sea below is painted as broad wet-in-wet indigo washes with soft blooms and hard-edged tide marks where the pigment dried. The sky above is a graded pale ochre wash, nearly white at the horizon, with the faint circle of a low sun burning through near the right edge. Nothing in the image looks digital: brush edges, backruns and dry-brush scumbling stay visible throughout.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1376,
+      "height": 768
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1376,
+      "height": 768
+    }
+  }
+}

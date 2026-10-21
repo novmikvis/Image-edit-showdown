@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A straight-on, deep-focus studio photograph of a white plywood shelving unit built as a photographic calibration target, filling the entire frame with no visible floor or ceiling. The unit is divided into three horizontal tiers by white shelf boards, and every object is lit by an even, neutral daylight-balanced softbox from the front left, producing soft shadows and no blown highlights.\n\nOn the top tier, arranged left to right: a green printed circuit board standing upright against the back panel, four cast-iron gears of decreasing size leaning against each other, a rusted five-pointed metal star, a tangled loop of galvanised chain, a black wire-mesh cup holding exactly eight felt-tip markers with red, yellow, green and blue caps, and a cobalt blue glass vase holding exactly three dahlias: one pale yellow, one deep magenta, one coral pink. Four wooden alphabet blocks stand along the front edge of this tier, spelling the letters T, E, S, T from left to right in coloured serif type. A single white chicken egg rests in the centre.\n\nThe middle tier is dominated by two flat calibration charts propped side by side. The left chart is a matte grid of exactly twenty-four colour patches in four rows of six, framed in black, with small printed text along its bottom edge reading \"COLOUR RENDITION CHART\". The right chart is a dense printed target of small colour and greyscale squares with a legible row of numbers 1 to 22 across the top and letters A to L down both sides. Immediately below both charts lies a long horizontal grey-scale strip with legible printed text reading \"GRAY SCALE\" and a row of step numbers from 1 to 19.\n\nOn the bottom tier, left to right: a brushed steel cocktail shaker held by a hand entering from the left frame edge, a chrome stand holding exactly four white golf balls stacked in a pyramid, two dried ears of multicoloured corn, a brown leather cylindrical case, a pair of black binoculars, a purple fabric box embroidered with a thin branch pattern, and a single yellow sunflower on a tall green stem leaning right. In the lower centre stands a round glass fish bowl half filled with water, purple gravel and one blue betta fish, next to a yellow twin-bell alarm clock whose white face shows legible hands at ten past ten. A terracotta pot of small green cacti and a blue glass bottle occupy the lower right, beside one orange, one lemon and one peach resting directly on the shelf board. Colours are saturated but accurate, textures are crisp from front to back, and the whole composition reads as an orderly test chart rather than a casual still life.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 896,
+      "height": 1184
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 896,
+      "height": 1184
+    }
+  }
+}

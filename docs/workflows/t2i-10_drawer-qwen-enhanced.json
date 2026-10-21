@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1184,
+      "height": 896,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a hand-drawn editorial illustration of a household junk drawer’s contents on a pale cream sheet, viewed directly overhead. The matte paper has a faint, warm fibre texture, and the open spaces between the objects make the sheet feel orderly and carefully catalogued. Across the top edge, dark grey hand-lettered capitals read \"CONTENTS OF ONE DRAWER\". Directly beneath, a smaller italic grey line reads \"catalogued on a wet Sunday\", with the five-column, four-row grid beginning below it.\n\nIn the upper-left cell, a brass door key lies at a slight angle, its rounded bow and toothed shaft picked out in loose ink lines above the small grey handwritten label \"SPARE KEY\". In the next cell, a beige masking-tape roll shows its brown cardboard core and softly uneven paper edge, with \"TAPE\" written beneath it. At the top centre, a red-handled screwdriver rests diagonally, its steel shaft ending in a flat tip, above the label \"PHILLIPS\". To its right, black earphones form a loose tangle, with two small earpieces and a thin cord visible above \"EARPHONES\". In the upper-right corner cell, a single AA battery sits horizontally, its metallic ends lightly shaded above \"BATTERY\".\n\nAt the left of the second row, small steel scissors with orange handles are partly open, and their twin blades meet above the handwritten \"SCISSORS\". Beside them, a paper tape measure is folded into a compact zigzag, with faint measuring marks across its pale surface and \"TAPE MEASURE\" beneath. In the centre cell, three brass thumbtacks cluster together, their round heads catching small highlights above the label \"TACKS\". To the right, a blue plastic lighter with a silver top sits upright, with \"LIGHTER\" written below. At the far right of the row, a rubber band ball shows several brown and muted red loops wrapped tightly around its surface, above \"ELASTICS\".\n\nIn the left cell of the third row, green garden twine forms a neat coil with a short loose end curling outward; the grey label beneath reads \"TWINE\". Next to it, a chrome bottle opener lies at an angle, with its cut-out opening and reflective metal surface drawn in fine strokes above \"OPENER\". In the centre, two paper clips rest separately but close together, one slightly overlapping the other, with \"CLIPS\" beneath them. To their right, a small superglue tube has a narrow nozzle and a capped end, with the label \"GLUE\" below. At the far right, a yellow carpenter’s pencil lies diagonally, its sharpened graphite point and bare wood tip visible above \"PENCIL\".\n\nIn the lower-left cell, a folded set of allen keys forms a compact dark metal fan, with several short hexagonal ends visible above \"ALLEN KEYS\". Beside it, a white plastic wall plug lies lengthwise, its ribbed sides and central opening outlined above the label \"WALL PLUG\". At the bottom centre, a single silver coin shows a softly suggested rim and indistinct central relief, with \"COIN\" written underneath. To its right, a strip of four plasters lies flat, each pale fabric pad and small perforation marks indicated above \"PLASTERS\". In the lower-right corner, a tiny brass padlock has a closed curved shackle and no key beside it, with the label \"PADLOCK\" below.\n\nEvery object fits within its own cell, with clear cream space around it, and the drawings maintain a consistent illustrative scale across the grid. The lighting is soft and even, like diffuse daylight from above, leaving gentle shadows beneath the objects and small warm highlights on the brass, steel, and chrome. The overall composition is balanced and regular, with even gutters, a muted cream, grey, brass, and watercolour palette, and a quiet editorial mood.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

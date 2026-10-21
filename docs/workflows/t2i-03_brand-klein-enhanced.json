@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A flat, straight-on presentation board for the fictional cloud software company NIMBRA, photographed as a clean digital mockup sheet on a pure white background. The sheet has six main rectangular zones in a two-row, three-column grid, separated by thin light-grey hairlines; several zones are subdivided into smaller labelled modules. Each module label sits at its upper left in tiny grey uppercase text. The upper-left zone contains three vertically stacked modules labelled \\\"PRIMARY LOGO\\\", \\\"ALTERNATE LOGO\\\" and \\\"APP ICON\\\". The primary logo is the wordmark \\\"NIMBRA\\\" in a modern geometric sans-serif, preceded by two overlapping rounded clouds, a pale-periwinkle rear cloud and a saturated-indigo-blue front cloud. The alternate logo repeats this lockup at a smaller size. The app icon is the cloud mark alone in white on a rounded-corner navy tile. The upper-middle zone contains two stacked modules labelled \\\"REVERSED LOGO\\\" and \\\"BUSINESS CARD\\\". The reversed logo is the white \\\"NIMBRA\\\" lockup on a solid navy card. The business card is white and bears the small cloud mark, \\\"ALEX MORGAN\\\" in bold dark type, \\\"HEAD OF PLATFORM\\\" beneath it, and three tiny grey contact lines reading \\\"alex@nimbra.com\\\", \\\"+1 415 555 0148\\\" and \\\"nimbra.com\\\". The upper-right zone occupies the entire right half of the top row and is labelled \\\"HOMEPAGE MOCKUP\\\"; it contains a browser window with a thin navigation bar, five small menu words \\\"HOME\\\", \\\"PLATFORM\\\", \\\"SOLUTIONS\\\", \\\"RESOURCES\\\", \\\"PRICING\\\", and a blue pill-shaped \\\"GET STARTED\\\" button. The headline reads \\\"WORK BETTER.\\\" on the first line and \\\"FROM ANYWHERE.\\\" on the second, with \\\"FROM\\\" near-black and \\\"ANYWHERE.\\\" indigo. Two short grey body-text lines read \\\"Your work, connected in one place.\\\" and \\\"Move projects forward from anywhere.\\\" Below them are a solid indigo \\\"TRY FREE\\\" button and an outlined \\\"BOOK A DEMO\\\" button. A pale dashboard card floats to the right of the headline, with a small rising line chart and the large legible figure \\\"98.6%\\\". Across the bottom row, the left zone is labelled \\\"COLOUR PALETTE\\\" and displays exactly five swatch rectangles in one row, left to right: near-black navy, saturated indigo, soft periwinkle, pale lavender and off-white. Beneath each swatch are two tiny grey lines with its name and hex code: \\\"NAVY\\\" / \\\"#11152E\\\", \\\"INDIGO\\\" / \\\"#4B3CDB\\\", \\\"PERIWINKLE\\\" / \\\"#A9B5F4\\\", \\\"LAVENDER\\\" / \\\"#E9E5FA\\\", and \\\"OFF-WHITE\\\" / \\\"#F8F8F6\\\". The bottom-middle zone is labelled \\\"TYPOGRAPHY\\\" and shows a very large \\\"Aa\\\", the typeface name \\\"INTER\\\", and four progressively smaller specimen lines: \\\"The quick brown fox\\\", \\\"Jumps over the lazy dog\\\", \\\"0123456789\\\", and \\\"Aa Bb Cc Dd Ee\\\". The bottom-right zone is divided into a narrow module labelled \\\"ICONOGRAPHY\\\", containing exactly ten thin-line outline icons in two rows of five, ordered cloud, shield, user, clock, message, folder, document, sliders, bell and grid, and a module labelled \\\"PACKAGING\\\", showing a matte navy cube-shaped box in soft three-quarter perspective. Its front face carries the white cloud mark and \\\"NIMBRA\\\" wordmark, with two small white lines near the lower edge reading \\\"SECURE CLOUD STORAGE\\\" and \\\"BUILT FOR TEAMS\\\". Centered directly beneath the entire sheet, one small dark line reads \\\"BRAND GUIDELINES 2024\\\". All type is crisp and legible, the layout is airy and precisely aligned, and the only colours are navy, indigo, periwinkle, lavender, white and neutral grey.\",\"subjects\":[{\"description\":\"A white presentation sheet divided by thin light-grey hairlines into six main rectangular zones arranged in two rows and three columns, with compact internal dividers for the labelled modules. The sheet has no shadow around its edge.\",\"position\":\"Centered and filling most of the frame, with a plain white margin around it.\",\"action\":\"Presents the complete NIMBRA brand guidelines board.\"},{\"description\":\"A modern geometric sans-serif NIMBRA wordmark preceded by two overlapping rounded clouds, with the rear cloud pale periwinkle and the front cloud saturated indigo blue; a smaller identical lockup; and a white cloud mark on a rounded-corner navy tile. Tiny grey uppercase labels read \\\"PRIMARY LOGO\\\", \\\"ALTERNATE LOGO\\\" and \\\"APP ICON\\\".\",\"position\":\"Upper-left zone, with the three labelled modules stacked vertically.\",\"action\":\"Displays the primary and alternate logo lockups and the app icon.\"},{\"description\":\"A white NIMBRA cloud-mark lockup reversed to white on a solid navy card, labelled \\\"REVERSED LOGO\\\". Below it, a white business card labelled \\\"BUSINESS CARD\\\" with the small cloud mark, bold dark \\\"ALEX MORGAN\\\", \\\"HEAD OF PLATFORM\\\", and three tiny grey lines reading \\\"alex@nimbra.com\\\", \\\"+1 415 555 0148\\\" and \\\"nimbra.com\\\".\",\"position\":\"Upper-middle zone, with the reversed logo module above the business card module.\",\"action\":\"Displays the reversed logo and a business card.\"},{\"description\":\"A browser-window homepage mockup with a thin navigation bar, five small menu words \\\"HOME\\\", \\\"PLATFORM\\\", \\\"SOLUTIONS\\\", \\\"RESOURCES\\\", \\\"PRICING\\\", and a blue pill-shaped \\\"GET STARTED\\\" button. Its headline reads \\\"WORK BETTER.\\\" and \\\"FROM ANYWHERE.\\\", with \\\"FROM\\\" near-black and \\\"ANYWHERE.\\\" indigo. Two short grey lines read \\\"Your work, connected in one place.\\\" and \\\"Move projects forward from anywhere.\\\" Below are a solid indigo \\\"TRY FREE\\\" button and an outlined \\\"BOOK A DEMO\\\" button. A pale dashboard card contains a small rising line chart and the large figure \\\"98.6%\\\".\",\"position\":\"Upper-right zone, spanning the entire right half of the top row; headline and buttons sit left within the browser, dashboard card to their right.\",\"action\":\"Shows the NIMBRA homepage design.\"},{\"description\":\"Exactly five rectangular swatches, ordered near-black navy, saturated indigo, soft periwinkle, pale lavender and off-white. Two tiny grey text lines under each read respectively \\\"NAVY\\\" / \\\"#11152E\\\", \\\"INDIGO\\\" / \\\"#4B3CDB\\\", \\\"PERIWINKLE\\\" / \\\"#A9B5F4\\\", \\\"LAVENDER\\\" / \\\"#E9E5FA\\\", and \\\"OFF-WHITE\\\" / \\\"#F8F8F6\\\". The module label reads \\\"COLOUR PALETTE\\\".\",\"position\":\"Bottom-left zone, swatches arranged in a single horizontal row.\",\"action\":\"Displays the five brand colours and their names and hex codes.\"},{\"description\":\"A very large \\\"Aa\\\" letterform pair, the typeface name \\\"INTER\\\", and four progressively smaller specimen lines reading \\\"The quick brown fox\\\", \\\"Jumps over the lazy dog\\\", \\\"0123456789\\\", and \\\"Aa Bb Cc Dd Ee\\\". The module label reads \\\"TYPOGRAPHY\\\".\",\"position\":\"Bottom-middle zone, with the large letterforms above the typeface name and specimen lines.\",\"action\":\"Displays the typeface and size hierarchy.\"},{\"description\":\"Exactly ten thin-line outline icons in two rows of five, ordered cloud, shield, user, clock, message, folder, document, sliders, bell and grid. The module label reads \\\"ICONOGRAPHY\\\".\",\"position\":\"Narrow module in the bottom-right zone, with five icons per row.\",\"action\":\"Displays the ten brand icons.\"},{\"description\":\"A matte navy cube-shaped box with soft three-quarter perspective, a white cloud mark and \\\"NIMBRA\\\" wordmark on its front face, and two small white lines near the lower edge reading \\\"SECURE CLOUD STORAGE\\\" and \\\"BUILT FOR TEAMS\\\". The module label reads \\\"PACKAGING\\\".\",\"position\":\"Beside the iconography module within the bottom-right zone.\",\"action\":\"Displays the branded packaging box.\"},{\"description\":\"A small dark line of centered text reading \\\"BRAND GUIDELINES 2024\\\".\",\"position\":\"Directly beneath the entire presentation sheet, centered.\",\"action\":\"Labels the board.\"}],\"style\":\"Clean digital graphic-design mockup sheet with crisp, legible typography, precise alignment, thin hairline dividers and flat presentation-board styling; photographed straight-on without perspective distortion or a sheet drop shadow.\",\"color_palette\":[\"near-black navy\",\"saturated indigo\",\"soft periwinkle\",\"pale lavender\",\"white\",\"neutral grey\"],\"lighting\":\"Even, soft, neutral illumination across the sheet, preserving clear contrast and legible text without cast shadows around the sheet.\",\"mood\":\"Airy, organized, contemporary and professional.\",\"background\":\"Pure white, evenly lit, with ample clean margin around the sheet.\",\"composition\":\"Landscape board organized into six main rectangular zones in two rows and three columns. The upper-left and upper-middle zones contain stacked labelled modules; the homepage fills the upper-right zone, spanning the right half of the top row. The bottom row contains palette, typography, and a right-side zone divided into iconography and packaging modules. A centered title line sits just below the sheet.\",\"camera\":{\"angle\":\"Straight-on, perpendicular to the sheet.\",\"lens\":\"Orthographic presentation with no perspective distortion.\",\"depth_of_field\":\"Uniform sharp focus across the entire sheet and all typography.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1184,
+      "height": 896
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1184,
+      "height": 896
+    }
+  }
+}

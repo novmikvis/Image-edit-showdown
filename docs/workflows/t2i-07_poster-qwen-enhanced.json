@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 896,
+      "height": 1184,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "The image is a flat graphic design poster printed on warm off-white paper, with overlapping mustard yellow and deep teal shapes behind oversized type. The uncoated sheet fills the frame edge to edge, photographed straight on, with no perspective distortion or cast shadow. Soft-edged geometric shapes overlap across the paper in deep teal, mustard yellow and warm off-white, leaving generous open areas between text blocks. A large mustard circle sits behind the right side of the title, while broad teal shapes form quieter bands and patches around it.\n\nAcross the upper half, the title sits flush left against the margin in two stacked lines of deep teal, heavy condensed sans-serif type. Its exact wording is “NIGHT MARKET,” with “NIGHT” above “MARKET,” and the second word slightly overlapping the large mustard circle. The letters are tightly set and occupy far more space than any other text on the sheet. Immediately below, a teal band carries the subtitle “AN EVENING OF FOOD, NOISE AND NEON” in small, widely letterspaced warm off-white capitals. The subtitle is roughly one fifth the title’s size and remains clearly distinct from the title.\n\nOn the middle right, the date “FRIDAY 12 SEPTEMBER” crosses the design at about fifteen degrees counter-clockwise. It appears in bold italic near-black serif type, set apart from both the title and subtitle. Along the left edge below the title, the tagline “EAT LATE, WALK SLOW” runs vertically upward in thin mustard yellow monospaced letters rotated ninety degrees. Its narrow line leaves space between itself and the larger text.\n\nAcross the lower third, a compact credit block is aligned flush right in three tight lines of very small grey type. The first line reads “PRESENTED BY THE HARBOUR SOCIETY,” the second reads “SOUND BY KESTREL COLLECTIVE,” and the third reads “DESIGN BY ATELIER NINE.” The grey lettering is small but crisp, and the three lines form a neat rectangular block. In the bottom-left corner, a thin rounded rectangle outlined in near-black encloses the RSVP information. Inside it, “RSVP” appears in small bold capitals above the smaller line “HARBOURSOCIETY.ORG.” The outlined box is separated from the credit block and the vertical tagline by clear areas of blank paper.\n\nThe lighting is broad, soft and even from the front, revealing a faint uncoated paper texture without directional shadows or glossy highlights. The overall composition balances the large title and mustard circle against the angled date and small lower text, using deep teal, mustard yellow, warm off-white, near-black and muted grey for a lively, orderly market-poster mood.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

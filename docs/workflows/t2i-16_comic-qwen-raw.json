@@ -1,0 +1,180 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Qwen21-qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "ComfySwitchNode",
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "8",
+        2
+      ],
+      "on_true": [
+        "4",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "14",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "prompt": "A square four-panel comic page drawn in a clean contemporary style with confident black ink linework and flat muted colour, laid out as a strict two-by-two grid of equal rectangular panels separated by even white gutters, with a thin black border around each panel.\n\nThe same character appears in all four panels and must stay recognisably identical throughout: a young woman with a short dark bob cut with a blunt fringe, round wire-rimmed glasses, a small mole on her left cheek, a mustard yellow crew-neck jumper and dark blue jeans. Her jumper, hair shape, glasses and mole are consistent in every panel.\n\nIn the top left panel, she stands in a kitchen holding an empty white mug, looking down into it with a flat expression. A speech balloon above her reads \"Out of coffee.\" The kitchen behind her has a pale green tiled backsplash and a single window.\n\nIn the top right panel, she is outside on a rainy street in the same clothes, now under a transparent umbrella, walking to the right past a shop with a green awning. A small caption box in the upper left corner of the panel reads \"TWO MINUTES LATER\". Rain is drawn as sparse diagonal ink strokes.\n\nIn the bottom left panel, she stands inside a café at the counter, seen from behind the counter's perspective, facing the viewer. A barista's arm reaches in from the right edge holding out a paper cup. Her speech balloon reads \"Large, please.\" and a second smaller balloon from off-panel right, with its tail pointing off the edge, reads \"Coming up.\"\n\nIn the bottom right panel, she is back in the same kitchen from the first panel, in the same spot by the window, now holding the paper cup with both hands and smiling with her eyes closed. A speech balloon reads \"Better.\" and a small sound effect in hand-lettered capitals near the cup reads \"SIP\".\n\nAll four balloons are clean white with black outlines and tails pointing correctly at their speaker, all lettering is correctly spelled and comfortably legible, the panels stay the same size, and the gutters remain even across the page.",
+      "negative_prompt": "",
+      "resolution": 0,
+      "clip": [
+        "14",
+        1
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "10": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "12": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "13",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ]
+    }
+  },
+  "14": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImageAdvanced",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "format": "png",
+      "images": [
+        "5",
+        0
+      ],
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 896,
+      "height": 1184,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A tightly framed photorealistic photograph of an elderly man holding a sleeping infant against his shoulder, shot on a 85mm lens at a very wide aperture so the plane of focus falls exactly on the man's eyes and the background dissolves into smooth unstructured blur. Fine Kodak Portra 400 grain sits evenly across the whole frame, heavier in the shadows, with the slightly warm highlight rolloff and soft magenta-leaning shadows of colour negative film.\n\nThe man is in his late seventies, seen in three-quarter view from his left, his head tilted down and slightly toward the baby. His skin is rendered with genuine detail: visible open pores across the nose and cheeks, fine crosshatched wrinkles at the outer corner of the eye, three deeper horizontal creases on the forehead, a spray of small brown sun spots across the temple, and translucent thinning skin over the back of the hand supporting the infant, where blue-grey veins and prominent tendons show through. Two days of white stubble catches the light along the jaw. His eyebrows are unruly and partly white, and one deep vertical line runs between them. His eyes are pale grey-blue, slightly watery, with a small crisp specular highlight from a window to the left, and the lower lids show the loose folds of age.\n\nHe wears a heather grey wool cardigan with visible knit texture and one small pill of fibre near the shoulder seam. The infant, no more than a few weeks old, is asleep with one cheek pressed flat against the cardigan, lips slightly parted, a single dark curl of fine hair on the crown, and one tiny hand curled into a fist resting on the man's collarbone with the fingernails clearly visible. The baby is swaddled in a pale cream cotton blanket with a soft waffle weave.\n\nThe light is a single large window source from the front left, soft but directional, modelling the man's face with a gentle falloff into shadow on the right side of his head and leaving a soft catchlight on the baby's cheek. The background is an unidentifiable warm brown interior, completely out of focus, with two dim out-of-focus highlights rendering as soft round bokeh discs in the upper right. No part of the image looks illustrated or smoothed: the texture of skin, wool and cotton all read as photographic."
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 896,
+      "height": 1184,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A portrait poster printed on uncoated paper, photographed straight on. Deep teal display lettering, small event details, and an outlined RSVP badge sit over overlapping soft-edged shapes in mustard yellow, deep teal, and warm off-white, with generous clear space between text blocks.\",\"objects\":[{\"description\":\"The full uncoated paper poster sheet, filling the frame edge to edge with a clean, flat printed surface.\",\"location\":\"throughout the frame\",\"relationship\":\"Carries the graphic design and its text and shapes.\",\"relative_size\":\"fills the frame\",\"shape_and_color\":\"portrait rectangular sheet in warm off-white\",\"texture\":\"matte, lightly fibrous uncoated paper\",\"appearance_details\":\"Photographed straight on with no visible perspective distortion.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"upright portrait\"},{\"description\":\"A pair of oversized title lines, flush left near the top of the poster, set in deep teal heavy condensed sans-serif. The second line crosses slightly over the large mustard circle behind it while remaining crisp and legible.\",\"location\":\"upper half, aligned to the left margin\",\"relationship\":\"The dominant text block, with the second line layered over the mustard circle and the subtitle directly beneath.\",\"relative_size\":\"largest element, large within frame\",\"shape_and_color\":\"two broad horizontal lines of deep teal lettering\",\"texture\":\"flat, solid ink\",\"appearance_details\":\"Heavy condensed forms with tight line spacing and sharp edges.\",\"number_of_objects\":2,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"horizontal lines, flush left\"},{\"description\":\"A compact subtitle in widely letterspaced small capitals, set in warm off-white on a deep teal band immediately below the title.\",\"location\":\"upper half, directly beneath the title\",\"relationship\":\"Sits beneath the title as its supporting line.\",\"relative_size\":\"small, about one fifth the title's size\",\"shape_and_color\":\"small off-white capitals on a horizontal deep teal band\",\"texture\":\"flat, solid ink\",\"appearance_details\":\"Wide tracking and clean, precise letterforms.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"horizontal\"},{\"description\":\"A date line in bold italic serif lettering, rotated about fifteen degrees counter-clockwise and printed near-black.\",\"location\":\"middle right\",\"relationship\":\"Crosses the open middle-right area, clear of the title, tagline, and lower information blocks.\",\"relative_size\":\"medium\",\"shape_and_color\":\"near-black italic serif text\",\"texture\":\"flat, solid ink\",\"appearance_details\":\"Bold, slanted letterforms remain clearly legible at the angle.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"tilted about fifteen degrees counter-clockwise\"},{\"description\":\"A vertical tagline in thin mustard-yellow monospaced lettering, with each letter rotated ninety degrees so the phrase reads upward along the edge.\",\"location\":\"left edge below the title area\",\"relationship\":\"Runs up the margin to the left of the date line and other central details.\",\"relative_size\":\"small\",\"shape_and_color\":\"thin mustard-yellow monospaced text\",\"texture\":\"flat, solid ink\",\"appearance_details\":\"Evenly spaced characters in a restrained, narrow weight.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"vertical, reading bottom to top\"},{\"description\":\"A right-aligned credit block arranged in three tight lines of very small grey type.\",\"location\":\"lower third, right side\",\"relationship\":\"Balances the RSVP badge across the lower part of the poster, with clear space around both.\",\"relative_size\":\"very small\",\"shape_and_color\":\"three grey lines of compact text\",\"texture\":\"flat, solid ink\",\"appearance_details\":\"Fine, understated type with crisp edges and tight leading.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"horizontal lines, flush right\"},{\"description\":\"A thin rounded rectangle outlined in near-black, containing a small bold RSVP label above a smaller web address.\",\"location\":\"bottom-left corner\",\"relationship\":\"Forms a distinct RSVP badge, separated by generous empty paper from the credit block.\",\"relative_size\":\"small\",\"shape_and_color\":\"rounded rectangular near-black outline with small dark lettering\",\"texture\":\"flat, solid printed ink\",\"appearance_details\":\"No fill inside the outline; two centered text lines with clear size contrast.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"upright, horizontal\"},{\"description\":\"A large soft-edged mustard circle placed behind the second title line.\",\"location\":\"upper half, behind the title's second line\",\"relationship\":\"Provides a warm graphic accent; the title overlaps it slightly while remaining fully legible.\",\"relative_size\":\"large\",\"shape_and_color\":\"circular, mustard yellow\",\"texture\":\"flat matte ink with a soft edge\",\"appearance_details\":\"Partly obscured by the title lettering.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"upright, face-on\"},{\"description\":\"A loose arrangement of overlapping soft-edged geometric forms in deep teal, mustard yellow, and warm off-white.\",\"location\":\"behind the typography across the poster\",\"relationship\":\"Creates a layered graphic background while leaving generous open paper between the text blocks.\",\"relative_size\":\"varied, from small accents to large fields\",\"shape_and_color\":\"overlapping geometric shapes in mustard yellow, deep teal, and warm off-white\",\"texture\":\"flat matte ink with soft edges\",\"appearance_details\":\"Simple, understated forms with no added symbols or lettering.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"flat and face-on\"}],\"background_setting\":\"A printed graphic design on a single portrait sheet of uncoated paper. The whole sheet fills the image. Soft-edged shapes overlap beneath the typography, with generous areas of clear warm off-white paper separating the text blocks.\",\"lighting\":{\"conditions\":\"Even, diffuse illumination for a neutral, legible print reproduction.\",\"direction\":\"Uniform frontal lighting.\",\"shadows\":\"No visible cast shadow from the sheet; no pronounced shadows on the design.\"},\"aesthetics\":{\"composition\":\"Straight-on portrait poster layout with the oversized two-line title in the upper half, smaller details arranged through the middle and lower third, and balanced empty space between blocks.\",\"color_scheme\":\"Limited palette of deep teal, mustard yellow, warm off-white, near-black, and grey.\",\"mood_atmosphere\":\"Lively evening-market energy presented with crisp, balanced editorial restraint.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Deep, keeping the entire printed sheet clear.\",\"focus\":\"Sharp and even across the full poster, with all lettering legible.\",\"camera_angle\":\"Straight-on, perpendicular to the sheet.\",\"lens_focal_length\":\"Standard lens, with no visible wide-angle distortion.\"},\"style_medium\":\"Photograph of a flat graphic design poster printed on uncoated paper\",\"text_render\":[{\"text\":\"NIGHT\",\"location\":\"upper half, first title line, flush left\",\"size\":\"very large\",\"color\":\"deep teal\",\"font\":\"heavy condensed sans-serif\",\"appearance_details\":\"Crisp capitals, tightly set.\"},{\"text\":\"MARKET\",\"location\":\"upper half, directly below NIGHT, flush left\",\"size\":\"very large\",\"color\":\"deep teal\",\"font\":\"heavy condensed sans-serif\",\"appearance_details\":\"Crisp capitals; overlaps the mustard circle behind it slightly.\"},{\"text\":\"AN EVENING OF FOOD, NOISE AND NEON\",\"location\":\"directly beneath the title on a deep teal band\",\"size\":\"small, about one fifth of the title size\",\"color\":\"warm off-white\",\"font\":\"widely letterspaced small capitals\",\"appearance_details\":\"A single clean horizontal line.\"},{\"text\":\"FRIDAY 12 SEPTEMBER\",\"location\":\"middle right\",\"size\":\"medium\",\"color\":\"near-black\",\"font\":\"bold italic serif\",\"appearance_details\":\"Rotated about fifteen degrees counter-clockwise.\"},{\"text\":\"EAT LATE, WALK SLOW\",\"location\":\"vertically along the left edge below the title area\",\"size\":\"small\",\"color\":\"mustard yellow\",\"font\":\"thin monospaced\",\"appearance_details\":\"Letters rotated ninety degrees; the phrase reads bottom to top.\"},{\"text\":\"PRESENTED BY THE HARBOUR SOCIETY\",\"location\":\"lower third, first line of the right-aligned credit block\",\"size\":\"very small\",\"color\":\"grey\",\"font\":\"compact type\",\"appearance_details\":\"Tight line spacing; flush right.\"},{\"text\":\"SOUND BY KESTREL COLLECTIVE\",\"location\":\"lower third, second line of the right-aligned credit block\",\"size\":\"very small\",\"color\":\"grey\",\"font\":\"compact type\",\"appearance_details\":\"Tight line spacing; flush right.\"},{\"text\":\"DESIGN BY ATELIER NINE\",\"location\":\"lower third, third line of the right-aligned credit block\",\"size\":\"very small\",\"color\":\"grey\",\"font\":\"compact type\",\"appearance_details\":\"Tight line spacing; flush right.\"},{\"text\":\"RSVP\",\"location\":\"bottom-left corner, inside the rounded rectangle above the web address\",\"size\":\"small\",\"color\":\"near-black\",\"font\":\"bold capitals\",\"appearance_details\":\"Centered within the badge.\"},{\"text\":\"HARBOURSOCIETY.ORG\",\"location\":\"bottom-left corner, inside the rounded rectangle below RSVP\",\"size\":\"very small\",\"color\":\"near-black\",\"font\":\"small capitals\",\"appearance_details\":\"Centered on one line.\"}],\"context\":\"A polished event poster for an evening food and night market, designed for print and photographed as a clean, flat reproduction.\",\"artistic_style\":\"flat graphic design\"}"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Straight-on photograph of a small international bookshop’s window display at dusk, with the glass filling most of the wide frame and the warm shop interior glowing behind it. Five separate printed signs are taped flat to the inside of the glass, each crisp, individually legible, correctly spelled, and rendered only with the specified characters. Behind the signs, three wooden shelves hold books mostly spine-on, with muted red, green, and cream spines and titles too small to resolve. A tortoiseshell cat sleeps curled on a stack of exactly four large books on the bottom shelf. The upper-right glass carries a partial reflection of a streetlight and the dim silhouette of a passing cyclist, visibly reflected on the glass over the shop interior. Wet pavement in front catches a little of the window’s warm light.\",\"subjects\":[{\"description\":\"The largest sign is a white card with the exact wording \\\"WORLD LITERATURE\\\" in bold black sans-serif capitals.\",\"position\":\"Taped inside the glass at the top centre.\",\"action\":\"Lies flat against the glass and remains crisp and legible.\"},{\"description\":\"A smaller cream card with the exact Russian wording \\\"КНИГИ И КОФЕ\\\" in dark red capitals.\",\"position\":\"Taped inside the glass directly beneath the largest sign, at the centre.\",\"action\":\"Lies flat against the glass and remains crisp and legible.\"},{\"description\":\"A pale blue card with the exact Japanese characters \\\"本屋\\\" in heavy black brushed strokes and the Latin word \\\"HONYA\\\" printed beneath them.\",\"position\":\"Taped inside the glass to the left of centre.\",\"action\":\"Lies flat against the glass and remains crisp and legible.\"},{\"description\":\"A mustard yellow card with the exact Chinese characters \\\"新書到\\\" in black and a thin black border.\",\"position\":\"Taped inside the glass to the right of centre.\",\"action\":\"Lies flat against the glass and remains crisp and legible.\"},{\"description\":\"A small white handwritten sign with the exact two lines \\\"OUVERT\\\" and \\\"10h - 19h\\\" in blue ink.\",\"position\":\"Taped inside the glass in the lower left corner of the window.\",\"action\":\"Lies flat against the glass and remains crisp and legible.\"},{\"description\":\"Three wooden shelves stacked with books seen mostly spine-on, their titles too small to resolve into words; the spines are muted reds, greens, and creams.\",\"position\":\"Inside the shop behind the glass, arranged across the middle and lower background.\",\"action\":\"Hold the books in orderly rows.\"},{\"description\":\"A brass desk lamp with a green glass shade.\",\"position\":\"On the middle wooden shelf among the books.\",\"action\":\"Throws warm light upward.\"},{\"description\":\"A tortoiseshell cat curled asleep on exactly four large books.\",\"position\":\"On the bottom shelf.\",\"action\":\"Sleeps curled on the stack.\"},{\"description\":\"A streetlight reflection and the dim silhouette of a passing cyclist, appearing as partial reflected shapes on the glass.\",\"position\":\"Reflected in the upper right of the glass, overlaying the shop scene.\",\"action\":\"Read clearly as reflections on the glass, not as objects inside the shop.\"},{\"description\":\"Wet pavement reflecting a little of the window’s warm light.\",\"position\":\"Across the foreground outside the window.\",\"action\":\"Reflects a restrained patch of warm light.\"}],\"style\":\"Full-color straight-on photograph with natural dusk detail and accurate, crisp typography on all five signs. Preserve each sign’s specified script, wording, spelling, and separation; render no additional readable text or invented characters.\",\"color_palette\":[\"warm amber\",\"white\",\"cream\",\"dark red\",\"pale blue\",\"mustard yellow\",\"black\",\"muted red\",\"muted green\",\"brass\"],\"lighting\":\"Dusk light outside contrasts with the warm glow of the shop interior. The brass lamp with its green glass shade casts warm light upward from the middle shelf; a little of the window’s warm light reflects on the wet pavement.\",\"mood\":\"Quiet, inviting bookshop at dusk.\",\"background\":\"The softly glowing interior behind the glass contains exactly three wooden shelves with mostly spine-on books in muted reds, greens, and creams. Book titles remain too small to resolve. In the upper-right glass, the partial streetlight and passing cyclist appear only as reflections.\",\"composition\":\"Wide 3:2 frame, straight-on view with the window glass occupying most of the image. Keep all five signs individually visible and sharply readable in their specified positions: largest at top centre, Russian sign directly below, Japanese sign left of centre, Chinese sign right of centre, and handwritten hours sign in the lower-left corner. Show the three shelves and sleeping cat behind the glass, the reflected streetlight and cyclist in the upper-right pane, and wet pavement along the foreground.\",\"camera\":{\"angle\":\"Straight-on, level with the window display.\",\"lens\":\"50mm lens.\",\"depth_of_field\":\"Keep all five signs crisp and legible; retain enough depth of field to show the shelves, lamp, cat, and glass reflections clearly.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1248,
+      "height": 832
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1248,
+      "height": 832
+    }
+  }
+}

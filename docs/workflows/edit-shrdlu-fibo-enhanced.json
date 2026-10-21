@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_10_shrdlu_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"Six colorful wooden blocks form a tall stack against a clean white studio background. The blue block sits between the orange and green blocks, and the yellow block sits between the green and purple blocks.\",\"objects\":[{\"description\":\"A vertical stack of six square wooden blocks: red at the base, orange above it, blue above orange, green above blue, yellow above green, and purple at the top. Each block retains its own size, with the larger blocks lower in the stack and smaller blocks higher up.\",\"location\":\"Slightly right of center, extending from the lower foreground to near the top of the frame\",\"relationship\":\"The blocks are stacked directly on one another in the order red, orange, blue, green, yellow, and purple from bottom to top.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Six colorful square cuboids in red, orange, blue, green, yellow, and purple\",\"texture\":\"Matte painted wood with subtle grain\",\"appearance_details\":\"Visible front and side faces give the blocks a three-dimensional appearance; small joinery marks line their edges.\",\"number_of_objects\":6,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and vertically stacked\"}],\"background_setting\":\"A plain white seamless studio backdrop and floor, with generous empty space around the stack.\",\"lighting\":{\"conditions\":\"Bright, even studio lighting\",\"direction\":\"Softly front-lit from the upper left\",\"shadows\":\"Soft, faint shadows fall on the white floor to the right of the stack.\"},\"aesthetics\":{\"composition\":\"Full view of the vertical stack, slightly right of center, with ample negative space on the left.\",\"color_scheme\":\"Vivid red, orange, blue, green, yellow, and purple against white\",\"mood_atmosphere\":\"Clean, simple, playful\"},\"photographic_characteristics\":{\"depth_of_field\":\"Deep, with the stack and backdrop in focus\",\"focus\":\"Sharp focus on the blocks\",\"camera_angle\":\"Near eye-level, slightly elevated three-quarter view\",\"lens_focal_length\":\"Standard lens\"},\"style_medium\":\"Photograph\",\"text_render\":[],\"context\":\"A clean studio product photograph of colorful wooden stacking blocks.\",\"artistic_style\":\"Realistic\",\"edit_instruction\":\"Swap the positions of the yellow and blue blocks, placing the blue block between the orange and green blocks and the yellow block between the green and purple blocks.\"}"
+    }
+  }
+}

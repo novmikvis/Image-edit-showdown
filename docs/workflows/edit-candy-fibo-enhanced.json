@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_07_candy_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A hand holds a red candy above a clear glass bowl loosely filled with colorful candies, with no brown candies among those in the bowl.\",\"objects\":[{\"description\":\"A large clear glass bowl filled with brightly colored candy pieces. Its transparent sides reveal the candies and catch soft reflections.\",\"location\":\"Centered, filling most of the frame\",\"relationship\":\"The colorful candies rest in its bottom; a hand reaches over its rim.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Round, wide-mouthed bowl of clear glass\",\"texture\":\"Smooth, glossy, transparent\",\"appearance_details\":\"Thick curved rim and rounded sides, with reflections and refractions visible through the glass.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, viewed from above at an oblique angle\"},{\"description\":\"A loose pile of glossy candy pieces in yellow, red, orange, and green, with no brown pieces.\",\"location\":\"Bottom center inside the bowl\",\"relationship\":\"The candies rest together at the base of the glass bowl beneath the hand.\",\"relative_size\":\"Medium cluster within the frame\",\"shape_and_color\":\"About 25 small rounded, oval pieces in yellow, red, orange, and green\",\"texture\":\"Smooth, shiny candy shells\",\"appearance_details\":\"Varied oval shapes and sizes, with bright highlights on the shells.\",\"number_of_objects\":25,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Piled loosely at the bottom of the bowl\"},{\"description\":\"A partial hand with pale skin and natural creases, entering from the top edge with fingers curled around a candy.\",\"location\":\"Upper center, above the bowl\",\"relationship\":\"The fingers hold a red candy over the bowl.\",\"relative_size\":\"Small portion of the frame\",\"shape_and_color\":\"Pale pinkish skin, with curved fingers\",\"texture\":\"Soft, natural skin texture\",\"appearance_details\":\"Only the fingers and part of the hand are visible; the face and rest of the person are outside the frame.\",\"number_of_objects\":null,\"pose\":\"Fingers curled downward over the bowl\",\"expression\":null,\"clothing\":null,\"action\":\"Holding a red candy between the fingers\",\"gender\":null,\"skin_tone_and_texture\":\"Pale skin with natural creases\",\"orientation\":\"Reaching downward into the frame\"},{\"description\":\"A single glossy red candy held above the bowl.\",\"location\":\"Upper center, between the hand's fingers\",\"relationship\":\"Held by the hand above the pile of colorful candies.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Small rounded oval, bright red\",\"texture\":\"Smooth, shiny shell\",\"appearance_details\":\"A bright highlight reflects from its surface.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright between the fingers\"}],\"background_setting\":\"A warm brown tabletop surrounds the bowl, softly blurred toward the edges of the close-up view.\",\"lighting\":{\"conditions\":\"Soft, diffuse indoor light\",\"direction\":\"From the upper left\",\"shadows\":\"Soft shadows beneath the bowl and candies, with gentle reflections on the glass\"},\"aesthetics\":{\"composition\":\"Close-up centered on the bowl, viewed from above at an oblique angle; the hand enters from the top edge.\",\"color_scheme\":\"Warm brown surroundings contrasted with vivid red, yellow, orange, and green candies\",\"mood_atmosphere\":\"Casual, colorful, and inviting\"},\"photographic_characteristics\":{\"depth_of_field\":\"Shallow, with the candies and bowl clear against a softly blurred tabletop\",\"focus\":\"Sharp focus on the candies and the front rim of the bowl\",\"camera_angle\":\"High angle, looking down into the bowl\",\"lens_focal_length\":\"Standard lens\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A realistic close-up photograph of colorful candies in a glass bowl.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Remove all brown pieces of candy from the glass bowl.\"}"
+    }
+  }
+}

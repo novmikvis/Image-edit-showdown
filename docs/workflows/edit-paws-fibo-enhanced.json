@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 832,
+      "height": 1248,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_05_paws_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A vintage painted suspense poster titled “PAWS,” with a goldfish swimming at the surface above a large cat paw reaching upward through turquoise water.\",\"objects\":[{\"description\":\"A huge cat forepaw reaches vertically upward from the bottom of the frame, looming beneath the water and filling the foreground. Its paw pads face outward.\",\"location\":\"bottom-center foreground\",\"relationship\":\"Dominates the underwater area beneath the goldfish and title.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Broad rounded paw with a pale gray-blue coat and darker paw pads.\",\"texture\":\"Soft, slightly painterly fur; smooth pads.\",\"appearance_details\":\"The paw rises toward the water surface in the dramatic central perspective.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, reaching toward the surface.\"},{\"description\":\"A small goldfish swims along the water surface, its body partly above and partly below the rippling waterline.\",\"location\":\"upper-center, at the water surface\",\"relationship\":\"Swims above the reaching paw, beneath the title.\",\"relative_size\":\"small\",\"shape_and_color\":\"Slender, horizontally oriented orange-gold body.\",\"texture\":\"Scaly, with a painterly finish.\",\"appearance_details\":\"Visible fins and tail extend behind its body.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal, facing right.\"},{\"description\":\"The word “PAWS” appears in oversized, bold uppercase lettering across the upper portion of the poster.\",\"location\":\"top-center\",\"relationship\":\"Sits above the waterline and the goldfish.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Wide block letters in deep red.\",\"texture\":\"Flat printed color with subtle aged-paper grain.\",\"appearance_details\":\"Heavy sans-serif lettering, closely spaced and slightly irregular at the edges.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, reading left to right.\"}],\"background_setting\":\"A vertically composed illustrated poster with a warm off-white upper field and a turquoise underwater view below. A rippling horizontal waterline separates the two areas; the underwater color darkens toward the lower edge.\",\"lighting\":{\"conditions\":\"Bright, diffuse light across the pale upper field, with softly illuminated turquoise water.\",\"direction\":\"Even frontal illumination.\",\"shadows\":\"Soft, subdued shadows beneath the surface and around the paw.\"},\"aesthetics\":{\"composition\":\"Vertical poster composition with large title lettering at the top, a narrow surface zone beneath it, and a looming foreground subject centered below the waterline.\",\"color_scheme\":\"Deep red lettering against warm ivory, turquoise water, and muted orange-gold.\",\"mood_atmosphere\":\"Playful suspense with a dramatic vintage poster feel.\"},\"photographic_characteristics\":null,\"style_medium\":\"Vintage painted poster illustration\",\"text_render\":[{\"text\":\"PAWS\",\"location\":\"top-center\",\"size\":\"large\",\"color\":\"deep red\",\"font\":\"bold uppercase sans-serif\",\"appearance_details\":\"Oversized, closely spaced block lettering with a subtle aged print texture.\"}],\"context\":\"A vintage illustrated suspense movie poster.\",\"artistic_style\":\"vintage, painterly, dramatic\",\"edit_instruction\":\"Change the shark into a large cat paw reaching upward underwater with its pads facing forward. Change the swimming woman into a goldfish swimming at the water's surface. Change the title from “JAWS” to “PAWS” and preserve the vintage painted poster aesthetic and composition.\"}"
+    }
+  }
+}

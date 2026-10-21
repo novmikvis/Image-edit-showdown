@@ -1,0 +1,110 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 832,
+      "height": 1264,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "panel_01_pisa_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A vertically upright Leaning Tower of Pisa rises above a lawn and visitors beneath a blue sky with large clouds.\",\"objects\":[{\"description\":\"The white stone Leaning Tower of Pisa stands vertically in the center of the frame, with its stacked arcaded levels, ornate columns, and circular upper gallery clearly visible.\",\"location\":\"center, extending from the lower foreground toward the top of the frame\",\"relationship\":\"The tower dominates the scene, rising behind the visitors and above the lawn.\",\"relative_size\":\"large within frame\",\"shape_and_color\":\"Tall cylindrical tower with repeated horizontal tiers; pale ivory and white stone.\",\"texture\":\"Weathered stone with carved arches, columns, and decorative details.\",\"appearance_details\":\"A narrow flagpole with a small dark red flag stands at the crown.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and vertical\"}],\"background_setting\":\"The tower stands in an open grassy area. A line of visitors gathers around its base behind a low barrier. Dark cypress trees, low buildings, distant hills, and large white and gray clouds fill the background beneath a deep blue sky.\",\"lighting\":{\"conditions\":\"Bright natural daylight\",\"direction\":\"Front-lit with sunlight from the upper left\",\"shadows\":\"Defined shadows fall across the tower's arches and columns.\"},\"aesthetics\":{\"composition\":\"Tall portrait composition with the full tower centered and framed against the sky; the lawn and visitors form a narrow band along the bottom.\",\"color_scheme\":\"Pale stone against deep blue sky, white and gray clouds, and green lawn.\",\"mood_atmosphere\":\"Bright, open, and touristic.\"},\"photographic_characteristics\":{\"depth_of_field\":\"Deep, with the tower and distant landscape in clear view.\",\"focus\":\"Sharp focus across the tower and foreground.\",\"camera_angle\":\"Slightly low angle.\",\"lens_focal_length\":\"Standard to short telephoto perspective.\"},\"style_medium\":\"photograph\",\"text_render\":[],\"context\":\"A realistic travel photograph of the Leaning Tower of Pisa and its surrounding grounds.\",\"artistic_style\":\"realistic\",\"edit_instruction\":\"Straighten the tower so it stands vertically.\"}"
+    }
+  }
+}

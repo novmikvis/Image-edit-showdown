@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A calm, poster-like flat vector illustration of a small laundrette at night, arranged as a square, straight-on stage set. Six sand-colored front-loading washing machines sit in an even row beneath a sign reading “WASH & FOLD.” A coral folding table with three neat laundry piles stands to the left; a sand vending machine stands to the right. In the foreground, a lone figure in a coral coat sits on a sand bench, facing right and reading a folded newspaper. A sand grid crosses the navy tiled floor, and a coral crescent moon appears through an upper-left window. Every element uses only deep slate navy, dusty coral pink, and pale warm sand, with crisp edges, flat color blocks, and no gradients or texture.\",\"objects\":[{\"description\":\"Exactly six matching front-loading washing machines arranged in one even horizontal row across the middle of the back wall. Each has a pale warm sand rectangular body and a dusty coral circular door disc, with details kept as crisp flat shapes in the three-color palette.\",\"location\":\"Across the middle of the frame, against the back wall\",\"relationship\":\"The row sits directly below the sign, between the folding table on the left and the vending machine on the right.\",\"relative_size\":\"Medium, repeated evenly across the frame\",\"shape_and_color\":\"Six upright pale warm sand rectangles, each with one dusty coral circular door disc\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Clean geometric silhouettes and crisp edges; no gradients, tinting, or additional colors.\",\"number_of_objects\":6,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"All six face directly toward the viewer.\"},{\"description\":\"A horizontal rectangular sign above the machines, filled with pale warm sand and bearing the exact words “WASH & FOLD” in deep slate navy capitals.\",\"location\":\"Upper center, directly above the row of washing machines\",\"relationship\":\"Centered over the machines and visually anchoring the back wall.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Horizontal pale warm sand rectangle with deep slate navy lettering\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Crisp, legible uppercase lettering in a bold geometric sans-serif style; no other text.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal and facing directly toward the viewer.\"},{\"description\":\"A tall folding table in dusty coral, holding exactly three neatly stacked piles of folded laundry in pale warm sand.\",\"location\":\"Left side of the frame, beside the washing machines\",\"relationship\":\"The laundry piles rest on the tabletop; the table stands to the left of the machine row and below the sign.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Tall, simple dusty coral table with three pale warm sand laundry piles\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"The three piles have tidy stepped edges, drawn with crisp flat shapes and no fabric texture.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and facing the viewer.\"},{\"description\":\"Exactly three neatly folded laundry piles, each rendered as a compact stack of pale warm sand shapes.\",\"location\":\"On top of the folding table at the left side of the frame\",\"relationship\":\"Grouped together on the dusty coral tabletop, separate from the figure's newspaper and the machines.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Three pale warm sand stacks with simple folded rectangular forms\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Even, stepped silhouettes with crisp edges; no additional hues or surface detail.\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright stacks, viewed from the front.\"},{\"description\":\"One upright vending machine in pale warm sand, with a dusty coral panel and a small deep slate navy coin slot.\",\"location\":\"Right side of the frame, beside the washing machines\",\"relationship\":\"Balances the folding table on the opposite side of the machine row.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Pale warm sand vertical rectangle with a dusty coral panel and a small deep slate navy slot\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Simple, clearly defined controls and panel, all in the three-color palette.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and facing directly toward the viewer.\"},{\"description\":\"A lone seated figure in a dusty coral coat, shown in three-quarter view facing right and reading a folded pale warm sand newspaper marked with deep slate navy lines in place of legible text.\",\"location\":\"Foreground, near the center of the frame\",\"relationship\":\"The figure sits on the bench in front of the machines, with the newspaper held in front of their body.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Human figure with a coral coat, pale warm sand face and hands, and a pale warm sand newspaper with navy line marks\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Simple graphic facial features and clothing shapes; the newspaper has only non-legible navy line marks, with no additional words.\",\"number_of_objects\":1,\"pose\":\"Seated on the bench with a relaxed posture, holding and reading the folded newspaper.\",\"expression\":\"Calm and absorbed in reading.\",\"clothing\":\"Dusty coral coat; all visible clothing uses only the specified three colors.\",\"action\":\"Reading a folded newspaper.\",\"gender\":\"Unspecified.\",\"skin_tone_and_texture\":\"Pale warm sand skin, rendered as flat color with no texture.\",\"orientation\":\"Three-quarter view, facing toward the right side of the image.\"},{\"description\":\"A simple bench in pale warm sand supporting the seated figure.\",\"location\":\"Foreground, directly beneath the figure\",\"relationship\":\"The figure sits on the bench in front of the laundrette's machine row.\",\"relative_size\":\"Medium\",\"shape_and_color\":\"Low, horizontal pale warm sand seat with simple geometric supports\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Unadorned silhouette with crisp edges and no extra colors.\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal and facing the viewer.\"},{\"description\":\"A deep slate navy tiled floor crossed by a simple pale warm sand grid that recedes toward the washing machines.\",\"location\":\"Lower half of the frame, extending from the foreground to the back wall\",\"relationship\":\"The grid leads the eye from the foreground bench toward the machines.\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Deep slate navy floor plane with pale warm sand grid lines\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Straight, evenly spaced grid lines create simple perspective without gradients or extra hues.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Horizontal floor plane receding toward the back wall.\"},{\"description\":\"An upper-left window set into the navy back wall, showing a deep slate navy night sky and one dusty coral crescent moon.\",\"location\":\"Upper-left corner of the frame\",\"relationship\":\"The window is separate from the sign and machine row; the crescent moon sits within its view.\",\"relative_size\":\"Small\",\"shape_and_color\":\"Simple window opening in the deep slate navy wall, with a dusty coral crescent against the same navy sky\",\"texture\":\"Flat vector surfaces with no texture\",\"appearance_details\":\"Crisp geometric window edges and a single clean crescent shape; no additional scenery or colors.\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright and facing directly toward the viewer.\"}],\"background_setting\":\"A compact laundrette interior at night, arranged like a straight-on stage set. The back wall and night sky are deep slate navy. The square image uses only deep slate navy, dusty coral pink, and pale warm sand throughout, with crisp flat shapes, no gradients, and no texture.\",\"lighting\":{\"conditions\":\"Graphic nighttime scene with flat, even color blocks and no simulated glow.\",\"direction\":\"Even and frontal, with no rendered light source.\",\"shadows\":\"No gradients or tonal shading; depth is shown through flat blocks of the three palette colors.\"},\"aesthetics\":{\"composition\":\"Square, straight-on stage-set composition; the machine row anchors the middle, with the foreground figure prominent and balanced by the table and vending machine.\",\"color_scheme\":\"Strictly limited to deep slate navy, dusty coral pink, and pale warm sand.\",\"mood_atmosphere\":\"Calm, graphic, and poster-like.\"},\"photographic_characteristics\":null,\"style_medium\":\"Contemporary flat vector illustration\",\"text_render\":[{\"text\":\"WASH & FOLD\",\"location\":\"Upper center, on the sign above the washing machines\",\"size\":\"Medium\",\"color\":\"Deep slate navy\",\"font\":\"Bold geometric sans-serif capitals\",\"appearance_details\":\"Legible, crisp lettering on a pale warm sand sign.\"}],\"context\":\"A square editorial-style poster illustration depicting a quiet neighborhood laundrette at night.\",\"artistic_style\":\"clean vector poster\"}"
+    }
+  }
+}

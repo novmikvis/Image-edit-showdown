@@ -1,0 +1,120 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "9",
+        0
+      ],
+      "width": 1264,
+      "height": 832,
+      "vae": [
+        "3",
+        0
+      ],
+      "images.image_1": [
+        "8",
+        0
+      ],
+      "images.image_2": [
+        "10",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_math-lady_1mp.png"
+    }
+  },
+  "9": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\n  \"short_description\": \"A four-panel math-confusion meme collage shows the same light-skinned woman with an oval face, light brown hair, and round glasses, making a puzzled sideways glance in each close-up. White formulas and geometry diagrams overlay the dark background in their established positions.\",\n  \"objects\": [\n    {\n      \"description\": \"The same woman appears in four close-up portraits, with a softly oval face, light skin, light brown hair worn in loose waves, and round eyeglasses. Her eyes glance sideways and her expression is puzzled in every panel, with slight variations in head angle.\",\n      \"location\": \"Across all four panels: top-left, top-right, bottom-left, and bottom-right\",\n      \"relationship\": \"The repeated portraits form the central subject of the collage; white mathematical formulas and diagrams sit over and around her.\",\n      \"relative_size\": \"Large within each panel\",\n      \"shape_and_color\": \"Oval face, light brown hair, light skin, and round muted-brown glasses\",\n      \"texture\": \"Natural skin texture, softly waved hair, and smooth eyeglass lenses\",\n      \"appearance_details\": \"Recognizable round frames and light brown hair; close facial framing keeps her features prominent.\",\n      \"number_of_objects\": 4,\n      \"pose\": \"Close-up head poses vary slightly across the four panels, matching the template's angles.\",\n      \"expression\": \"Puzzled, with a confused sideways glance in each panel.\",\n      \"clothing\": \"Dark clothing, minimally visible at the lower edges of the close crops.\",\n      \"action\": \"Holding a portrait pose while glancing sideways.\",\n      \"gender\": \"Woman\",\n      \"skin_tone_and_texture\": \"Light skin tone with natural photographic texture.\",\n      \"orientation\": \"Facing generally toward the camera, with slight head turns and sideways eye directions.\"\n    },\n    {\n      \"description\": \"A single graphic overlay layer of white mathematical notation and geometry diagrams spans the four panels. It includes circle, cone, and cylinder sketches, trigonometry tables, triangles, integrals, a graph, and algebraic expressions.\",\n      \"location\": \"Across the four panels, in the same positions as the template\",\n      \"relationship\": \"The diagrams and equations surround and overlap the portraits without obscuring the woman's defining facial features.\",\n      \"relative_size\": \"Large overlay spanning most of the frame\",\n      \"shape_and_color\": \"Fine white symbols, lines, equations, and geometric outlines\",\n      \"texture\": \"Clean, thin, chalk-like strokes\",\n      \"appearance_details\": \"The circle diagram and circle formulas sit at the left of the top-left panel; cone notation occupies the center of the top-right panel, with a cylinder at the right. Trigonometry, triangle sketches, and integral expressions fill the bottom-left panel; a graph sits left of the algebraic expressions in the bottom-right panel.\",\n      \"number_of_objects\": 1,\n      \"pose\": null,\n      \"expression\": null,\n      \"clothing\": null,\n      \"action\": null,\n      \"gender\": null,\n      \"skin_tone_and_texture\": null,\n      \"orientation\": \"Flat overlays aligned with the four-panel grid.\"\n    }\n  ],\n  \"background_setting\": \"A dark, muted charcoal-gray background divided into a two-by-two grid of close-up portrait panels. White mathematical formulas and diagrams overlay each panel.\",\n  \"lighting\": {\n    \"conditions\": \"Soft, warm portrait lighting consistent across the panels.\",\n    \"direction\": \"Mostly frontal with a slight upper-left bias.\",\n    \"shadows\": \"Soft, understated facial shadows.\"\n  },\n  \"aesthetics\": {\n    \"composition\": \"A tightly cropped two-by-two grid of close-up portraits, with the face filling each panel and the mathematical overlays occupying the same positions throughout.\",\n    \"color_scheme\": \"Warm skin and light brown hair against muted charcoal gray, with white overlays.\",\n    \"mood_atmosphere\": \"Puzzled, humorous, and analytical.\"\n  },\n  \"photographic_characteristics\": {\n    \"depth_of_field\": \"Moderate to shallow, with faces distinct against the dark background.\",\n    \"focus\": \"Faces and round glasses in clear focus; overlays remain legible.\",\n    \"camera_angle\": \"Eye-level close-ups with slight head-angle variations.\",\n    \"lens_focal_length\": \"Standard portrait lens, approximately 50mm to 85mm.\"\n  },\n  \"style_medium\": \"Photograph with graphic overlays\",\n  \"text_render\": [],\n  \"context\": \"A math-confusion meme collage made from four close-up portrait photographs with overlaid formulas and diagrams.\",\n  \"artistic_style\": \"Realistic meme collage\",\n  \"edit_instruction\": \"Replace the woman in all four panels with the light-skinned person with an oval face, light brown hair, and round glasses, preserving each confused sideways glance and head pose, the four-panel layout, template clothing, dark background, lighting, close-up framing, and all white formulas and diagrams in their exact positions.\"\n}"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "meme_reference_person-1.png"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1376,
+      "height": 768,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "{\"short_description\":\"A wide ink-and-watercolour fantasy landscape on cold-pressed paper: a city crowns five enormous rock spires rising from an indigo sea of cloud. Four winding suspension bridges cross between them at different heights, crowded with tiny dark silhouettes. Three thin-necked birds glide through the open air, while a faint low sun glows near the right horizon.\",\"objects\":[{\"description\":\"Five enormous rock spires rise through the cloud sea, each crowned with a compact city of tiled roofs, narrow towers, laundry lines and small round windows. The buildings are rendered in translucent warm sepia and pale ochre with confident dark ink outlines. The largest spire stands on the right; the furthest spire recedes into the haze.\",\"location\":\"Across the middle of the image, from left to right; the largest spire is on the right and the furthest spire is distant in the haze\",\"relationship\":\"The city structures crown the five spires, which rise from the cloud sea and are linked by four suspension bridges\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Five tall, irregular tapering rock columns; muted indigo and sepia stone beneath ochre and sepia rooftops\",\"texture\":\"Rough rock, tiled roofs, translucent granulating washes and visible ink contours\",\"appearance_details\":\"Each summit has narrow towers, small circular windows and laundry lines; the largest right-hand spire has rooftop terraces and a low foreground wall nearby\",\"number_of_objects\":5,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Upright, rising vertically from the clouds\"},{\"description\":\"Four long, winding suspension bridges connect the spires. Their fine ink cables trace gentle sagging catenary curves, with each bridge crossing at a different height to create layered depth.\",\"location\":\"Across the middle-ground between the spires\",\"relationship\":\"The bridges connect the city-topped spires and pass at distinct heights; the widest central bridge carries the densest crowd\",\"relative_size\":\"Large within frame\",\"shape_and_color\":\"Four narrow, curving horizontal spans in fine dark ink, with subtle sepia details\",\"texture\":\"Delicate ink strokes and lightly washed surfaces\",\"appearance_details\":\"The spans sag gently between their supports and overlap in depth without merging\",\"number_of_objects\":4,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Winding horizontally between the spires, each at a different height\"},{\"description\":\"A dense crowd of roughly fifteen people appears only as small, featureless dark ink silhouettes, moving in both directions along the widest bridge.\",\"location\":\"Center middle-ground on the widest bridge\",\"relationship\":\"The crowd fills the central bridge, which links the city-topped spires\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Compact upright silhouettes in deep indigo-black\",\"texture\":\"Flat, solid ink marks\",\"appearance_details\":\"No faces, clothing detail or other individual features are visible\",\"number_of_objects\":15,\"pose\":\"Small walking silhouettes, some facing either direction along the bridge\",\"expression\":\"No facial features or expression visible\",\"clothing\":\"Not discernible\",\"action\":\"Moving in both directions across the bridge\",\"gender\":\"Not discernible\",\"skin_tone_and_texture\":\"Not visible; each figure is a solid dark ink silhouette\",\"orientation\":\"Upright, aligned with the bridge\"},{\"description\":\"About ten people, each a small dark ink silhouette without facial features or detail, are spaced singly along the two higher bridges on the left.\",\"location\":\"Along the two higher bridges to the left of center\",\"relationship\":\"The scattered figures travel across the upper left-hand spans between the spires\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Tiny upright dark indigo-black marks\",\"texture\":\"Flat ink silhouettes\",\"appearance_details\":\"Figures are separated from one another and soften slightly with distance; no individual features are visible\",\"number_of_objects\":10,\"pose\":\"Upright walking silhouettes\",\"expression\":\"No facial features or expression visible\",\"clothing\":\"Not discernible\",\"action\":\"Walking singly along the higher bridges\",\"gender\":\"Not discernible\",\"skin_tone_and_texture\":\"Not visible; each figure is a solid dark ink silhouette\",\"orientation\":\"Upright, aligned with the bridge spans\"},{\"description\":\"Six people appear as small, featureless dark ink silhouettes leaning over the rooftop terrace railings of the largest spire.\",\"location\":\"On rooftop terraces of the largest spire at the right\",\"relationship\":\"The figures lean over terrace railings above the cloud sea\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Six narrow dark indigo-black silhouettes\",\"texture\":\"Flat ink marks\",\"appearance_details\":\"No faces, clothing or other individual details are visible\",\"number_of_objects\":6,\"pose\":\"Leaning forward over terrace railings\",\"expression\":\"No facial features or expression visible\",\"clothing\":\"Not discernible\",\"action\":\"Looking out from the rooftop terraces\",\"gender\":\"Not discernible\",\"skin_tone_and_texture\":\"Not visible; each figure is a solid dark ink silhouette\",\"orientation\":\"Upright, turned toward the cloud sea\"},{\"description\":\"A cluster of five people sits as dark, featureless ink silhouettes along a low wall in the near foreground, seen from behind as they look across the cloud sea.\",\"location\":\"Near foreground, along a low wall at the bottom of the composition\",\"relationship\":\"The seated group faces away from the viewer toward the distant spires and cloud sea\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Five compact dark indigo-black silhouettes\",\"texture\":\"Flat ink marks\",\"appearance_details\":\"Seen from behind; no faces, clothing detail or individual features are visible\",\"number_of_objects\":5,\"pose\":\"Seated side by side along the wall, backs toward the viewer\",\"expression\":\"Not visible from behind\",\"clothing\":\"Not discernible\",\"action\":\"Looking out across the cloud sea\",\"gender\":\"Not discernible\",\"skin_tone_and_texture\":\"Not visible; each figure is a solid dark ink silhouette\",\"orientation\":\"Facing away from the viewer toward the distant landscape\"},{\"description\":\"The remaining figures appear on the furthest spire as tiny dark specks, with no facial features or body detail; their exact number is unspecified, and they bring the total population above forty.\",\"location\":\"On the furthest spire in the distant haze\",\"relationship\":\"The tiny silhouettes occupy the distant city and recede into the atmosphere\",\"relative_size\":\"Tiny marks within frame\",\"shape_and_color\":\"Minute dark indigo marks, paler with distance\",\"texture\":\"Sparse ink specks\",\"appearance_details\":\"They read as marks rather than distinct bodies\",\"number_of_objects\":null,\"pose\":\"Not individually discernible\",\"expression\":\"No facial features or expression visible\",\"clothing\":\"Not discernible\",\"action\":\"Not individually discernible\",\"gender\":\"Not discernible\",\"skin_tone_and_texture\":\"Not visible; rendered only as tiny dark marks\",\"orientation\":\"Not individually discernible\"},{\"description\":\"Three thin-necked birds glide through the open air between the spires, rendered as small ink forms.\",\"location\":\"In the open air between the spires\",\"relationship\":\"The birds pass through the negative space between the city and the cloud sea\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Three slender dark ink silhouettes\",\"texture\":\"Fine linework with light watercolour accents\",\"appearance_details\":\"Long, thin necks and outstretched gliding wings\",\"number_of_objects\":3,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":\"Gliding through the air\",\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"In flight, angled through the open air\"},{\"description\":\"A broad sea of low cloud fills the lower landscape, painted in layered wet-in-wet indigo washes.\",\"location\":\"Across the lower half of the image, beneath and around the spires\",\"relationship\":\"The cloud sea surrounds the rock spires and sits below the bridges\",\"relative_size\":\"Large, spanning the width of the frame\",\"shape_and_color\":\"Soft horizontal cloud masses in translucent indigo and thin sea green\",\"texture\":\"Wet-in-wet blooms, soft wash transitions and hard-edged tide marks where pigment dried\",\"appearance_details\":\"The paper glows through the translucent washes\",\"number_of_objects\":null,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Layered horizontally across the scene\"},{\"description\":\"A faint circular low sun burns through the pale ochre sky near the right edge.\",\"location\":\"Near the right edge, just above the horizon\",\"relationship\":\"The sun glows behind the distant landscape and lightly warms the haze\",\"relative_size\":\"Small within frame\",\"shape_and_color\":\"Faint pale circular disc in warm ochre\",\"texture\":\"Soft-edged wash with paper showing through\",\"appearance_details\":\"Subtle and nearly veiled by the sky wash\",\"number_of_objects\":1,\"pose\":null,\"expression\":null,\"clothing\":null,\"action\":null,\"gender\":null,\"skin_tone_and_texture\":null,\"orientation\":\"Round, facing the viewer\"}],\"background_setting\":\"A vast fantasy city among towering rock spires above a sea of low cloud. The sky is a graded pale ochre wash, nearly white at the horizon, with open air between the spires. The image is painted on cold-pressed paper, with visible paper tooth, translucent washes, bleeding pigment edges, granulation, backruns, dry-brush scumbling and confident dark ink linework throughout.\",\"lighting\":{\"conditions\":\"Soft atmospheric daylight with a faint low sun\",\"direction\":\"Diffuse light from the low sun near the right edge, filtered through pale ochre haze\",\"shadows\":\"Soft, restrained shadows within the translucent washes; no hard photographic shadows\"},\"aesthetics\":{\"composition\":\"Wide landscape composition with five spires distributed across the frame; layered bridges create winding horizontal paths through the middle-ground, with the largest spire on the right and a small seated group in the near foreground\",\"color_scheme\":\"Translucent indigo, sepia, pale ochre and thin sea green, with the paper tone glowing through\",\"mood_atmosphere\":\"Dreamlike, contemplative and quietly bustling, with an airy sense of height and distance\"},\"photographic_characteristics\":null,\"style_medium\":\"Ink and watercolour painting on cold-pressed paper\",\"text_render\":[],\"context\":\"A wide fantasy landscape illustration for a storybook or concept art setting, painted with traditional ink and watercolour techniques.\",\"artistic_style\":\"expressive, translucent, atmospheric\"}"
+    }
+  }
+}

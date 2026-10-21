@@ -1,0 +1,100 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "fibo2_edit_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "fibo2-qwen3vl_4b_int8_convrot.safetensors",
+      "type": "fibo2",
+      "device": "default"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "TextEncodeFibo2",
+    "inputs": {
+      "negative_prompt": "",
+      "batch_size": 1,
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": [
+        "8",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 424242,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "PrimitiveStringMultiline",
+    "inputs": {
+      "value": "A square four-panel comic page drawn in a clean contemporary style with confident black ink linework and flat muted colour, laid out as a strict two-by-two grid of equal rectangular panels separated by even white gutters, with a thin black border around each panel.\n\nThe same character appears in all four panels and must stay recognisably identical throughout: a young woman with a short dark bob cut with a blunt fringe, round wire-rimmed glasses, a small mole on her left cheek, a mustard yellow crew-neck jumper and dark blue jeans. Her jumper, hair shape, glasses and mole are consistent in every panel.\n\nIn the top left panel, she stands in a kitchen holding an empty white mug, looking down into it with a flat expression. A speech balloon above her reads \"Out of coffee.\" The kitchen behind her has a pale green tiled backsplash and a single window.\n\nIn the top right panel, she is outside on a rainy street in the same clothes, now under a transparent umbrella, walking to the right past a shop with a green awning. A small caption box in the upper left corner of the panel reads \"TWO MINUTES LATER\". Rain is drawn as sparse diagonal ink strokes.\n\nIn the bottom left panel, she stands inside a café at the counter, seen from behind the counter's perspective, facing the viewer. A barista's arm reaches in from the right edge holding out a paper cup. Her speech balloon reads \"Large, please.\" and a second smaller balloon from off-panel right, with its tail pointing off the edge, reads \"Coming up.\"\n\nIn the bottom right panel, she is back in the same kitchen from the first panel, in the same spot by the window, now holding the paper cup with both hands and smiling with her eyes closed. A speech balloon reads \"Better.\" and a small sound effect in hand-lettered capitals near the cup reads \"SIP\".\n\nAll four balloons are clean white with black outlines and tails pointing correctly at their speaker, all lettering is correctly spelled and comfortably legible, the panels stay the same size, and the gutters remain even across the page."
+    }
+  }
+}

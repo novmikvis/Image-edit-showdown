@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"Three-quarter overhead still-life photograph of a cheese board and accompaniments on a honey-toned oak table.\",\"subjects\":[{\"description\":\"Round pale birch cheese board holding a loose bunch of red-purple grapes attached to a woody stem, a thick triangular wedge of firm pale yellow cheese with a natural rind and a few small irregular holes, a stacked pair of soft white-rinded brie wedges with visibly creamy interiors, a crumbling wedge of blue-veined cheese with dense blue-grey marbling, and one fresh rosemary sprig.\",\"position\":\"Centered on the table; arranged clockwise from the board’s upper left in the stated order, with the rosemary lying diagonally across the board’s lower left.\",\"action\":\"Displays the cheeses and grapes in a composed arrangement.\"},{\"description\":\"Exactly three shelled walnut halves.\",\"position\":\"Scattered on the bare wood between the rosemary and the brass dish.\",\"action\":\"Rest on the tabletop.\"},{\"description\":\"Small hammered brass dish containing a mound of mixed almonds, cashews, and walnut pieces, with a long ornate handle.\",\"position\":\"On the tabletop beside the board, lower right of the rosemary; handle extends toward the lower right.\",\"action\":\"Holds the mixed nuts.\"},{\"description\":\"Rustic sourdough boule with a dark blistered crust and exactly three slices showing open, irregular crumb.\",\"position\":\"Off the board on the left, with the slices cut from the boule and fanned in front of it.\",\"action\":\"Rests on the table.\"},{\"description\":\"Two small white fluted ramekins; the left contains dark red fruit preserve with a specular highlight, and the right contains whole green cornichons.\",\"position\":\"Behind the board, side by side, preserve ramekin on the left and cornichon ramekin on the right.\",\"action\":\"Hold the preserve and cornichons.\"},{\"description\":\"Exactly four loose grapes, each casting its own small shadow.\",\"position\":\"On the bare table in the upper left.\",\"action\":\"Rest scattered on the tabletop.\"},{\"description\":\"Clear glass jar filled with amber honey, with a wooden honey dipper inside leaning right; a small cream paper label bears the two legible lines “MIEL DE FORET” and, in smaller type, “RECOLTE 2024”.\",\"position\":\"On the right side of the table.\",\"action\":\"Holds honey and the dipper.\"},{\"description\":\"Crumpled oatmeal linen napkin.\",\"position\":\"Entering the frame from the lower left corner.\",\"action\":\"Rests partly within the frame.\"},{\"description\":\"Pale, blurred corner of a wooden chair back.\",\"position\":\"Deep background at the upper right, against the soft white wall.\",\"action\":\"Remains softly out of focus.\"}],\"style\":\"Full-color still-life photograph with natural food textures and restrained, realistic color.\",\"color_palette\":[\"pale birch\",\"honey-toned oak\",\"red-purple\",\"pale yellow\",\"white\",\"blue-grey\",\"fresh green\",\"hammered brass\",\"amber\",\"oatmeal\",\"soft white\"],\"lighting\":\"Hard late-afternoon sunlight rakes in from the upper right through an unseen window, casting two bright diagonal bands across the tabletop and long, soft-edged shadows toward the lower left; the fruit preserve catches a specular highlight.\",\"mood\":\"Quiet, warm afternoon still life.\",\"background\":\"The honey-toned oak tabletop fills the scene, with its far edge gently out of focus. A soft white wall sits behind it, and the pale blurred corner of a wooden chair back is just visible in the deep upper-right background.\",\"composition\":\"Three-quarter overhead view with the round board centered. The cheese, grapes, and rosemary sit on the board; sourdough and fanned slices are to the left, ramekins behind, and the honey jar to the right. Loose grapes occupy the upper-left tabletop, while the three walnut halves and brass nut dish sit between the rosemary and lower right. The napkin enters at the lower-left edge.\",\"camera\":{\"angle\":\"Three-quarter overhead\",\"lens\":\"85mm\",\"depth_of_field\":\"Shallow aperture; the far edge of the table and the chair corner fall gently out of focus.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1248,
+      "height": 832
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1248,
+      "height": 832
+    }
+  }
+}

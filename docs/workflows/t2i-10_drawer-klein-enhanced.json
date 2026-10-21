@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A hand-drawn editorial illustration presenting the contents of a household junk drawer as a flat overhead catalogue. Twenty objects sit in a regular five-column by four-row grid, each fully separated from its neighbors by clear cream space and drawn at a consistent scale. A small handwritten grey label sits beneath each object. Across the very top, above the grid, the hand-lettered dark grey capital title reads \\\"CONTENTS OF ONE DRAWER\\\"; directly beneath it, a smaller italic grey line reads \\\"catalogued on a wet Sunday\\\".\",\"subjects\":[{\"description\":\"A brass door key with a small round bow, labelled \\\"SPARE KEY\\\" in small grey handwriting.\",\"position\":\"Top row, first column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A roll of beige masking tape, labelled \\\"TAPE\\\" in small grey handwriting.\",\"position\":\"Top row, second column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A screwdriver with a red handle and a straight metal shaft, labelled \\\"PHILLIPS\\\" in small grey handwriting.\",\"position\":\"Top row, third column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A tangled set of black earphones with earbuds and a thin cord, labelled \\\"EARPHONES\\\" in small grey handwriting.\",\"position\":\"Top row, fourth column, label directly beneath.\",\"action\":\"Rests in a loose tangle, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"One single AA battery, labelled \\\"BATTERY\\\" in small grey handwriting.\",\"position\":\"Top row, fifth column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A pair of small steel scissors with orange handles, labelled \\\"SCISSORS\\\" in small grey handwriting.\",\"position\":\"Second row, first column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A folded paper tape measure, labelled \\\"TAPE MEASURE\\\" in small grey handwriting.\",\"position\":\"Second row, second column, label directly beneath.\",\"action\":\"Rests folded, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"Three brass thumbtacks grouped together, labelled \\\"TACKS\\\" in small grey handwriting.\",\"position\":\"Second row, third column, label directly beneath.\",\"action\":\"Rest together as a group, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A blue plastic lighter, labelled \\\"LIGHTER\\\" in small grey handwriting.\",\"position\":\"Second row, fourth column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A ball formed from tightly wound rubber bands, labelled \\\"ELASTICS\\\" in small grey handwriting.\",\"position\":\"Second row, fifth column, label directly beneath.\",\"action\":\"Rests as a compact ball, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A coil of green garden twine, labelled \\\"TWINE\\\" in small grey handwriting.\",\"position\":\"Third row, first column, label directly beneath.\",\"action\":\"Rests in a neat coil, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A chrome bottle opener, labelled \\\"OPENER\\\" in small grey handwriting.\",\"position\":\"Third row, second column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"Two paper clips, labelled \\\"CLIPS\\\" in small grey handwriting.\",\"position\":\"Third row, third column, label directly beneath.\",\"action\":\"Rest side by side, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A small tube of superglue, labelled \\\"GLUE\\\" in small grey handwriting.\",\"position\":\"Third row, fourth column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A yellow carpenter's pencil, labelled \\\"PENCIL\\\" in small grey handwriting.\",\"position\":\"Third row, fifth column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A folded set of allen keys, labelled \\\"ALLEN KEYS\\\" in small grey handwriting.\",\"position\":\"Bottom row, first column, label directly beneath.\",\"action\":\"Rests folded together, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A white plastic wall plug, labelled \\\"WALL PLUG\\\" in small grey handwriting.\",\"position\":\"Bottom row, second column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"One single silver coin, labelled \\\"COIN\\\" in small grey handwriting.\",\"position\":\"Bottom row, third column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A strip of four plasters, labelled \\\"PLASTERS\\\" in small grey handwriting.\",\"position\":\"Bottom row, fourth column, label directly beneath.\",\"action\":\"Rests as one strip, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"A tiny brass padlock with no key, labelled \\\"PADLOCK\\\" in small grey handwriting.\",\"position\":\"Bottom row, fifth column, label directly beneath.\",\"action\":\"Lies flat, drawn with loose ink lines and flat watercolour fill.\"},{\"description\":\"The hand-lettered title \\\"CONTENTS OF ONE DRAWER\\\" in dark grey capitals.\",\"position\":\"Very top of the sheet, centered above the grid.\",\"action\":\"Sits as one line of lettering.\"},{\"description\":\"The smaller italic grey line \\\"catalogued on a wet Sunday\\\".\",\"position\":\"Directly beneath the title and above the grid.\",\"action\":\"Sits as one line of lettering.\"}],\"style\":\"Hand-drawn editorial illustration, loose ink outlines with flat watercolour fills; small handwritten grey labels and hand-lettered title typography.\",\"color_palette\":[\"pale cream\",\"dark grey\",\"grey\",\"brass\",\"beige\",\"red\",\"black\",\"orange\",\"steel\",\"blue\",\"green\",\"chrome\",\"yellow\",\"white\",\"silver\"],\"lighting\":\"Even, diffuse illumination across the sheet with no pronounced shadows.\",\"mood\":\"Neat, understated catalogue with a domestic, hand-made feel.\",\"background\":\"A plain pale cream sheet with open cream space around each isolated object and no extra decorations.\",\"composition\":\"Flat overhead catalogue on a wide sheet. A centered title and subtitle sit above a regular five-column by four-row grid. Reading left to right, the rows contain: brass door key, beige masking tape, red-handled screwdriver, black earphones, single AA battery; small steel scissors with orange handles, folded paper tape measure, three grouped brass thumbtacks, blue plastic lighter, rubber band ball; green garden twine, chrome bottle opener, two paper clips, small superglue tube, yellow carpenter's pencil; folded allen keys, white plastic wall plug, single silver coin, strip of four plasters, tiny brass padlock without a key. Each object has its correctly spelled label directly beneath it, with consistent scale and even gutters.\",\"camera\":{\"angle\":\"Directly overhead, perpendicular to the sheet.\",\"lens\":\"Straightforward orthographic flat-lay perspective without visible distortion.\",\"depth_of_field\":\"Even sharpness across the entire sheet.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1184,
+      "height": 896
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1184,
+      "height": 896
+    }
+  }
+}

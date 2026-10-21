@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{\"scene\":\"A straight-on studio photograph of a white plywood shelving unit built as a photographic calibration target, filling the entire tall frame from edge to edge with no visible floor or ceiling. Three horizontal tiers are divided by white shelf boards. The top tier holds, from left to right, an upright green printed circuit board against the back panel, four cast-iron gears decreasing in size and leaning against one another, a rusted five-pointed metal star, a tangled loop of galvanised chain, a black wire-mesh cup holding exactly eight felt-tip markers with red, yellow, green and blue caps, and a cobalt blue glass vase holding exactly three dahlias: one pale yellow, one deep magenta and one coral pink. Along the front edge, four wooden alphabet blocks display T, E, S, T from left to right in coloured serif type; a single white chicken egg rests at the center. The middle tier is dominated by two flat calibration charts propped side by side. The left chart has exactly twenty-four matte colour patches in four rows of six, a black frame and the small printed bottom-edge text \\\"COLOUR RENDITION CHART\\\". The right chart is a dense printed target of small colour and greyscale squares, with the legible numbers 1 to 22 in a row across the top and the letters A to L down both sides. Directly below both charts lies a long horizontal greyscale strip labeled \\\"GRAY SCALE\\\" with step numbers 1 to 19. On the bottom tier, from left to right, a brushed steel cocktail shaker is held by a hand entering at the left frame edge; a chrome stand holds exactly four white golf balls stacked in a pyramid; two dried ears of multicoloured corn rest beside a brown leather cylindrical case, a pair of black binoculars and a purple fabric box embroidered with a thin branch pattern. A single yellow sunflower on a tall green stem leans right. In the lower center, a round glass fish bowl half filled with water and purple gravel contains one blue betta fish, next to a yellow twin-bell alarm clock with a white face and hands showing ten past ten. At lower right, a terracotta pot of small green cacti and a blue glass bottle sit beside one orange, one lemon and one peach resting directly on the shelf board. Every object is clearly separated and legible; the orderly arrangement reads as a test chart rather than a casual still life.\",\"subjects\":[{\"description\":\"White plywood shelving unit with a flat back panel and three horizontal tiers divided by white shelf boards.\",\"position\":\"Fills the frame from edge to edge; the back panel and all three tiers are visible, with no floor or ceiling.\",\"action\":\"Forms the photographic calibration target.\"},{\"description\":\"Green printed circuit board with visible printed traces and small components.\",\"position\":\"Top tier, far left, standing against the back panel.\",\"action\":\"Stands upright.\"},{\"description\":\"Exactly four cast-iron gears, dark and visibly different in size, arranged from largest to smallest.\",\"position\":\"Top tier, immediately right of the circuit board.\",\"action\":\"Lean against one another.\"},{\"description\":\"Five-pointed metal star with a rough, rusted brown surface.\",\"position\":\"Top tier, right of the four gears.\",\"action\":\"Rests on the shelf.\"},{\"description\":\"Tangled loop of galvanised chain with dull silver links.\",\"position\":\"Top tier, right of the rusted star.\",\"action\":\"Rests in a compact tangle.\"},{\"description\":\"Black wire-mesh cup containing exactly eight felt-tip markers with red, yellow, green and blue caps.\",\"position\":\"Top tier, right of the chain and left of the vase.\",\"action\":\"Holds the markers upright.\"},{\"description\":\"Cobalt blue glass vase holding exactly three dahlias: one pale yellow, one deep magenta and one coral pink.\",\"position\":\"Top tier, far right.\",\"action\":\"Holds the three flowers upright.\"},{\"description\":\"Exactly four wooden alphabet blocks bearing the letters T, E, S and T from left to right in coloured serif type.\",\"position\":\"Along the front edge of the top tier.\",\"action\":\"Stand in a straight row spelling TEST.\"},{\"description\":\"One smooth white chicken egg.\",\"position\":\"Top tier, centered behind the front row of alphabet blocks.\",\"action\":\"Rests on the shelf.\"},{\"description\":\"Flat matte calibration chart with exactly twenty-four colour patches arranged in four rows of six, a black frame and the printed text \\\"COLOUR RENDITION CHART\\\" along its bottom edge.\",\"position\":\"Middle tier, left side, propped against the back panel.\",\"action\":\"Faces forward.\"},{\"description\":\"Flat dense printed calibration target made of small colour and greyscale squares, with the numbers 1 to 22 across the top and the letters A to L down both sides.\",\"position\":\"Middle tier, right side, propped beside the colour-patch chart.\",\"action\":\"Faces forward with all numbers and letters legible.\"},{\"description\":\"Long horizontal greyscale strip with the printed text \\\"GRAY SCALE\\\" and a row of step numbers from 1 to 19.\",\"position\":\"Middle tier, directly below both calibration charts.\",\"action\":\"Lies horizontally.\"},{\"description\":\"Brushed steel cocktail shaker with a reflective cylindrical body and a cropped hand gripping it.\",\"position\":\"Bottom tier, far left; the hand enters from the left frame edge.\",\"action\":\"The hand holds the shaker.\"},{\"description\":\"Chrome stand holding exactly four white golf balls stacked in a pyramid.\",\"position\":\"Bottom tier, immediately right of the cocktail shaker.\",\"action\":\"Supports the four-ball pyramid.\"},{\"description\":\"Exactly two dried ears of multicoloured corn with textured kernels.\",\"position\":\"Bottom tier, right of the golf-ball stand.\",\"action\":\"Rest side by side.\"},{\"description\":\"Brown leather cylindrical case with a worn, matte surface.\",\"position\":\"Bottom tier, right of the two ears of corn.\",\"action\":\"Rests on its side.\"},{\"description\":\"Pair of black binoculars with two eyepieces and a central bridge.\",\"position\":\"Bottom tier, right of the leather case.\",\"action\":\"Rests with its lenses facing forward.\"},{\"description\":\"Purple fabric box embroidered with a thin branch pattern.\",\"position\":\"Bottom tier, right of the binoculars.\",\"action\":\"Rests on the shelf.\"},{\"description\":\"One yellow sunflower with a dark central disk on a tall green stem.\",\"position\":\"Bottom tier, toward the right, left of the terracotta pot and fruit.\",\"action\":\"Leans to the right.\"},{\"description\":\"Round clear glass fish bowl, half filled with water, with purple gravel and exactly one blue betta fish inside.\",\"position\":\"Bottom tier, lower center.\",\"action\":\"Holds the fish in water above the gravel.\"},{\"description\":\"Yellow twin-bell alarm clock with a white face and legible hands showing ten past ten.\",\"position\":\"Bottom tier, beside the fish bowl.\",\"action\":\"Faces forward.\"},{\"description\":\"Terracotta pot containing small green cacti.\",\"position\":\"Bottom tier, lower right, beside the blue glass bottle.\",\"action\":\"Holds the cacti upright.\"},{\"description\":\"Blue glass bottle with a simple clear silhouette.\",\"position\":\"Bottom tier, lower right, beside the cactus pot.\",\"action\":\"Stands on the shelf.\"},{\"description\":\"One orange, one lemon and one peach, each with a distinct natural skin colour and shape.\",\"position\":\"Bottom tier, lower right, beside the cactus pot and blue glass bottle.\",\"action\":\"Rest directly on the shelf board.\"}],\"style\":\"Full-color, straight-on deep-focus studio photograph with crisp textures from front to back and saturated but accurate colours.\",\"color_palette\":[\"white plywood\",\"green\",\"cast-iron black\",\"rust brown\",\"galvanised silver\",\"cobalt blue\",\"pale yellow\",\"deep magenta\",\"coral pink\",\"multicoloured\",\"brushed steel\",\"chrome\",\"purple\",\"terracotta\",\"orange\",\"lemon yellow\",\"peach\"],\"lighting\":\"Even, neutral daylight-balanced softbox illumination from the front left, with soft shadows and no blown highlights.\",\"mood\":\"Orderly, precise and functional, like a photographic test chart.\",\"background\":\"The white plywood back panel fills the background behind the shelves; no floor or ceiling is visible.\",\"composition\":\"Tall frame filled edge to edge by the shelving unit, viewed straight on. Three horizontal tiers form clear bands. Objects are arranged left to right as specified, with the charts side by side on the middle tier and the long greyscale strip directly below them. The hand and shaker enter from the left frame edge; all shelf contents remain legible and in focus.\",\"camera\":{\"angle\":\"Straight-on, level view centered on the shelving unit.\",\"lens\":\"50 mm normal perspective lens.\",\"depth_of_field\":\"Deep focus, with the full shelving unit and every object crisp from front to back.\"}}",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 896,
+      "height": 1184
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 896,
+      "height": 1184
+    }
+  }
+}

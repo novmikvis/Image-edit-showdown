@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 424242
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "image-study/output",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "5": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A wide documentary photograph taken at animal eye level on a bare dirt clearing, shot on a 50mm lens with a deep depth of field so both the animals and the distant treeline stay legible. The light is flat and diffuse under a heavily overcast sky, producing soft shadows directly beneath each animal and no strong highlights.\n\nExactly five animals stand in a single row across the middle of the frame, ordered strictly from largest on the left to smallest on the right, their heights forming a clean descending staircase. On the far left stands a full-grown African elephant in three-quarter view facing slightly left, its enormous grey ears fanned outward, two pale curved tusks visible, deep wrinkles across its trunk and forehead, and its trunk hanging down and curling gently inward at the tip. Immediately to its right stands a bay horse in profile facing right, its coat a warm reddish brown with a black mane and tail, a white blaze running down the centre of its face, and black lower legs; its head is turned slightly toward the camera and its withers reach roughly to the elephant's shoulder.\n\nThird in the row, a golden retriever stands square and alert facing the camera, its long cream-gold coat slightly wavy at the chest and tail, mouth open in a relaxed pant with the pink tongue visible, ears hanging soft against its cheeks, and its head reaching roughly to the horse's knee. Fourth, a grey tabby cat walks slowly to the right in profile, its striped coat marked with darker rings along the tail, tail carried low and curved upward at the tip, one front paw lifted mid-step, its shoulder height reaching roughly to the dog's elbow. On the far right, a single small brown field mouse sits on the bare earth in profile facing right, its long thin tail trailing behind it, tiny pink ears and paws visible, no larger than the cat's paw.\n\nNo other animals appear anywhere in the frame. The foreground is dry compacted earth scattered with small pale stones and sparse tufts of yellow-green grass. The middle distance behind the animals is a low band of dense green scrub and bushes, and beyond that a range of rounded forested hills recedes into pale grey haze. The upper third of the frame is filled with soft layered white and grey cloud. Scale relationships between all five animals remain anatomically plausible and consistent.",
+      "clip": [
+        "12",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "Klein9b-qwen_3_8b_f2k_int8_convrot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    }
+  },
+  "9": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux-2-klein-9b-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "1",
+        0
+      ],
+      "guider": [
+        "5",
+        0
+      ],
+      "sampler": [
+        "4",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    }
+  },
+  "12": {
+    "class_type": "Lora Loader Stack (rgthree)",
+    "inputs": {
+      "lora_01": "None",
+      "strength_01": 1,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "8",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "Flux2Scheduler",
+    "inputs": {
+      "steps": 4,
+      "width": 1024,
+      "height": 1024
+    }
+  },
+  "14": {
+    "class_type": "EmptyFlux2LatentImage",
+    "inputs": {
+      "batch_size": 1,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}
