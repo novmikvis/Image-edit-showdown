@@ -13,7 +13,7 @@ function pair(){return edit?'source':key().replace(/_(raw|enhanced)$/,(_,s)=>s==
 function label(k){return variantList.find(v=>v[0]===k)?.[1]||'Original'}
 function picture(rec,alt,lazy=false){
  const p=document.createElement('picture'),source=document.createElement('source'),img=document.createElement('img');
- source.type='image/jxl';source.srcset=rec.image+'.jxl';img.src=rec.image+'.jxl';img.alt=alt;img.width=rec.size[0];img.height=rec.size[1];img.draggable=false;img.decoding='async';if(lazy)img.loading='lazy';p.append(source,img);return p;
+ source.type='image/webp';source.srcset=rec.image+'.webp';img.src=rec.image+'.webp';img.alt=alt;img.width=rec.size[0];img.height=rec.size[1];img.draggable=false;img.decoding='async';if(lazy)img.loading='lazy';p.append(source,img);return p;
 }
 function transform(){canvas.style.transform=`translate(${panX}px,${panY}px) scale(${scale})`;viewer.classList.toggle('zoomed',scale>1);$('#fit').textContent=scale===1?'Fit':Math.round(scale*100)+'%'}
 function fit(){scale=1;panX=panY=0;transform()}

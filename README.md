@@ -1,30 +1,44 @@
-# Opinionated image studies
+# Fibo 2 vs Klein 9b vs Qwen 2.1: plain and enhanced prompts
 
-An image-first comparison of Fibo 2 edit turbo, Klein 9b and Qwen 2.1 turbo.
+A set of experiments to see how three fast image models handle the same requests, with and without prompt enhancement.
 
-- Editing: 16 scenes, 96 outputs, 16 template images and two identity references. Sections: General edits, Meme swap and Model breakers.
-- Text to image: 16 scenes and 96 outputs.
-- Plain and enhanced prompts; seed 424242, CFG 1. Fibo 2 and Klein 9b use four steps; Qwen 2.1 uses eight.
-- Enhancements use Luna 6 with xhigh reasoning.
+<p align="left">
+<a href="https://novmikvis.github.io/Image-edit-showdown/">
+  <img src="https://github.com/user-attachments/assets/de5ef820-5c5a-4097-9c1e-4fbb14bc54a4" width="1000" alt="Fibo 2, Klein 9b and Qwen 2.1 image comparison viewer">
+</a>
+</p>
 
-Open `docs/index.html` for editing or `docs/t2i/index.html` for generation. The site is static, uses relative URLs, and makes no runtime API calls.
+#### **[Open the viewer →](https://novmikvis.github.io/Image-edit-showdown/)**
 
-## Controls
+I ran 16 image-editing cases and 16 text-to-image prompts through all three models, using a plain and an enhanced prompt for each. 
 
-Up/down changes scenes; left/right changes images. Hold Space or the hold button to reveal the original in Edit or swap plain/enhanced for the same model in T2I.
+Seed is the same `424242`  at roughly 1 megapixel and CFG 1. Fibo 2 turbo edit and Klein 9b use 4 steps; Qwen 2.1 turbo uses 8. All three use INT8 convrot weights; Klein is the distilled version. Exact dimensions and run settings are listed in the viewer below the image
 
-On desktop, scroll over the image to zoom at the pointer; drag to pan. Zoom and pan remain fixed when switching variants. Double-click or use Fit to reset. Mobile uses native browser pinch zoom. Full details opens the generation context and prompts below the image. The desktop sidebar lists samples with thumbnails and test purposes. On mobile, the top picker chooses a scene, the bottom left/right arrows cycle model/prompt variants, and the image up/down arrows change scenes. The hold button sits with the bottom controls. Holding the image also compares; movement or a second touch cancels comparison so native gestures can take over.
+Plain prompts used as is. For the enhanced versions, Luna 6 with xhigh expands each into the model's format:
 
-## Workflows and images
+* Fibo 2 uses [VGL JSON](https://github.com/Bria-AI/vgl/tree/dev/src/bria_vgl/dialects/thales).
+* Klein 9b uses [FLUX2 JSON](https://docs.bfl.ml/guides/usecases_t2i_json_prompting).
+* Qwen 2.1 uses prose, with separate enhancers for [editing](https://pastebin.com/vvnnAtiX) and [text to image](https://pastebin.com/J9ruPcts).
 
-Download original workflow provides the executed ComfyUI graph in API JSON format, importable into ComfyUI. Model and custom-node dependencies must be installed. Editing workflows also require their source input images; meme swaps use a template plus one or two identity references. Node identifiers and output prefixes are normalized for distribution.
+The editing cases cover small targeted changes, relighting, style preservation, meme identity swaps and difficult geometry. 
+The text-to-image prompts test counts, spatial relationships, small text, multilingual signs, branding, crowds, reflections and comic panels. Both the original request and the executed prompt are available for every result.
 
-JPEG XL images retain their saved dimensions and embed prompts and generation settings in XMP metadata.
+## How to use the viewer
 
-Qwen edit enhancements use the [edit enhancer](https://pastebin.com/vvnnAtiX). Qwen T2I enhancements use the [image-description enhancer](https://pastebin.com/J9ruPcts).
+* Pick a scene from the right sidebar on desktop or the top picker on mobile. Use the model buttons to choose a plain or enhanced result.
+* On desktop, scroll to zoom and drag to pan. The crop stays in place when switching variants, so you can compare the same detail. Use **Tools → Fit** to reset.
+* Keys: `↑` `↓` switch scenes; `←` `→` switch images. Hold `Space` to show the original in editing, or swap plain and enhanced for the same model in T2I.
+* On mobile, pinch to zoom. Hold the image or the comparison button to compare; release to return.
+* **Full details** opens the prompts, settings, source links and workflow download below the image.
 
-## GitHub Pages
+## Reproducibility
 
-Deploy the repository branch's `/docs` folder, or select GitHub Actions and run the included deployment workflow manually. This package is prepared locally; it has not been published.
+**Download original workflow**  us under each result. Drag into comfy and load images to get same results _(hopefully)_
 
-The editing cases come from [GenAI Showdown](https://genai-showdown.specr.net/image-editing) and [OpenRouter’s meme benchmark](https://openrouter.ai/benchmarks/media/memes/math-lady). Individual source links are included in the page. Attribution does not change ownership or licensing. This small study does not establish an overall model ranking.
+## Sources and caveats
+
+Editing cases come from [GenAI Showdown](https://genai-showdown.specr.net/image-editing) and [OpenRouter's meme benchmark](https://openrouter.ai/benchmarks/media/memes/math-lady). Each case links to its source page in the viewer.
+
+Fibo turbo edit is meant for editing. Its developers recommend [Fibo 2.0 Dev](https://huggingface.co/briaai/Fibo-2.0-dev) for text to image, so treat its T2I results with that limitation in mind.
+
+This is an opinionated study with one seed and a small set of cases, not an overall model ranking. Reference-image preprocessing differs between models, and visible failures are kept in the panel.
